@@ -9,8 +9,18 @@ import React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 import Header from "./header"
+import tw from 'tailwind.macro'
+import styled from '@emotion/styled'
 import "./layout.css"
 import '../css/global.css'
+
+const PageContainer = styled.div`
+    ${tw`
+        bg-gray-200 text-xl w-1/2 text-center
+    `}
+    padding: 10px;
+`;
+
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -26,6 +36,7 @@ const Layout = ({ children }) => {
   return (
     <>
       <Header siteTitle={data.site.siteMetadata.title} />
+        <PageContainer>
       <div
         style={{
           margin: `0 auto`,
@@ -40,6 +51,7 @@ const Layout = ({ children }) => {
           <a href="https://www.gatsbyjs.org">Gatsby</a>
         </footer>
       </div>
+        </PageContainer>
     </>
   )
 }
