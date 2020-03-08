@@ -70,7 +70,7 @@ class StarfieldAnimation extends PureComponent {
         this._canvas = ref
     }
     _draw() {
-        if (!this._canvas) return
+        if (!this._canvas) return;
         const ctx = this._canvas.getContext('2d');
         const width = this._vp.x;
         const height = this._vp.y;
@@ -99,7 +99,6 @@ class StarfieldAnimation extends PureComponent {
          var zembrzuski robi gwiazdy
          */
         var zembrzuski = {
-
 
             getRandomStar: function (minX, minY, maxX, maxY, maxSpeed) {
                 var coords = zembrzuski.getRandomPosition(minX, minY, maxX, maxY);
@@ -155,9 +154,8 @@ class StarfieldAnimation extends PureComponent {
         StarField.prototype._renderStarField = function () {
             var i,
                 star;
-            ctx.fillStyle = "rgba(255, 0, 0, 0)"; // tło      CLEAR RECT CZYSCI CALY CANVAS :)
+            ctx.fillStyle = "rgba(255, 0, 0, 0)";
             ctx.clearRect(0, 0, this.width, this.height);
-            // gwiazdki
             for (i = 0; i < this.numStars; i++) {
                 star = this.starField[i];
 
@@ -173,29 +171,26 @@ class StarfieldAnimation extends PureComponent {
             this._updateStarField();
             this._renderStarField();
             raf(this._tick.bind(this));
+
         }
+
         /**
-         *Upewnia sie ze canvas miesci sie w containerze
+         * This listener compares the old container size with the new one, and caches
+         * the new values.
          */
-        StarField.prototype._adjustCanvasSize = function (width, height) {
-            // Ustawia rozmiar canvasu do containera
-            this.width =  width || this.container.offsetWidth;
-            this.height = height || this.container.offsetHeight;
-        };
-
-
-        StarField.prototype._watchCanvasSize = function (elapsedTime) {
+        StarField.prototype._watchCanvasSize = function(elapsedTime) {
             var timeSinceLastCheck = elapsedTime - (this.prevCheckTime || 0),
                 width,
                 height;
-
             window.requestAnimationFrame(this._watchCanvasSize.bind(this));
-            // (Cap do ~3fps)
+
+            // Skip frames unless at least 333ms have passed since the last check
+            // (Cap to ~3fps)
             if (timeSinceLastCheck >= 333 || !this.prevCheckTime) {
                 this.prevCheckTime = elapsedTime;
-                // MADEUP
-                width = this.width;
-                height = this.height;
+                var size = sizeMe({ monitorWidth: true, monitorHeight: true });
+                width = size.width;
+                height = size.height;
                 if (this.oldWidth !== width || this.oldHeight !== height) {
                     this.oldWidth = width;
                     this.oldHeight = height;
@@ -203,7 +198,6 @@ class StarfieldAnimation extends PureComponent {
                 }
             }
         };
-
         /**
          * główna pętla
          * @param {int} numStars liczba gwiazdek
@@ -220,9 +214,9 @@ class StarfieldAnimation extends PureComponent {
 
                 }
             }
-            // inty nie przetrzymywane
-            window.requestAnimationFrame(this._tick.bind(this));
-            window.requestAnimationFrame(this._watchCanvasSize.bind(this));
+            raf(this._tick.bind(this));
+            raf(this._watchCanvasSize.bind(this));
+
         };
 
         /**
