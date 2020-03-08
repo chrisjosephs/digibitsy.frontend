@@ -72,6 +72,9 @@ class StarfieldAnimation extends PureComponent {
     _draw() {
         if (!this._canvas) return
         const ctx = this._canvas.getContext('2d');
+        const width = this._vp.x;
+        const height = this._vp.y;
+
         var Star = function (x, y, maxSpeed) {
             this.x = x;
             this.y = y;
@@ -113,11 +116,8 @@ class StarfieldAnimation extends PureComponent {
 
         var StarField = function (containerId) {
             this.container = document.getElementById(containerId);
-
-            // MADEUP
-            this.width = 900;
-            this.height = 900;
-
+            this.width = width;
+            this.height = height;
             this.starField = [];
         };
 
@@ -191,8 +191,8 @@ class StarfieldAnimation extends PureComponent {
          */
         StarField.prototype._adjustCanvasSize = function (width, height) {
             // Ustawia rozmiar canvasu do containera
-            this.width = ctx.width = width || this.container.offsetWidth;
-            this.height = ctx.height = height || this.container.offsetHeight;
+            this.width =  width || this.container.offsetWidth;
+            this.height = height || this.container.offsetHeight;
         };
 
 
@@ -202,15 +202,12 @@ class StarfieldAnimation extends PureComponent {
                 height;
 
             window.requestAnimationFrame(this._watchCanvasSize.bind(this));
-
-            //
             // (Cap do ~3fps)
             if (timeSinceLastCheck >= 333 || !this.prevCheckTime) {
                 this.prevCheckTime = elapsedTime;
-
                 // MADEUP
-                width = 900;
-                height = 900;
+                width = this.width;
+                height = this.height;
                 if (this.oldWidth !== width || this.oldHeight !== height) {
                     this.oldWidth = width;
                     this.oldHeight = height;
@@ -294,8 +291,8 @@ class StarfieldAnimation extends PureComponent {
         } = props
 
         const vp = {
-            x: size.width / 2,
-            y: size.height / 2
+            x: size.width ,
+            y: size.height
         }
 
         this._vp = vp
