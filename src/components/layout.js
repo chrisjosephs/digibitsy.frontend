@@ -6,6 +6,7 @@
  */
 
 import React from "react"
+import StarFieldCanvas from "./starfieldcanvas";
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 import Header from "./header"
@@ -16,9 +17,9 @@ import '../css/global.css'
 
 const PageContainer = styled.div`
     ${tw`
-        bg-gray-200 text-xl w-1/2 text-center
+        bg-transparent text-xl text-center
     `}
-    padding: 10px;
+    padding: 0px;
 `;
 
 
@@ -34,7 +35,15 @@ const Layout = ({ children }) => {
   `)
 
   return (
-    <>
+    <div
+    style={{
+        'overflow-x': 'hidden',
+        'background-image': 'url("https://lukasz-zembrzuski.pl/wp-content/uploads/2018/03/nebula-starfield.jpg")',
+        'padding': '0px; margin: 0px',
+        'width': '100%',
+        'height': '100%'
+    }}>
+        <StarFieldCanvas>STARFIELD CANVAS</StarFieldCanvas>
       <Header siteTitle={data.site.siteMetadata.title} />
         <PageContainer>
       <div
@@ -52,7 +61,7 @@ const Layout = ({ children }) => {
         </footer>
       </div>
         </PageContainer>
-    </>
+    </div>
   )
 }
 
