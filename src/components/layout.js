@@ -6,7 +6,7 @@
  */
 
 import React from "react"
-import StarFieldCanvas from "./starfieldcanvas";
+import StarfieldAnimation from "./starfieldcanvas";
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 import Header from "./header"
@@ -38,32 +38,37 @@ const Layout = ({ children }) => {
     <div
     style={{
         'overflow-x': 'hidden',
-        'background-image': 'url("https://lukasz-zembrzuski.pl/wp-content/uploads/2018/03/nebula-starfield.jpg")',
         'padding': '0px; margin: 0px',
         'width': '100%',
         'height': '100%'
     }}>
-        <StarFieldCanvas>STARFIELD CANVAS</StarFieldCanvas>
-      <Header siteTitle={data.site.siteMetadata.title} />
+        <StarfieldAnimation
+            style={{
+                position: 'absolute',
+                width: '100%',
+                height: '100%'
+            }}
+        />
+    </div>
+  )
+}
+var old = `  <Header siteTitle={data.site.siteMetadata.title} />
         <PageContainer>
       <div
         style={{
-          margin: `0 auto`,
+          margin: '0 auto',
           maxWidth: 960,
-          padding: `0 1.0875rem 1.45rem`,
+          padding: '0 1.0875rem 1.45rem',
         }}
       >
         <main>{children}</main>
         <footer>
           © {new Date().getFullYear()}, Built with
-          {` `}
+          {' '}
           <a href="https://www.gatsbyjs.org">Gatsby</a>
         </footer>
       </div>
-        </PageContainer>
-    </div>
-  )
-}
+        </PageContainer>`;
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
