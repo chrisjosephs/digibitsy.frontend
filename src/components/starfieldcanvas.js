@@ -1,23 +1,24 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import sizeMe from 'react-sizeme'
-// import raf from 'raf'
+import raf from 'raf'
 
 class StarfieldAnimation extends PureComponent {
 
     static propTypes = {
-        containerId: PropTypes.string,
         numStars: PropTypes.string,
-        maxStarSpeed: PropTypes.number,
+        maxSpeed: PropTypes.number,
+        offsetX: PropTypes.number,
+        offsetY: PropTypes.number,
         style: PropTypes.object,
         size: PropTypes.shape({
             width: PropTypes.number,
             height: PropTypes.number
         }).isRequired
+
     }
 
     static defaultProps = {
-        containerId: PropTypes.string,
         numStars: 333,
         maxStarSpeed: 3,
         style: { },
@@ -27,19 +28,17 @@ class StarfieldAnimation extends PureComponent {
     }
 
     componentDidMount() {
-        this._tick()
+        this._draw()
     }
 
     componentWillUnmount() {
-        // raf.cancel(this._tickRaf)
+        raf.cancel(this._tickRaf)
     }
 
     componentWillReceiveProps(props) {
         this._reset(props)
     }
-    _tick = () => {
-        this._draw()
-    }
+
     render() {
         const {
             numStars,
@@ -53,7 +52,8 @@ class StarfieldAnimation extends PureComponent {
             <div class={'fullScreen'}
                 style={{
                     overflow: 'hidden',
-                    'background-image': 'url("https://lukasz-zembrzuski.pl/wp-content/uploads/2018/03/nebula-starfield.jpg")',
+                    'background-image': 'url("https://cdnuploads.aa.com.tr/uploads/Contents/2019/08/02/thumbs_b_c_e71aafb0cd4baed977ee65c59e94c941.jpg?v=171748")',
+                    'background-size': 'cover',
                     ...style
                 }}
                 {...rest}
@@ -74,6 +74,7 @@ class StarfieldAnimation extends PureComponent {
         const ctx = this._canvas.getContext('2d');
         const width = this._vp.x;
         const height = this._vp.y;
+        ctx.scale(4,4);
 
         var Star = function (x, y, maxSpeed) {
             this.x = x;
@@ -164,28 +165,15 @@ class StarfieldAnimation extends PureComponent {
                 ctx.fillRect(
                     star.x + this.width / 2,
                     star.y + this.height / 2,
-                    2, 2);
+                    1, 1);
             }
         };
 
-        /**
-         * funkcja ogarniajaca animacje aktualizuje starfield
-         * i render
-         */
-        StarField.prototype._renderFrame = function (elapsedTime) {
-            var timeSinceLastFrame = elapsedTime - (this.prevFrameTime || 0);
-
-            window.requestAnimationFrame(this._renderFrame.bind(this));
-
-
-            if (timeSinceLastFrame >= 30 || !this.prevFrameTime) {
-                this.prevFrameTime = elapsedTime;
-                this._updateStarField();
-                this._renderStarField();
-            }
-        };
-
-
+        StarField.prototype._tick = function()  {
+            this._updateStarField();
+            this._renderStarField();
+            raf(this._tick.bind(this));
+        }
         /**
          *Upewnia sie ze canvas miesci sie w containerze
          */
@@ -232,9 +220,8 @@ class StarfieldAnimation extends PureComponent {
 
                 }
             }
-
             // inty nie przetrzymywane
-            window.requestAnimationFrame(this._renderFrame.bind(this));
+            window.requestAnimationFrame(this._tick.bind(this));
             window.requestAnimationFrame(this._watchCanvasSize.bind(this));
         };
 
@@ -281,7 +268,6 @@ class StarfieldAnimation extends PureComponent {
                 };
         }());
 
-        // Rozpoczyna!
         var starField = new StarField('fullScreen').render(333, 3);
         return(starField);
     }
@@ -291,8 +277,8 @@ class StarfieldAnimation extends PureComponent {
         } = props
 
         const vp = {
-            x: size.width ,
-            y: size.height
+            x: size.width / 4,
+            y: size.height / 4
         }
 
         this._vp = vp
