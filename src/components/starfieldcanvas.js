@@ -71,7 +71,9 @@ class StarfieldAnimation extends PureComponent {
         if (!this._canvas) return;
         const {
             scale,
-            size
+            size,
+            numStars,
+            maxStarSpeed
         } = this.props
         const ctx = this._canvas.getContext('2d');
         const container = this._container;
@@ -256,12 +258,12 @@ class StarfieldAnimation extends PureComponent {
          * @param {int} maxStarSpeed maximum star speed
          */
         StarField.prototype.render = function (numStars, maxStarSpeed) {
-            this.numStars = numStars || 100;
-            this.maxStarSpeed = maxStarSpeed || 3;
+            this.numStars = numStars;
+            this.maxStarSpeed = maxStarSpeed;
             this._initScene(this.numStars);
         };
 
-        let starField = new StarField().render(333, 3);
+        let starField = new StarField().render(numStars, maxStarSpeed);
         return (starField);
     }
 
