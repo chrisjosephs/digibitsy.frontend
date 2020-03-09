@@ -10,6 +10,7 @@ class StarfieldAnimation extends PureComponent {
         maxSpeed: PropTypes.number,
         offsetX: PropTypes.number,
         offsetY: PropTypes.number,
+        scale: PropTypes.number,
         style: PropTypes.object,
         size: PropTypes.shape({
             width: PropTypes.number,
@@ -21,6 +22,7 @@ class StarfieldAnimation extends PureComponent {
     static defaultProps = {
         numStars: 333,
         maxStarSpeed: 3,
+        scale: 4,
         style: { },
     }
     componentWillMount() {
@@ -45,11 +47,13 @@ class StarfieldAnimation extends PureComponent {
             maxStarSpeed,
             size,
             style,
+            scale,
             ...rest
         } = this.props
 
         return (
             <div class={'fullScreen'}
+                 ref={this._containerRef}
                 style={{
                     overflow: 'hidden',
                     'background-image': 'url("https://cdnuploads.aa.com.tr/uploads/Contents/2019/08/02/thumbs_b_c_e71aafb0cd4baed977ee65c59e94c941.jpg?v=171748")',
@@ -69,12 +73,19 @@ class StarfieldAnimation extends PureComponent {
     _canvasRef = (ref) => {
         this._canvas = ref
     }
+    _containerRef = (ref) => {
+        this._container = ref
+    }
     _draw() {
         if (!this._canvas) return;
+        const {
+            scale,
+            size
+        } = this.props
         const ctx = this._canvas.getContext('2d');
-        const width = this._vp.x;
-        const height = this._vp.y;
-        ctx.scale(4,4);
+        const container = this._container;
+        ctx.scale(scale,scale);
+        ctx.translate(1, 0.5);
 
         var Star = function (x, y, maxSpeed) {
             this.x = x;
@@ -114,10 +125,9 @@ class StarfieldAnimation extends PureComponent {
             }
         };
 
-        var StarField = function (containerId) {
-            this.container = document.getElementById(containerId);
-            this.width = width;
-            this.height = height;
+        let StarField = function() {
+            this.width = size.width;
+            this.height = size.height;
             this.starField = [];
         };
 
@@ -175,30 +185,6 @@ class StarfieldAnimation extends PureComponent {
         }
 
         /**
-         * This listener compares the old container size with the new one, and caches
-         * the new values.
-         */
-        StarField.prototype._watchCanvasSize = function(elapsedTime) {
-            var timeSinceLastCheck = elapsedTime - (this.prevCheckTime || 0),
-                width,
-                height;
-            window.requestAnimationFrame(this._watchCanvasSize.bind(this));
-
-            // Skip frames unless at least 333ms have passed since the last check
-            // (Cap to ~3fps)
-            if (timeSinceLastCheck >= 333 || !this.prevCheckTime) {
-                this.prevCheckTime = elapsedTime;
-                var size = sizeMe({ monitorWidth: true, monitorHeight: true });
-                width = size.width;
-                height = size.height;
-                if (this.oldWidth !== width || this.oldHeight !== height) {
-                    this.oldWidth = width;
-                    this.oldHeight = height;
-                    this._adjustCanvasSize(width, height);
-                }
-            }
-        };
-        /**
          * główna pętla
          * @param {int} numStars liczba gwiazdek
          */
@@ -215,9 +201,7 @@ class StarfieldAnimation extends PureComponent {
                 }
             }
             raf(this._tick.bind(this));
-            raf(this._watchCanvasSize.bind(this));
-
-        };
+               };
 
         /**
          * Rozpoczyna wszystko
@@ -231,38 +215,7 @@ class StarfieldAnimation extends PureComponent {
             this._initScene(this.numStars);
         };
 
-        /**
-         * requestAnimationFrame z set timeout fallback / gladzenie animacji
-         */
-        (function () {
-            var lastTime = 0;
-            var vendors = ['ms', 'moz', 'webkit', 'o'];
-            for (var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
-                window.requestAnimationFrame = window[vendors[x] + 'RequestAnimationFrame'];
-                window.cancelAnimationFrame =
-                    window[vendors[x] + 'CancelAnimationFrame'] || window[vendors[x] + 'CancelRequestAnimationFrame'];
-            }
-
-            if (!window.requestAnimationFrame)
-                window.requestAnimationFrame = function (callback, element) {
-                    var currTime = new Date().getTime();
-                    var timeToCall = Math.max(0, 16 - (currTime - lastTime));
-                    var id = window.setTimeout(function () {
-                            callback(currTime + timeToCall);
-                        },
-                        timeToCall);
-                    lastTime = currTime + timeToCall;
-                    return id;
-                };
-
-            if (!window.cancelAnimationFrame)
-
-                window.cancelAnimationFrame = function (id) {
-                    clearTimeout(id);
-                };
-        }());
-
-        var starField = new StarField('fullScreen').render(333, 3);
+        var starField = new StarField().render(333, 3);
         return(starField);
     }
     _reset(props) {
