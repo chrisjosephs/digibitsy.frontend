@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import sizeMe from 'react-sizeme'
 import raf from 'raf'
@@ -23,22 +23,11 @@ class StarfieldAnimation extends PureComponent {
         numStars: 333,
         maxStarSpeed: 3,
         scale: 4,
-        style: { },
-    }
-    componentWillMount() {
-        this._reset(this.props)
+        style: {},
     }
 
     componentDidMount() {
         this._draw()
-    }
-
-    componentWillUnmount() {
-        raf.cancel(this._tickRaf)
-    }
-
-    componentWillReceiveProps(props) {
-        this._reset(props);
     }
 
     render() {
@@ -54,13 +43,13 @@ class StarfieldAnimation extends PureComponent {
         return (
             <div class={'fullScreen'}
                  ref={this._containerRef}
-                style={{
-                    overflow: 'hidden',
-                    'background-image': 'url("https://cdnuploads.aa.com.tr/uploads/Contents/2019/08/02/thumbs_b_c_e71aafb0cd4baed977ee65c59e94c941.jpg?v=171748")',
-                    'background-size': 'cover',
-                    ...style
-                }}
-                {...rest}
+                 style={{
+                     overflow: 'hidden',
+                     'background-image': 'url("https://cdnuploads.aa.com.tr/uploads/Contents/2019/08/02/thumbs_b_c_e71aafb0cd4baed977ee65c59e94c941.jpg?v=171748")',
+                     'background-size': 'cover',
+                     ...style
+                 }}
+                 {...rest}
             >
                 <canvas
                     ref={this._canvasRef}
@@ -70,12 +59,14 @@ class StarfieldAnimation extends PureComponent {
             </div>
         )
     }
+
     _canvasRef = (ref) => {
         this._canvas = ref
     }
     _containerRef = (ref) => {
         this._container = ref
     }
+
     _draw() {
         if (!this._canvas) return;
         const {
@@ -84,7 +75,6 @@ class StarfieldAnimation extends PureComponent {
         } = this.props
         const ctx = this._canvas.getContext('2d');
         const container = this._container;
-        ctx.scale(scale,scale);
         // ctx.translate(1, 0.5);
 
         var Star = function (x, y, maxSpeed) {
@@ -106,23 +96,23 @@ class StarfieldAnimation extends PureComponent {
             return this;
         };
 
+
         /**
-         * The BigBang factory creates stars (Should be called StarFactory, but that is
-         * a WAY LESS COOL NAME!
+         * Star Factory
          * @type {Object}
          */
         var BigBang = {
             /**
              * Returns a random star within a region of the space.
              *
-             * @param  {number} minX minimum X coordinate of the region
-             * @param  {number} minY minimum Y coordinate of the region
-             * @param  {number} maxX maximum X coordinate of the region
-             * @param  {number} maxY maximum Y coordinate of the region
+             * @param  {number} minX coordinate of the region
+             * @param  {number} minY coordinate of the region
+             * @param  {number} maxX coordinate of the region
+             * @param  {number} maxY coordinate of the region
              *
              * @return {Star} The random star
              */
-            getRandomStar: function(minX, minY, maxX, maxY, maxSpeed) {
+            getRandomStar: function (minX, minY, maxX, maxY, maxSpeed) {
                 var coords = BigBang.getRandomPosition(minX, minY, maxX, maxY);
                 return new Star(coords.x, coords.y, maxSpeed);
             },
@@ -131,14 +121,14 @@ class StarfieldAnimation extends PureComponent {
              * Gets a random (x,y) position within a bounding box
              *
              *
-             * @param  {number} minX minimum X coordinate of the region
-             * @param  {number} minY minimum Y coordinate of the region
-             * @param  {number} maxX maximum X coordinate of the region
-             * @param  {number} maxY maximum Y coordinate of the region
+             * @param  {number} minX coordinate of the region
+             * @param  {number} minY coordinate of the region
+             * @param  {number} maxX coordinate of the region
+             * @param  {number} maxY coordinate of the region
              *
              * @return {Object} An object with random {x, y} positions
              */
-            getRandomPosition: function(minX, minY, maxX, maxY) {
+            getRandomPosition: function (minX, minY, maxX, maxY) {
                 return {
                     x: Math.floor((Math.random() * maxX) + minX),
                     y: Math.floor((Math.random() * maxY) + minY)
@@ -146,7 +136,7 @@ class StarfieldAnimation extends PureComponent {
             }
         };
 
-        let StarField = function() {
+        let StarField = function () {
             this.width = size.width / scale;
             this.height = size.height / scale;
             this.starField = [];
@@ -190,7 +180,7 @@ class StarfieldAnimation extends PureComponent {
             for (i = 0; i < this.numStars; i++) {
                 star = this.starField[i];
 
-                ctx .fillStyle = "rgba(217, 66, 244, " + star.opacity + ")";
+                ctx.fillStyle = "rgba(217, 66, 244, " + star.opacity + ")";
                 ctx.fillRect(
                     star.x + this.width / 2,
                     star.y + this.height / 2,
@@ -198,7 +188,42 @@ class StarfieldAnimation extends PureComponent {
             }
         };
 
-        StarField.prototype._tick = function()  {
+        /**
+         * Makes sure that the canvas size fits the size of its container
+         */
+        StarField.prototype._adjustCanvasSize = function (width, height) {
+            // Set the canvas size to match the container ID (and cache values)
+            this.width = ctx.width = width;
+            this.height = ctx.height = height;
+            ctx.scale(scale, scale);
+        };
+
+        /**
+         * This listener compares the old container size with the new one, and caches
+         * the new values.
+         */
+        StarField.prototype._watchCanvasSize = function (elapsedTime) {
+            var timeSinceLastCheck = elapsedTime - (this.prevCheckTime || 0),
+                width,
+                height;
+
+            raf(this._watchCanvasSize.bind(this));
+
+            // Skip frames unless at least 333ms have passed since the last check
+            // (Cap to ~3fps)
+            if (timeSinceLastCheck >= 333 || !this.prevCheckTime) {
+                this.prevCheckTime = elapsedTime;
+                width = container.offsetWidth / scale;
+                height = container.offsetHeight / scale;
+                if (this.oldWidth !== width || this.oldHeight !== height) {
+                    this.oldWidth = width;
+                    this.oldHeight = height;
+                    this._adjustCanvasSize(width, height);
+                }
+            }
+        };
+
+        StarField.prototype._tick = function () {
             this._updateStarField();
             this._renderStarField();
             raf(this._tick.bind(this));
@@ -206,8 +231,9 @@ class StarfieldAnimation extends PureComponent {
         }
 
         /**
-         * główna pętla
-         * @param {int} numStars liczba gwiazdek
+         * Init scene by resizing the canvas to the appropiate value, and
+         * set up main loop
+         * @param {int} numStars Number of stars in our starfield
          */
         StarField.prototype._initScene = function (numStars) {
             var i;
@@ -216,47 +242,29 @@ class StarfieldAnimation extends PureComponent {
                     this.starField.push(
                         BigBang.getRandomStar(-this.width / 2, -this.height / 2, this.width, this.height, this.maxStarSpeed)
                     );
-                }
-                catch {
+                } catch {
 
                 }
             }
             raf(this._tick.bind(this));
-               };
+            raf(this._watchCanvasSize.bind(this));
+        };
 
         /**
          * Start Everything
          *  {int} numStars Number of stars to render
          * @param {int} maxStarSpeed maximum star speed
          */
-            StarField.prototype.render = function (numStars, maxStarSpeed) {
+        StarField.prototype.render = function (numStars, maxStarSpeed) {
             this.numStars = numStars || 100;
             this.maxStarSpeed = maxStarSpeed || 3;
             this._initScene(this.numStars);
         };
 
         let starField = new StarField().render(333, 3);
-        return(starField);
+        return (starField);
     }
-    _reset(props) {
-        const {
-            size
-        } = props
 
-        const vp = {
-            x: size.width / 4,
-            y: size.height / 4
-        }
-
-        this._vp = vp
-        this._bounds = {
-            width: size.width,
-            height: size.height,
-            x: { min: -vp.x, max: size.width - vp.x },
-            y: { min: -vp.y, max: size.height - vp.y },
-        }
-
-    }
 }
 
-export default sizeMe({ monitorWidth: true, monitorHeight: true })(StarfieldAnimation)
+export default sizeMe({monitorWidth: true, monitorHeight: true})(StarfieldAnimation)
