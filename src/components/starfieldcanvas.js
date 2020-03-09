@@ -77,7 +77,6 @@ class StarfieldAnimation extends PureComponent {
         } = this.props
         const ctx = this._canvas.getContext('2d');
         const container = this._container;
-        // ctx.translate(1, 0.5);
 
         var Star = function (x, y, maxSpeed) {
             this.x = x;
@@ -98,12 +97,11 @@ class StarfieldAnimation extends PureComponent {
             return this;
         };
 
-
         /**
          * Star Factory
          * @type {Object}
          */
-        var BigBang = {
+        var StarFactory = {
             /**
              * Returns a random star within a region of the space.
              *
@@ -115,7 +113,7 @@ class StarfieldAnimation extends PureComponent {
              * @return {Star} The random star
              */
             getRandomStar: function (minX, minY, maxX, maxY, maxSpeed) {
-                var coords = BigBang.getRandomPosition(minX, minY, maxX, maxY);
+                var coords = StarFactory.getRandomPosition(minX, minY, maxX, maxY);
                 return new Star(coords.x, coords.y, maxSpeed);
             },
 
@@ -139,8 +137,8 @@ class StarfieldAnimation extends PureComponent {
         };
 
         let StarField = function () {
-            this.width = size.width / scale;
-            this.height = size.height / scale;
+            this.width = size.width ;
+            this.height = size.height;
             this.starField = [];
         };
 
@@ -164,7 +162,7 @@ class StarfieldAnimation extends PureComponent {
                 if ((Math.abs(star.x) > this.width / 2) ||
                     (Math.abs(star.y) > this.height / 2)) {
 
-                    randomLoc = BigBang.getRandomPosition(
+                    randomLoc = StarFactory.getRandomPosition(
                         -this.width / 10, -this.height / 10,
                         this.width / 5, this.height / 5
                     );
@@ -242,7 +240,7 @@ class StarfieldAnimation extends PureComponent {
             for (i = 0; i < this.numStars; i++) {
                 try {
                     this.starField.push(
-                        BigBang.getRandomStar(-this.width / 2, -this.height / 2, this.width, this.height, this.maxStarSpeed)
+                        StarFactory.getRandomStar(-this.width / 2, -this.height / 2, this.width, this.height, this.maxStarSpeed)
                     );
                 } catch {
 
