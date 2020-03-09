@@ -126,8 +126,8 @@ class StarfieldAnimation extends PureComponent {
         };
 
         let StarField = function() {
-            this.width = size.width;
-            this.height = size.height;
+            this.width = size.width / scale;
+            this.height = size.height / scale;
             this.starField = [];
         };
 
