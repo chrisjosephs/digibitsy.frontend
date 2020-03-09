@@ -38,7 +38,7 @@ class StarfieldAnimation extends PureComponent {
     }
 
     componentWillReceiveProps(props) {
-        this._reset(props)
+        this._reset(props);
     }
 
     render() {
@@ -85,7 +85,7 @@ class StarfieldAnimation extends PureComponent {
         const ctx = this._canvas.getContext('2d');
         const container = this._container;
         ctx.scale(scale,scale);
-        ctx.translate(1, 0.5);
+        // ctx.translate(1, 0.5);
 
         var Star = function (x, y, maxSpeed) {
             this.x = x;
@@ -107,17 +107,38 @@ class StarfieldAnimation extends PureComponent {
         };
 
         /**
-         var zembrzuski robi gwiazdy
+         * The BigBang factory creates stars (Should be called StarFactory, but that is
+         * a WAY LESS COOL NAME!
+         * @type {Object}
          */
-        var zembrzuski = {
-
-            getRandomStar: function (minX, minY, maxX, maxY, maxSpeed) {
-                var coords = zembrzuski.getRandomPosition(minX, minY, maxX, maxY);
+        var BigBang = {
+            /**
+             * Returns a random star within a region of the space.
+             *
+             * @param  {number} minX minimum X coordinate of the region
+             * @param  {number} minY minimum Y coordinate of the region
+             * @param  {number} maxX maximum X coordinate of the region
+             * @param  {number} maxY maximum Y coordinate of the region
+             *
+             * @return {Star} The random star
+             */
+            getRandomStar: function(minX, minY, maxX, maxY, maxSpeed) {
+                var coords = BigBang.getRandomPosition(minX, minY, maxX, maxY);
                 return new Star(coords.x, coords.y, maxSpeed);
             },
 
-
-            getRandomPosition: function (minX, minY, maxX, maxY) {
+            /**
+             * Gets a random (x,y) position within a bounding box
+             *
+             *
+             * @param  {number} minX minimum X coordinate of the region
+             * @param  {number} minY minimum Y coordinate of the region
+             * @param  {number} maxX maximum X coordinate of the region
+             * @param  {number} maxY maximum Y coordinate of the region
+             *
+             * @return {Object} An object with random {x, y} positions
+             */
+            getRandomPosition: function(minX, minY, maxX, maxY) {
                 return {
                     x: Math.floor((Math.random() * maxX) + minX),
                     y: Math.floor((Math.random() * maxY) + minY)
@@ -151,7 +172,7 @@ class StarfieldAnimation extends PureComponent {
                 if ((Math.abs(star.x) > this.width / 2) ||
                     (Math.abs(star.y) > this.height / 2)) {
 
-                    randomLoc = zembrzuski.getRandomPosition(
+                    randomLoc = BigBang.getRandomPosition(
                         -this.width / 10, -this.height / 10,
                         this.width / 5, this.height / 5
                     );
@@ -193,7 +214,7 @@ class StarfieldAnimation extends PureComponent {
             for (i = 0; i < this.numStars; i++) {
                 try {
                     this.starField.push(
-                        zembrzuski.getRandomStar(-this.width / 2, -this.height / 2, this.width, this.height, this.maxStarSpeed)
+                        BigBang.getRandomStar(-this.width / 2, -this.height / 2, this.width, this.height, this.maxStarSpeed)
                     );
                 }
                 catch {
@@ -204,18 +225,17 @@ class StarfieldAnimation extends PureComponent {
                };
 
         /**
-         * Rozpoczyna wszystko
-         *  {int} numStars liczba gwiazd do renderu
-         * @param {int} maxStarSpeed maxymalna szybkosc gwiazdek pixel/klatka
+         * Start Everything
+         *  {int} numStars Number of stars to render
+         * @param {int} maxStarSpeed maximum star speed
          */
             StarField.prototype.render = function (numStars, maxStarSpeed) {
             this.numStars = numStars || 100;
             this.maxStarSpeed = maxStarSpeed || 3;
-
             this._initScene(this.numStars);
         };
 
-        var starField = new StarField().render(333, 3);
+        let starField = new StarField().render(333, 3);
         return(starField);
     }
     _reset(props) {
