@@ -31,7 +31,7 @@ const Layout = ({ children }) => {
             <Header siteTitle={data.site.siteMetadata.title} />
             <div
                 style={{
-                    'overflow-x': 'hidden',
+                    'overflowX': 'hidden',
                     'padding': '0px; margin: 0px',
                     'width': '100%',
                     'height': '100%'
@@ -57,7 +57,7 @@ const Layout = ({ children }) => {
                 <footer>
                     © {new Date().getFullYear()}, Built with
                     {` `}
-                    <a href="https://www.gatsbyjs.org">Gatsby</a>, Threejs, Drupal 8, graphQL, Tailwind css
+                    <a href="https://www.gatsbyjs.org">Gatsby</a>, Threejs (where opengl supported), Drupal 8, graphQL, Tailwind css
                 </footer>
             </div>
         </>

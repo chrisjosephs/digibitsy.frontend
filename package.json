@@ -7,6 +7,7 @@
   "dependencies": {
     "@emotion/core": "^10.0.28",
     "@emotion/styled": "^10.0.27",
+    "@pixiv/three-vrm": "^0.3.3",
     "autoprefixer": "^9.7.5",
     "gatsby": "^2.20.8",
     "gatsby-image": "^2.2.39",
