@@ -37,6 +37,7 @@ const Layout = ({ children }) => {
                     'height': '100%'
                 }}>
                 <BigBangStarField
+                className="BigBangStarField"
                 style={{
                     position: 'absolute',
                     width: '100%',
@@ -56,7 +57,7 @@ const Layout = ({ children }) => {
                 <footer>
                     © {new Date().getFullYear()}, Built with
                     {` `}
-                    <a href="https://www.gatsbyjs.org">Gatsby</a>
+                    <a href="https://www.gatsbyjs.org">Gatsby</a>, Threejs, Drupal 8, graphQL, Tailwind css
                 </footer>
             </div>
         </>
