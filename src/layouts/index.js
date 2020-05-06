@@ -12,6 +12,7 @@ import {useStaticQuery, graphql} from "gatsby"
 import Header from "../components/header"
 import tw from 'tailwind.macro'
 import styled from '@emotion/styled'
+import Invaders from '../components/invaders'
 import "./layout.css"
 import '../css/global.css'
 import {StaticQuery} from "../../.cache/gatsby-browser-entry";
@@ -52,6 +53,7 @@ const Layout = ({ children, location }) => (
                             padding: `0 1.0875rem 1.45rem`,
                         }}
                     >
+                        <Invaders/>
                     <Transition location = {location}>
                             <main>{children}</main>
                     </Transition>
