@@ -3,6 +3,7 @@ import React, {Component} from "react";
 import tw from 'tailwind.macro'
 
 import rocketSVG from "../images/rocket.svg"
+import exhaustFumes from "../images/smoke-with-transparency-rs.gif"
 
 class Rocket extends Component {
     constructor(props) {
@@ -21,7 +22,10 @@ class Rocket extends Component {
     render() {
         return (
             <div className={"Rocket"} relative>
+                <RocketContainer>
                 <RocketImg/>
+                <RocketExhaustFumesImg/>
+                </RocketContainer>
             </div>
         );
     }
@@ -42,16 +46,31 @@ const noblastOff = keyframes`
   0% { margin-top:0; }
   100% { margin-top: 0;}
 `;
+const RocketContainer = styled.div`
+${tw`block absolute`}
+bottom: 0;
+`
 
 const RocketImg = styled.div`
-${tw`w-full inline-block absolute`}
+${tw`block relative`}
 animation: "${props => props.blastOff ? css`${blastOff}` : css`${noblastOff}`}  8s linear infinite";
 background-image: url(${rocketSVG});
 background-size: cover;
-bottom: 0;
+float:left;
 height: 160px;
 transform: rotate(-45deg);
 width: 160px;
+`
+const RocketExhaustFumesImg = styled.div`
+${tw`block relative`}
+animation: "${props => props.blastOff ? css`${blastOff}` : css`${noblastOff}`}  8s linear infinite";
+background-image: url(${exhaustFumes});
+background-size: cover;
+bottom: 0;
+clear: left;
+height: 320px;
+transform: rotate(-180deg);
+width: 320px;
 `
 
 export default Rocket

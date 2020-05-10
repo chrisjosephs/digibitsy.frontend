@@ -18,7 +18,7 @@ class Invaders extends Component {
 
     render() {
         return (
-            <div className={"SpaceInvader"} style={{position: "absolute", width: "100%", height: "100%"}}>
+            <div className={"SpaceInvader"} style={{position: "fixed", width: "100%", height: "100%"}}>
                 <ButtonSi onClick={() => this.toggleCurtains()}/>
                 <FullScreenInvaders curtains={this.state.curtains}
                                     className={this.state.curtains ? FullscreenShow : ''}/>
@@ -122,7 +122,7 @@ const FullscreenShow = styled.div`
     -o-transition-delay: 0s;
     -ms-transition-delay: 0s;
     transition-delay: 0s;
-    position: absolute;
+    position: fixed;
     height: 100%;
     z-index: 1000;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
