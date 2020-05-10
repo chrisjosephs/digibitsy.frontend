@@ -32,15 +32,15 @@ class Invaders extends Component {
  * @type {Keyframes}
  */
 const curtain = keyframes`
-  0% { margin-top: -3.125em; }
-  6.25%, 12.5% { margin-top: 0em; }
-  18.75%, 25% { margin-top: 3em; }
-  31.25%, 37.5% { margin-top: 6em; }
-  43.75%, 50% { margin-top: 9em; }
-  56.25%, 62.5% { margin-top: 12em; }
-  69.75%, 75% { margin-top: 15em; }
-  81.25%, 87.5% { margin-top: 18em; }
-  93.75%, 100% { margin-top: 21em; }
+  0% { height: 6.25% }
+  6.25%, 12.5% { height: 6.25% }
+  18.75%, 25% { height: 18.75% }
+  31.25%, 37.5% { height: 31.25% }
+  43.75%, 50% { height: 43.75% }
+  56.25%, 62.5% { height: 56.25% }
+  69.75%, 75% { height: 69.75% }
+  81.25%, 87.5% { height: 81.25% }
+  93.75%, 100% { height: 93.75% }
 `;
 
 const nocurtain = keyframes`
@@ -48,7 +48,7 @@ const nocurtain = keyframes`
   100% { margin-top: 0;}
 `;
 const FullScreenInvaders = styled.div`
-${tw`w-full inline-block bg-pink-500 bottom-0 right-0 left-0 h-screen w-full`}
+${tw`w-full inline-block bg-pink-500 bottom-0 right-0 left-0 h-0 w-full`}
 animation: ${props => props.curtains ? css`${curtain}` : css`${nocurtain}`}  8s linear infinite
 `
 

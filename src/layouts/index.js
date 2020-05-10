@@ -17,6 +17,7 @@ import "./layout.css"
 import '../css/global.css'
 import {StaticQuery} from "../../.cache/gatsby-browser-entry";
 import Transition from '../components/transition'
+import Rocket from "../components/rocket";
 
 const Layout = ({ children, location }) => (
     <StaticQuery
@@ -54,6 +55,7 @@ const Layout = ({ children, location }) => (
                         }}
                     >
                         <Invaders/>
+                        <Rocket/>
                     <Transition location = {location}>
                             <main>{children}</main>
                     </Transition>
