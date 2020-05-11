@@ -18,7 +18,7 @@ class Invaders extends Component {
 
     render() {
         return (
-            <div className={"SpaceInvader"} style={{position: "fixed", width: "100%", height: "100%"}}>
+            <div className={"SpaceInvader fixed h-full"} style={{width: "inherit"}}>
                 <ButtonSi onClick={() => this.toggleCurtains()}/>
                 <FullScreenInvaders curtains={this.state.curtains}
                                     className={this.state.curtains ? FullscreenShow : ''}/>
@@ -48,8 +48,9 @@ const nocurtain = keyframes`
   100% { margin-top: 0;}
 `;
 const FullScreenInvaders = styled.div`
-${tw`w-full inline-block bg-pink-500 bottom-0 right-0 left-0 h-0 w-full`}
-animation: ${props => props.curtains ? css`${curtain}` : css`${nocurtain}`}  8s linear infinite
+${tw`inline-block bg-pink-500 bottom-0 right-0 left-0 h-0`}
+animation: ${props => props.curtains ? css`${curtain}` : css`${nocurtain}`}  8s linear infinite;
+width: inherit;
 `
 
 const SpaceInvaderCurtainOld = styled.div`

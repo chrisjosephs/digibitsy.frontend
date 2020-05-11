@@ -18,8 +18,9 @@ import '../css/global.css'
 import {StaticQuery} from "../../.cache/gatsby-browser-entry";
 import Transition from '../components/transition'
 import Rocket from "../components/rocket";
+import MatrixLetters from "../components/matrix";
 
-const Layout = ({ children, location }) => (
+const Layout = ({children, location}) => (
     <StaticQuery
         query={graphql`query SiteTitleQuery {
         site {
@@ -30,6 +31,15 @@ const Layout = ({ children, location }) => (
       }`}
         render={data => (
             <>
+                    <BigBangStarField
+                className="Big-Bang-Star-Field"
+                style={{
+                    position: 'absolute',
+                    width: '100%',
+                    height: '100%',
+                    zIndex: '-10'
+                }}
+            />
                 <Header siteTitle={data.site.siteMetadata.title}/>
                 <div
                     style={{
@@ -38,34 +48,22 @@ const Layout = ({ children, location }) => (
                         'width': '100%',
                         'height': '100%'
                     }}>
-                    <BigBangStarField
-                        className="Big-Bang-Star-Field"
-                        style={{
-                            position: 'absolute',
-                            width: '100%',
-                            height: '100%',
-                            zIndex: '-10'
-                        }}
-                    />
-                    <div
-                        style={{
-                            margin: `0 auto`,
-                            maxWidth: 960,
-                            padding: `0 1.0875rem 1.45rem`,
-                        }}
-                    >
+
+                    <div className={"container mx-auto"}>
+                        <MatrixLetters/>
                         <Invaders/>
                         <Rocket/>
-                    <Transition location = {location}>
+                        <Transition location={location}>
                             <main>{children}</main>
-                    </Transition>
+                        </Transition>
+                        <footer className={"fixed bottom-0 content-center"}>
+                            © {new Date().getFullYear()}, Built with
+                            {` `}
+                            <a href="https://www.gatsbyjs.org">Gatsby</a>, Threejs (where opengl supported), Drupal 8,
+                            graphQL, Tailwind css
+                        </footer>
                     </div>
-                    <footer>
-                        © {new Date().getFullYear()}, Built with
-                        {` `}
-                        <a href="https://www.gatsbyjs.org">Gatsby</a>, Threejs (where opengl supported), Drupal 8,
-                        graphQL, Tailwind css
-                    </footer>
+
                 </div>
             </>
         )}

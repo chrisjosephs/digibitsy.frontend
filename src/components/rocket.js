@@ -69,6 +69,7 @@ background-size: cover;
 bottom: 0;
 clear: left;
 height: 320px;
+left: -23px;
 transform: rotate(-180deg);
 width: 320px;
 `
