@@ -72,9 +72,11 @@ class MatrixLetters extends Component {
     // Setting up the draw function
     _draw() {
         this.ctx.fillStyle = 'rgba(0, 0, 0, .1)';
-        this.ctx.fillRect(0, 0, this.state.containerWidth, this.state.containerHeight);
+        // this.ctx.fillRect(0, 0, this.state.containerWidth, this.state.containerHeight);
         for (var i = 0; i < this.drops.length; i++) {
             var text = this.letters[Math.floor(Math.random() * this.letters.length)];
+            this.ctx.fillStyle = 'rgba(0, 0, 0, .1)';
+            this.ctx.fillRect(i * this.fontSize, this.drops[i], this.fontSize, this.drops[i] * this.fontSize);
             this.ctx.fillStyle = '#0f0';
             this.ctx.fillText(text, i * this.fontSize, this.drops[i] * this.fontSize);
             this.drops[i]++;
