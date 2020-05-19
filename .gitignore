@@ -68,3 +68,8 @@ yarn-error.log
 # Yarn Integrity file
 .yarn-integrity
 /src/images/ignore/
+/static/stacy-lightweight.glb
+/test.php
+/test2.php
+/test3.php
+/test4.php

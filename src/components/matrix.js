@@ -14,6 +14,7 @@ class MatrixLetters extends Component {
         // Setting up the letters
         this.letters = 'ABCDEFGHIJKLMNOPQRSTUVXYZ0123456789';
         this.letters = this.letters.split('');
+        this.reruns = 0;
     }
     static propTypes = {
         style: PropTypes.object
@@ -58,6 +59,7 @@ class MatrixLetters extends Component {
         for (let i = 0; i < this.columns; i++) {
             this.drops[i] = 1;
         }
+        this.reruns = 0;
         this._tick()
     }
 
@@ -72,16 +74,38 @@ class MatrixLetters extends Component {
     // Setting up the draw function
     _draw() {
         this.ctx.fillStyle = 'rgba(0, 0, 0, .1)';
+        this.fontSize = 16;
+        this.ctx.font = "14px Verdana";
+        if(this.reruns > (this.drops.length * 8)){
+            raf.cancel(this._tickRaf);
+        }
         // this.ctx.fillRect(0, 0, this.state.containerWidth, this.state.containerHeight);
         for (var i = 0; i < this.drops.length; i++) {
             var text = this.letters[Math.floor(Math.random() * this.letters.length)];
-            this.ctx.fillStyle = 'rgba(0, 0, 0, .1)';
-            this.ctx.fillRect(i * this.fontSize, this.drops[i], this.fontSize, this.drops[i] * this.fontSize);
-            this.ctx.fillStyle = '#0f0';
-            this.ctx.fillText(text, i * this.fontSize, this.drops[i] * this.fontSize);
+            if(this.reruns < (this.drops.length * 5)) {
+                this.ctx.fillStyle = 'rgba(0, 0, 0, .1)';
+                this.ctx.fillRect(i * this.fontSize, this.drops[i], this.fontSize, this.drops[i] * this.fontSize);
+                this.ctx.fillStyle = '#0f0';
+                this.ctx.fillText(text, i * this.fontSize, this.drops[i] * this.fontSize);
+            }
             this.drops[i]++;
             if (this.drops[i] * this.fontSize > this.state.containerHeight && Math.random() > .95) {
                 this.drops[i] = 0;
+                this.reruns++;
+            }
+            if(this.reruns > (this.drops.length * 5)){
+                this.ctx.fillStyle = 'rgba(0, 0, 0, .1)';
+                this.ctx.clearRect(i * this.fontSize, this.drops[i], this.fontSize, this.drops[i] * this.fontSize);
+                this.ctx.fillStyle = '#0f0';
+                this.ctx.fillText(text, i * this.fontSize, this.drops[i] * this.fontSize);
+            }
+            if(this.reruns > (this.drops.length * 8)){
+                this.ctx.fillStyle = 'rgba(0, 0, 0, .1)';
+                this.ctx.clearRect(i * this.fontSize, this.drops[i], this.fontSize, this.drops[i] * this.fontSize);
+                this.ctx.fillStyle = '#0f0';
+                this.ctx.fillText(text, i * this.fontSize, this.drops[i] * this.fontSize);
+                raf.cancel(this._tickRaf);
+                break;
             }
         }
     }
