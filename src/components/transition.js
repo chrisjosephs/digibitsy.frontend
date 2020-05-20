@@ -22,6 +22,8 @@ class Transition extends React.PureComponent {
     render() {
         const { children, location } = this.props
         return (
+            <>
+
             <TransitionGroup>
                 <ReactTransition
                     key={location.pathname}
@@ -41,6 +43,7 @@ class Transition extends React.PureComponent {
                     )}
                 </ReactTransition>
             </TransitionGroup>
+                </>
         )
     }
 }

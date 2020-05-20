@@ -1,5 +1,7 @@
 import React, {Component, createRef} from "react";
 import PropTypes from 'prop-types';
+import tw from 'tailwind.macro'
+import styled from '@emotion/styled'
 
 const raf = require('raf');
 
@@ -17,9 +19,11 @@ class MatrixLetters extends Component {
         this.reruns = 0;
     }
     static propTypes = {
+        triggerAnim: PropTypes.number,
         style: PropTypes.object
     }
     static defaultProps = {
+        triggerAnim: false,
         style: {}
     };
 
@@ -34,6 +38,12 @@ class MatrixLetters extends Component {
                  ref={this.containerRef}
                  style={{
                      overflow: 'hidden',
+                     position: 'fixed',
+                     zIndex: 1,
+                     top: 0,
+                     left: 0,
+                     right: 0,
+                     bottom: 0,
                      ...style
                  }}
                  {...rest}
@@ -52,7 +62,7 @@ class MatrixLetters extends Component {
         this.updateWindowDimensions();
         window.addEventListener('resize', this.updateWindowDimensions);
         // Setting up the columns
-        this.fontSize = 10;
+        this.fontSize = 16;
         this.columns = this.state.containerWidth / this.fontSize;
         // Setting up the drops
         this.drops = [];
@@ -60,13 +70,17 @@ class MatrixLetters extends Component {
             this.drops[i] = 1;
         }
         this.reruns = 0;
-        this._tick()
+        console.log("fire" + this.props.triggerAnim);
+        if(this.props.triggerAnim==1){
+            this._tick();
+        }
     }
 
     componentWillUnmount() {
         raf.cancel(this._tickRaf)
         window.removeEventListener('resize', this.updateWindowDimensions);
     }
+
     _tick = () => {
         this._draw()
         this._tickRaf = raf(this._tick)
@@ -93,13 +107,13 @@ class MatrixLetters extends Component {
                 this.drops[i] = 0;
                 this.reruns++;
             }
-            if(this.reruns > (this.drops.length * 5)){
+            if(this.reruns > (this.drops.length * 2)){
                 this.ctx.fillStyle = 'rgba(0, 0, 0, .1)';
                 this.ctx.clearRect(i * this.fontSize, this.drops[i], this.fontSize, this.drops[i] * this.fontSize);
                 this.ctx.fillStyle = '#0f0';
                 this.ctx.fillText(text, i * this.fontSize, this.drops[i] * this.fontSize);
             }
-            if(this.reruns > (this.drops.length * 8)){
+            if(this.reruns > (this.drops.length * 4)){
                 this.ctx.fillStyle = 'rgba(0, 0, 0, .1)';
                 this.ctx.clearRect(i * this.fontSize, this.drops[i], this.fontSize, this.drops[i] * this.fontSize);
                 this.ctx.fillStyle = '#0f0';
