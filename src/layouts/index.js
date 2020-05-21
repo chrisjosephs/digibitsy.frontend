@@ -27,33 +27,36 @@ import lerp from "lerp";
 import background from '../images/piqsels.com-id-fvkta.jpg'
 import {css} from "styled-components";
 import {TransitionGroup} from "react-transition-group";
+import Octopirate from "../components/Octopirate";
+
+const CanvasModel =({mouse})=> {
+    return (
+        <Canvas height={"600px"}
+                pixelRatio={window.devicePixelRatio} camera={{camera}}>
+
+            <directionalLight
+                position={[2.2, 3.4, 1]}
+                rotation={[2.3, 0.8, -2.14]}
+                color={0xffffff}
+                castShadow={false}
+                scale={[1,1,1]}
+            />
+            <hemisphereLight skyColor={"black"} groundColor={0xffffff} intensity={0.68} position={[0, 2, 0]} />
+            <mesh position={[0, 0, -10]} >
+                <circleBufferGeometry attach="geometry" args={[8, 64]} />
+                <meshLambertMaterial transparent={true} attach="material" color="lightpink" opacity={0.7 }/>
+            </mesh>
+
+            <Suspense fallback={null}>
+                <Octopirate mouse={mouse} position={[0,-0.3,0]} />
+            </Suspense>
+        </Canvas>
+    )
+}
 
 const Layout = ({children, location}) => {
     const mouse = useRef({x: 0, y: 0});
-    const CanvasModel = props => {
-        return (
-            <Canvas height={"600px"}
-                    pixelRatio={window.devicePixelRatio} camera={{camera}}>
 
-                <directionalLight
-                    position={[2.2, 3.4, 1]}
-                    rotation={[2.3, 0.8, -2.14]}
-                    color={0xffffff}
-                    castShadow={false}
-                    scale={[1,1,1]}
-                />
-                <hemisphereLight skyColor={"black"} groundColor={0xffffff} intensity={0.68} position={[0, 2, 0]} />
-                <mesh position={[0, 0, -10]} >
-                    <circleBufferGeometry attach="geometry" args={[8, 64]} />
-                    <meshLambertMaterial transparent={true} attach="material" color="lightpink" opacity={0.7 }/>
-                </mesh>
-
-                <Suspense fallback={null}>
-                    <Model mouse={mouse} position={[0,-0.3,0]} />
-                </Suspense>
-            </Canvas>
-        )
-    }
     return(
     <StaticQuery
         query={graphql`query SiteTitleQuery {
@@ -90,7 +93,7 @@ const Layout = ({children, location}) => {
                         <div className="flex">
                         <div className={"md:w-2/3"}></div>
                         <div className={"md:w-1/3"} style={{height: "600px"}}>
-                            <CanvasModel/>
+                            <CanvasModel mouse={mouse}/>
                         </div>
                         </div>
 
@@ -120,76 +123,54 @@ const Layout = ({children, location}) => {
 }
 
 
-function Model({ mouse, ...props }) {
-    const group = useRef()
-
-    const { nodes, scene, scenes, animations } = useLoader(GLTFLoader, "/octoanka6.glb")
-
-    const actions = useRef()
-    const [mixer] = useState(() => new THREE.AnimationMixer())
-    function moveJoint(mouse, joint, degreeLimit = 45 ) {
-        let degrees = getMouseDegrees(mouse.current.x, mouse.current.y, degreeLimit)
-        joint.rotation.xD = lerp(joint.rotation.xD || 0, degrees.x, 0.1)
-        joint.rotation.yD = lerp(joint.rotation.yD || 0, degrees.y, 0.1)
-        joint.rotation.x =  -0.1 + THREE.Math.degToRad(joint.rotation.xD)
-        joint.rotation.z = -0.5 + THREE.Math.degToRad(joint.rotation.yD)
-    }
-
-
-    useFrame((state, delta) => {
-        mixer.update(delta)
-    })
-    useFrame((state, delta) => {
-        mixer.update(delta)
-        moveJoint(mouse, nodes.Neck_M_0297);
-    })
-
-    useFrame((state, delta) => mixer.update(delta))
-    /* No Animations yet
-    useEffect(() => {
-        actions.current = { idle: mixer.clipAction(animations[8], group.current) }
-        actions.current.idle.play()
-        return () => animations.forEach(clip => mixer.uncacheClip(clip))
-    }, [])
-*/
-    useFrame((state, delta) => {
-        mixer.update(delta)
-        // moveJoint(mouse, nodes.mixamorigNeck)
-        // moveJoint(mouse, nodes.mixamorigSpine)
-    })
-    console.log("nodes");
-    console.log(nodes);
-    console.log("scenes");
-    console.log(scenes);
-    // scenes[0]["children"][3].material.metalness = 1 ;
-    // scenes[0]["children"][3].material.roughness = 0.55;
-    // scenes[0]["children"][3].material.shininess = 0.5;
-    var textureLoader = new THREE.TextureLoader();
-    var MetalRusted = textureLoader.load('/rm.jpg');
-
-    var material = new THREE.MeshStandardMaterial( {
-        color: 0xffffff,
-        metalness: 0.95,   // between 0 and 1
-        roughness: 0.65, // between 0 and 1
-        envMapIntensity: 1,
-        map: MetalRusted,
-
-    } );
-    nodes['octopus_hat_high_octopus_hat_tex_0'].visible = true;
-    nodes['anchor'].material = material;
-    nodes['octopus_body_high_Octopus_body_tex_0'].material.metalness = 0.1;
-    const ref = useRef()
-
-    useFrame(({ clock }) => (
-        nodes["Armature_0"].rotation.x  = nodes["Armature_0"].rotation.y =nodes["Armature_0"].rotation.z = Math.sin(clock.getElapsedTime()) * -0.3))
-
-    return (
-        <group ref={ref} rotation={[2, 0, 0]} ref={group} {...props} dispose={null}>
-            <primitive object={nodes["Armature_0"]} />
-           
-        </group>
+function CloudTitle() {
+    return(
+        <>
+            <h2>Final Product</h2>
+            <div className="main">
+                <div class="cloud_base">
+                    <div class="title">
+                        Digibitsy
+                    </div>
+                    <span class="rounds"></span>
+                </div>
+            </div>
+            </>
     )
 }
+const cloud_base= styled.div`
+background: white;
+height: 100px;
+width: 300px;
+border-radius: 50px; /* half of height will do */
+position: relative;
+top: 120px;
+box-shadow:
+inset 5px -9px 5px rgba(225, 245, 253, 0.5), 0px 0px 10px 6px rgba(240, 240, 240, 0.7);
+-webkit-transition: 0.2s ease-in all;
+-moz-transition: 0.2s ease-in all;
+transition: 0.2s ease-in all;
+&:hover {
+ left: 55%;
+}
+`
+const rounds= styled.div`
+width: 300px;
+border-radius: 50%; /* circle */
+position: absolute;
+bottom: -30px;
+-webkit-box-shadow: 0 0 25px 8px rgba(0, 0, 0, 0.2);
+-moz-box-shadow: 0 0 25px 8px rgba(0, 0, 0, 0.2);
+box-shadow: 0 0 25px 8px rgba(0, 0, 0, 0.2);
+-webkit-transition: 0.2s ease-in all;
+-moz-transition: 0.2s ease-in all;
+transition: 0.2s ease-in all;
+&:hover {
+ left: 55%;
+}
+
+`
+
 function Plane({ ...props }) {
     return (
         <mesh {...props} receiveShadow>

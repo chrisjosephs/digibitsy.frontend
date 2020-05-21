@@ -70,12 +70,11 @@ const ButtonSi = styled.div`
     height:100px;
     width:200px;
     background:red;
-    float:left;
-}
+    float:left
 `
 
 const FullscreenHide = styled.div`
-    -webkit-transition-property: all,
+    -webkit-transition-property: all;
     -moz-transition-property: all;
     -o-transition-property: all;
     -ms-transition-property: all;

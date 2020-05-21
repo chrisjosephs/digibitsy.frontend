@@ -86,7 +86,7 @@ function main() {
 
     {
         const gltfLoader = new GLTFLoader();
-        gltfLoader.load('../../static/octoanka3.glb', (gltf) => {
+        gltfLoader.load('../../static/octoankanakeddraco.gltf', (gltf) => {
             const root = gltf.scene;
             scene.add(root);
 
