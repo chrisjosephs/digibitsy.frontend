@@ -1,11 +1,10 @@
 import * as THREE from "three"
-import React, {useEffect, useRef, useState} from "react"
-import {useLoader, useFrame} from "react-three-fiber"
+import React, {Suspense, useEffect, useRef, useState} from "react"
+import {useLoader, useFrame, Canvas} from "react-three-fiber"
 import {GLTFLoader} from "three/examples/jsm/loaders/GLTFLoader"
 import lerp from "lerp"
 import {getMouseDegrees} from "./utils"
-import styled from "@emotion/styled";
-import {keyframes} from "styled-components";
+import styled, {keyframes, css} from 'styled-components';
 
 function moveJoint(mouse, joint, degreeLimit = 45) {
     let degrees = getMouseDegrees(mouse.current.x, mouse.current.y, degreeLimit)
@@ -15,11 +14,47 @@ function moveJoint(mouse, joint, degreeLimit = 45) {
     joint.rotation.z = -0.5 + THREE.Math.degToRad(joint.rotation.yD)
 }
 
+const fov = 45;
+const aspect = 2;  // the canvas default
+const near = 0.1;
+const far = 100;
+const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
+camera.position.set(0, 5, 0);
 
-export default function OctoPirate({mouse, ...props}) {
+export default function OctoPirateCanvas({mouse, ...props}) {
+    return (
+        <>
+            <LoadingScreen className={"LoadingScreen"}>
+                <Loader></Loader>
+                <Canvas height={"600px"}
+                        pixelRatio={window.devicePixelRatio} camera={{camera}}>
+
+                    <directionalLight
+                        position={[2.2, 3.4, 1]}
+                        rotation={[2.3, 0.8, -2.14]}
+                        color={0xffffff}
+                        castShadow={false}
+                        scale={[1, 1, 1]}
+                    />
+                    <hemisphereLight skyColor={"black"} groundColor={0xffffff} intensity={0.68} position={[0, 2, 0]}/>
+                    <mesh position={[0, 0, -10]}>
+                        <circleBufferGeometry attach="geometry" args={[8, 64]}/>
+                        <meshLambertMaterial transparent={true} attach="material" color="lightpink" opacity={0.7}/>
+                    </mesh>
+
+                    <Suspense fallback={null}>
+                        <OctoPirate mouse={mouse} position={[0, -0.3, 0]}/>
+                    </Suspense>
+                </Canvas>
+            </LoadingScreen>
+        </>
+    )
+}
+
+function OctoPirate({mouse, ...props}) {
     const group = useRef()
 
-    function onTransitionEnd(){
+    function onTransitionEnd() {
 
     }
 
@@ -83,9 +118,6 @@ export default function OctoPirate({mouse, ...props}) {
     const ref = useRef()
     return (
         <>
-            {/*<LoadingScreen>
-                <Loader></Loader>
-            </LoadingScreen>*/}
             <group ref={ref} rotation={[2, 0, 0]} ref={group} {...props} dispose={null}>
                 <primitive object={nodes["Armature_0"]}/>
             </group>
@@ -94,60 +126,15 @@ export default function OctoPirate({mouse, ...props}) {
 }
 
 const LoadingScreen = styled.div`
-position: absolute;
 z-index: 2;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-background-color: #000000;
 opacity: 1;
+width: 100%;
+    height: 100%;
 transition: 1s opacity;
 &.fade-out{
   opacity: 0;
 }
 `
-const Loader = styled.div`
-display: block;
-position: relative;
-left: 50%;
-top: 50%;
-width: 150px;
-height: 150px;
-margin: -75px 0 0 -75px;
-border-radius: 50%;
-border: 3px solid transparent;
-border-top-color: #9370DB;
--webkit-animation: spin 2s linear infinite;
-animation: spin 2s linear infinite;
-&:before{
-content: "";
-position: absolute;
-top: 5px;
-left: 5px;
-right: 5px;
-bottom: 5px;
-border-radius: 50%;
-border: 3px solid transparent;
-border-top-color: #BA55D3;
--webkit-animation: spin 3s linear infinite;
-animation: spin 3s linear infinite;
-}
-&:after{
-content: "";
-position: absolute;
-top: 15px;
-left: 15px;
-right: 15px;
-bottom: 15px;
-border-radius: 50%;
-border: 3px solid transparent;
-border-top-color: #FF00FF;
--webkit-animation: spin 1.5s linear infinite;
-animation: spin 1.5s linear infinite;
-}
-`
-
 const spin = keyframes`
 0%   {
         -webkit-transform: rotate(0deg);
@@ -160,3 +147,45 @@ const spin = keyframes`
         transform: rotate(360deg);
     }
 `;
+
+const Loader = styled.div`
+display: block;
+position: relative;
+left: 50%;
+top: 50%;
+width: 150px;
+height: 150px;
+margin: -75px 0 0 -75px;
+border-radius: 50%;
+border: 3px solid transparent;
+border-top-color: #9370DB;
+-webkit-animation: ${spin} 2s linear infinite;
+animation: ${spin} 2s linear infinite;
+&&:before {
+content: "";
+position: absolute;
+top: 5px;
+left: 5px;
+right: 5px;
+bottom: 5px;
+border-radius: 50%;
+border: 3px solid transparent;
+border-top-color: #BA55D3;
+-webkit-animation: ${spin} 3s linear infinite;   
+animation: ${spin} 3s linear infinite;
+}
+&&:after {
+content: "";
+position: absolute;
+top: 15px;
+left: 15px;
+right: 15px;
+bottom: 15px;
+border-radius: 50%;
+border: 3px solid transparent;
+border-top-color: #FF00FF;
+-webkit-animation: ${spin} 1.5s linear infinite;
+animation: ${spin} 1.5s linear infinite;
+}
+`
+

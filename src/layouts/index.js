@@ -10,49 +10,20 @@ import BigBangStarField from 'react-big-bang-star-field'
 import PropTypes from "prop-types"
 import {useStaticQuery, graphql} from "gatsby"
 import Header from "../components/header"
-import tw from 'tailwind.macro'
 import styled from '@emotion/styled'
 import Invaders from '../components/invaders'
 import "./layout.css"
 import '../css/global.css'
 import {StaticQuery} from "../../.cache/gatsby-browser-entry";
 import Transition from '../components/transition'
-import Rocket from "../components/rocket";
 import MatrixLetters from "../components/matrix";
 import {Canvas, useFrame, useLoader} from "react-three-fiber";
-import {GLTFLoader} from "three/examples/jsm/loaders/GLTFLoader";
 import * as THREE from "three";
-import {getMouseDegrees, getMousePos} from "../components/utils";
-import lerp from "lerp";
+import {getMousePos} from "../components/utils";
 import background from '../images/piqsels.com-id-fvkta.jpg'
-import {css} from "styled-components";
-import {TransitionGroup} from "react-transition-group";
-import Octopirate from "../components/Octopirate";
+import OctoPirateCanvas from "../components/Octopirate";
 
-const CanvasModel =({mouse})=> {
-    return (
-        <Canvas height={"600px"}
-                pixelRatio={window.devicePixelRatio} camera={{camera}}>
 
-            <directionalLight
-                position={[2.2, 3.4, 1]}
-                rotation={[2.3, 0.8, -2.14]}
-                color={0xffffff}
-                castShadow={false}
-                scale={[1,1,1]}
-            />
-            <hemisphereLight skyColor={"black"} groundColor={0xffffff} intensity={0.68} position={[0, 2, 0]} />
-            <mesh position={[0, 0, -10]} >
-                <circleBufferGeometry attach="geometry" args={[8, 64]} />
-                <meshLambertMaterial transparent={true} attach="material" color="lightpink" opacity={0.7 }/>
-            </mesh>
-
-            <Suspense fallback={null}>
-                <Octopirate mouse={mouse} position={[0,-0.3,0]} />
-            </Suspense>
-        </Canvas>
-    )
-}
 
 const Layout = ({children, location}) => {
     const mouse = useRef({x: 0, y: 0});
@@ -93,7 +64,7 @@ const Layout = ({children, location}) => {
                         <div className="flex">
                         <div className={"md:w-2/3"}></div>
                         <div className={"md:w-1/3"} style={{height: "600px"}}>
-                            <CanvasModel mouse={mouse}/>
+                            <OctoPirateCanvas mouse={mouse}/>
                         </div>
                         </div>
 
@@ -138,7 +109,7 @@ function CloudTitle() {
             </>
     )
 }
-const cloud_base= styled.div`
+const cloud_base = styled.div`
 background: white;
 height: 100px;
 width: 300px;
@@ -154,7 +125,7 @@ transition: 0.2s ease-in all;
  left: 55%;
 }
 `
-const rounds= styled.div`
+const rounds = styled.div`
 width: 300px;
 border-radius: 50%; /* circle */
 position: absolute;
@@ -179,12 +150,6 @@ function Plane({ ...props }) {
         </mesh>
     )
 }
-const fov = 45;
-const aspect = 2;  // the canvas default
-const near = 0.1;
-const far = 100;
-const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
-camera.position.set(0, 5, 0);
 
 Layout.propTypes = {
     children: PropTypes.node.isRequired,
