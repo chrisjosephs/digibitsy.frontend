@@ -4,7 +4,8 @@ import {useLoader, useFrame, Canvas} from "react-three-fiber"
 import {GLTFLoader} from "three/examples/jsm/loaders/GLTFLoader"
 import lerp from "lerp"
 import {getMouseDegrees} from "./utils"
-import styled, {keyframes, css} from 'styled-components';
+import styled from '@emotion/styled'
+import { jsx, css, keyframes } from '@emotion/core'
 
 function moveJoint(mouse, joint, degreeLimit = 45) {
     let degrees = getMouseDegrees(mouse.current.x, mouse.current.y, degreeLimit)
@@ -36,6 +37,7 @@ export default function OctoPirateCanvas({mouse, ...props}) {
                         castShadow={false}
                         scale={[1, 1, 1]}
                     />
+
                     <hemisphereLight skyColor={"black"} groundColor={0xffffff} intensity={0.68} position={[0, 2, 0]}/>
                     <mesh position={[0, 0, -10]}>
                         <circleBufferGeometry attach="geometry" args={[8, 64]}/>
@@ -57,11 +59,22 @@ function OctoPirate({mouse, ...props}) {
     function onTransitionEnd() {
 
     }
+    const loadingManager = new THREE.LoadingManager( () => {
+        console.log("LOADED");
+        const loadingScreen = document.getElementsByClassName( 'LoadingScreen' );
+        console.log(loadingScreen);
+        if(!undefined===loadingScreen){
+            loadingScreen.classList.add( 'fade-out' );
+        }
+        // optional: remove loader from DOM via event listener
+        // loadingScreen.addEventListener( 'transitionend', onTransitionEnd );
+    });
 
     const {nodes, scene, scenes, animations} = useLoader(GLTFLoader, "/octoanka6.glb", loader => {
         // const dracoLoader = new DRACOLoader()
         // dracoLoader.setDecoderPath('/draco-gltf/')
         // loader.setDRACOLoader(dracoLoader)
+        loader.manager = loadingManager;
     })
 
     let [mixer] = useState(() => new THREE.AnimationMixer())
@@ -83,18 +96,6 @@ function OctoPirate({mouse, ...props}) {
         return () => animations.forEach(clip => mixer.uncacheClip(clip))
     }, [])
 */
-    useFrame((state, delta) => {
-        mixer.update(delta)
-        // moveJoint(mouse, nodes.mixamorigNeck)
-        // moveJoint(mouse, nodes.mixamorigSpine)
-    })
-    console.log("nodes");
-    console.log(nodes);
-    console.log("scenes");
-    console.log(scenes);
-    // scenes[0]["children"][3].material.metalness = 1 ;
-    // scenes[0]["children"][3].material.roughness = 0.55;
-    // scenes[0]["children"][3].material.shininess = 0.5;
     var textureLoader = new THREE.TextureLoader();
     var MetalRusted = textureLoader.load('/rm.jpg');
 
@@ -110,10 +111,8 @@ function OctoPirate({mouse, ...props}) {
     nodes['anchor'].material = material;
     nodes['octopus_body_high_Octopus_body_tex_0'].material.metalness = 0.1;
 
-
     useFrame(({clock}) => (
         nodes["Armature_0"].rotation.x = nodes["Armature_0"].rotation.y = nodes["Armature_0"].rotation.z = Math.sin(clock.getElapsedTime()) * -0.3))
-
 
     const ref = useRef()
     return (
@@ -152,7 +151,7 @@ const Loader = styled.div`
 display: block;
 position: relative;
 left: 50%;
-top: 50%;
+top: 66%;
 width: 150px;
 height: 150px;
 margin: -75px 0 0 -75px;
@@ -161,6 +160,7 @@ border: 3px solid transparent;
 border-top-color: #9370DB;
 -webkit-animation: ${spin} 2s linear infinite;
 animation: ${spin} 2s linear infinite;
+z-index:12;
 &&:before {
 content: "";
 position: absolute;
