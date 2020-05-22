@@ -88,7 +88,7 @@ class MatrixLetters extends Component {
         this.ctx.fillStyle = 'rgba(0, 0, 0, .1)';
         this.fontSize = 16;
         this.ctx.font = "14px Verdana";
-        if(this.reruns > (this.drops.length * 8)){
+        if(this.reruns > (this.drops.length * 6)){
             raf.cancel(this._tickRaf);
         }
         // this.ctx.fillRect(0, 0, this.state.containerWidth, this.state.containerHeight);
