@@ -21,7 +21,7 @@ import {Canvas, useFrame, useLoader} from "react-three-fiber";
 import * as THREE from "three";
 import {getMousePos} from "../components/utils";
 import background from '../images/piqsels.com-id-fvkta.jpg'
-import OctoPirateCanvas from "../components/Octopirate";
+import OctoPirate from "../components/Octopirate";
 
 
 
@@ -57,7 +57,7 @@ const Layout = ({children, location}) => {
                         <div className="flex">
                         <div className={"md:w-2/3"}></div>
                         <div className={"md:w-1/3"} style={{height: "600px"}}>
-                            <OctoPirateCanvas mouse={mouse}/>
+                            <OctoPirate mouse={mouse}/>
                         </div>
                         </div>
 
