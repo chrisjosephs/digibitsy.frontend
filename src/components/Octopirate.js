@@ -14,7 +14,7 @@ function moveJoint(mouse, joint, degreeLimit = 45) {
     joint.rotation.x = -0.1 + THREE.Math.degToRad(joint.rotation.xD)
     joint.rotation.z = -0.5 + THREE.Math.degToRad(joint.rotation.yD)
 }
-
+let loaded = 0;
 const fov = 45;
 const aspect = 2;  // the canvas default
 const near = 0.1;
@@ -25,7 +25,7 @@ camera.position.set(0, 5, 0);
 export default function OctoPirateCanvas({mouse, ...props}) {
     return (
         <>
-            <LoadingScreen className={"LoadingScreen"}>
+            <LoadingScreen className={loaded  ? 'loaded' : 'loading'}>
                 <Loader></Loader>
                 <Canvas height={"600px"}
                         pixelRatio={window.devicePixelRatio} camera={{camera}}>
@@ -45,7 +45,7 @@ export default function OctoPirateCanvas({mouse, ...props}) {
                     </mesh>
 
                     <Suspense fallback={null}>
-                        <OctoPirate mouse={mouse} position={[0, -0.3, 0]}/>
+                        <Model mouse={mouse} position={[0, -0.3, 0]}/>
                     </Suspense>
                 </Canvas>
             </LoadingScreen>
@@ -53,7 +53,7 @@ export default function OctoPirateCanvas({mouse, ...props}) {
     )
 }
 
-function OctoPirate({mouse, ...props}) {
+function Model({mouse, ...props}) {
     const group = useRef()
 
     function onTransitionEnd() {
@@ -61,11 +61,16 @@ function OctoPirate({mouse, ...props}) {
     }
     const loadingManager = new THREE.LoadingManager( () => {
         console.log("LOADED");
-        const loadingScreen = document.getElementsByClassName( 'LoadingScreen' );
-        console.log(loadingScreen);
-        if(!undefined===loadingScreen){
-            loadingScreen.classList.add( 'fade-out' );
-        }
+        loaded = 1;
+        console.log(loaded);
+        /*
+    const loadingScreen = document.getElementsByClassName( 'LoadingScreen' );
+    console.log(loadingScreen);
+
+    if(!undefined===loadingScreen){
+        loadingScreen.classList.add( 'fade-out' );
+    }
+    */
         // optional: remove loader from DOM via event listener
         // loadingScreen.addEventListener( 'transitionend', onTransitionEnd );
     });
@@ -160,7 +165,7 @@ border: 3px solid transparent;
 border-top-color: #9370DB;
 -webkit-animation: ${spin} 2s linear infinite;
 animation: ${spin} 2s linear infinite;
-z-index:12;
+z-index:3;
 &&:before {
 content: "";
 position: absolute;

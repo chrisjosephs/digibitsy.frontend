@@ -1,7 +1,5 @@
 import React, {Component, createRef} from "react";
 import PropTypes from 'prop-types';
-import tw from 'tailwind.macro'
-import styled from '@emotion/styled'
 
 const raf = require('raf');
 
@@ -24,7 +22,7 @@ class MatrixLetters extends Component {
     }
     static defaultProps = {
         triggerAnim: false,
-        style: {}
+          style: {}
     };
 
     render() {
@@ -39,7 +37,7 @@ class MatrixLetters extends Component {
                  style={{
                      overflow: 'hidden',
                      position: 'fixed',
-                     zIndex: 1,
+                     zIndex: 5,
                      top: 0,
                      left: 0,
                      right: 0,
