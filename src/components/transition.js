@@ -3,6 +3,7 @@ import {
     TransitionGroup,
     Transition as ReactTransition,
 } from "react-transition-group"
+import MatrixLetters from "./matrix";
 const timeout = 500
 const getTransitionStyles = {
     entering: {
@@ -25,6 +26,7 @@ class Transition extends React.PureComponent {
             <>
 
             <TransitionGroup>
+
                 <ReactTransition
                     key={location.pathname}
                     timeout={{

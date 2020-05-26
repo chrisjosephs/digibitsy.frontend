@@ -12,17 +12,17 @@ class MatrixLetters extends Component {
         this.state = {containerWidth: window.innerWidth, containerHeight: window.innerHeight};
         this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
         // Setting up the letters
-        this.letters = 'ABCDEFGHIJKLMNOPQRSTUVXYZ0123456789';
+        this.letters = 'ABCDEFABCDEF0123456789ƐㄥϛㄣƐ∀ƆƎℲ';
         this.letters = this.letters.split('');
         this.reruns = 0;
     }
     static propTypes = {
-        triggerAnim: PropTypes.number,
+        trigger: PropTypes.number,
         style: PropTypes.object
     }
     static defaultProps = {
-        triggerAnim: false,
-          style: {}
+        trigger: false,
+        style: {}
     };
 
     render() {
@@ -37,11 +37,12 @@ class MatrixLetters extends Component {
                  style={{
                      overflow: 'hidden',
                      position: 'fixed',
-                     zIndex: 5,
+                     zIndex: 50,
                      top: 0,
                      left: 0,
                      right: 0,
                      bottom: 0,
+                     display: this.props.trigger ? "block" : "none",
                      ...style
                  }}
                  {...rest}
@@ -68,8 +69,9 @@ class MatrixLetters extends Component {
             this.drops[i] = 1;
         }
         this.reruns = 0;
-        console.log("fire" + this.props.triggerAnim);
-        if(this.props.triggerAnim==1){
+
+        if(this.props.trigger==1){
+            this.containerRef.current.style.display = "block";
             this._tick();
         }
     }
@@ -111,12 +113,13 @@ class MatrixLetters extends Component {
                 this.ctx.fillStyle = '#0f0';
                 this.ctx.fillText(text, i * this.fontSize, this.drops[i] * this.fontSize);
             }
-            if(this.reruns > (this.drops.length * 4)){
+            if(this.reruns > (this.drops.length * 3)){
                 this.ctx.fillStyle = 'rgba(0, 0, 0, .1)';
                 this.ctx.clearRect(i * this.fontSize, this.drops[i], this.fontSize, this.drops[i] * this.fontSize);
                 this.ctx.fillStyle = '#0f0';
                 this.ctx.fillText(text, i * this.fontSize, this.drops[i] * this.fontSize);
                 raf.cancel(this._tickRaf);
+                this.containerRef.current.style.display = "none";
                 break;
             }
         }
