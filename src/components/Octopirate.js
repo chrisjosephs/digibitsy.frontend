@@ -13,6 +13,7 @@ const CameraController = () => {
     const { camera, gl } = useThree();
     useEffect(
         () => {
+            camera.position.z =  3;
             const controls = new OrbitControls(camera, gl.domElement);
             controls.minDistance = 5;
             controls.maxDistance = 8;
@@ -89,7 +90,7 @@ class Octopirate extends Component {
                         </mesh>
                         */}
                         <Suspense fallback={null}>
-                            <Model mouse={mouse} setLoaded={loaded=>this.setLoaded(loaded)} position={[-0.2, 1, 0]}/>
+                            <Model mouse={mouse} setLoaded={loaded=>this.setLoaded(loaded)} position={[-0.2, 0, 0]}/>
                         </Suspense>
                     </Canvas>
                 </LoadingScreen>
