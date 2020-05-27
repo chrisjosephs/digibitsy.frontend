@@ -8,7 +8,7 @@
 import React, {Suspense, useRef, useState} from "react"
 import BigBangStarField from 'react-big-bang-star-field'
 import PropTypes from "prop-types"
-import {useStaticQuery, graphql} from "gatsby"
+import {useStaticQuery, graphql, Link} from "gatsby"
 import Header from "../components/header"
 import "./layout.css"
 import '../css/global.css'
@@ -52,20 +52,20 @@ const Layout = ({children, location}) => {
                         <Header siteTitle={data.site.siteMetadata.title}/>
                         <div className="flex" style={{marginTop: "100px"}}>
                         <div className={"md:w-2/3"}>
-                            <div className={"md:w-1/4 text-gray-300 p-8 "} style={{fontFamily: "Orbitron",  fontWeight: "400"}}>
+                            <div className={"md:w-1/4 text-gray-300 p-8 z-20"} style={{fontFamily: "Orbitron",  fontWeight: "400"}}>
                                 <br />
                                 <br />
                                 <br />
-                            > me <br/>
-                            > HOW <br/>
-                            > Career <br/>
+                                <Link to="/" className={"z-20 relative"}>> Me <br/></Link>
+                                <Link to="/page-2/" className={"z-20 relative"}>>  HOW <br/></Link>
+                                <Link to="/career/" className={"z-20 relative"}>> Career <br/></Link>
                             > Artwork <br/>
                             > github / bitbucket <br/>
                             > contact <br/>
 
                             </div>
                         </div>
-                        <div className={"md:w-1/3 z-10"} style={{marginTop: "100px", height: "600px"}}>
+                        <div className={"md:w-1/3 z-10"} style={{marginTop: "100px", height: "420px"}}>
                             <OctoPirate mouse={mouse}/>
                         </div>
                         </div>
@@ -75,9 +75,9 @@ const Layout = ({children, location}) => {
                         {/*  <Rocket/> */}
                         <Transition location={location} >
                             <MatrixLetters trigger={location.pathname==="/page-2/" ?1:0}/>
-                            <div className="flex text-white p-10 bg-gray-700 opacity-75 z-0" style={{marginTop: "-300px"}}>
+                            <div className="flex text-white p-10 bg-gray-700 opacity-75 z-0" style={{marginTop: "-150px"}}>
                             <main className="my-8 mb-20" style={{position: "relative", zIndex:"10"}}>
-                                <div className="cutout" style={{position:"relative", float:"right", top: "0", right: "0", width: "33%", height: "50px", marginBottom: "1.45rem"}}></div>{children}</main>
+                                <div className="cutout" style={{position:"relative", float:"right", top: "0", right: "0", width: "33%", height: "60px", marginBottom: "1.45rem"}}></div>{children}</main>
                             </div>
                         </Transition>
                     </div>
