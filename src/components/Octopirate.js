@@ -15,8 +15,6 @@ const CameraController = () => {
         () => {
             camera.position.z =  3;
             const controls = new OrbitControls(camera, gl.domElement);
-            controls.minDistance = 5;
-            controls.maxDistance = 8;
             controls.enableZoom = false;
             return () => {
                 controls.dispose();
@@ -90,6 +88,7 @@ class Octopirate extends Component {
                         </mesh>
                         */}
                         <Suspense fallback={null}>
+                            <CameraController />
                             <Model mouse={mouse} setLoaded={loaded=>this.setLoaded(loaded)} position={[-0.2, 0, 0]}/>
                         </Suspense>
                     </Canvas>
@@ -175,7 +174,7 @@ function Model ({mouse, ...props}) {
         const ref = useRef()
         return (
             <>
-                <CameraController />
+
                 <group ref={ref} rotation={[2, 0, 0]} ref={group} {...props} dispose={null}>
                     <primitive object={nodes["Armature_0"]}/>
                 </group>

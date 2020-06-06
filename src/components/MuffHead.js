@@ -5,7 +5,7 @@ import {useLoader, useFrame, Canvas} from "react-three-fiber"
 import {GLTFLoader} from "three/examples/jsm/loaders/GLTFLoader"
 import {Component} from "react";
 
-class HeadOld extends Component {
+class MuffHead extends Component {
     constructor() {
         super();
         this.time = 0;

@@ -107,13 +107,13 @@ class MatrixLetters extends Component {
                 this.drops[i] = 0;
                 this.reruns++;
             }
-            if(this.reruns > (this.drops.length * 2)){
+            if(this.reruns > (this.drops.length )){
                 this.ctx.fillStyle = 'rgba(0, 0, 0, .1)';
                 this.ctx.clearRect(i * this.fontSize, this.drops[i], this.fontSize, this.drops[i] * this.fontSize);
                 this.ctx.fillStyle = '#0f0';
                 this.ctx.fillText(text, i * this.fontSize, this.drops[i] * this.fontSize);
             }
-            if(this.reruns > (this.drops.length * 3)){
+            if(this.reruns > (this.drops.length * 2)){
                 this.ctx.fillStyle = 'rgba(0, 0, 0, .1)';
                 this.ctx.clearRect(i * this.fontSize, this.drops[i], this.fontSize, this.drops[i] * this.fontSize);
                 this.ctx.fillStyle = '#0f0';

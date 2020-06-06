@@ -1,5 +1,6 @@
 // About
 
+// I STARTERD PROGRAMMING AT 5 on an Acorn electron (picture of acorn electron), but then my dad said i should play in trees
 
     // my favourite lethal weapon film is lethal weapon 3, and I am pretty good at making paper planes.  As for actors, I like Bill Paxton because he is the only person to have been killed by a Predator, an Alien, and a Terminator.
    // the first computer I ever programmed was an Acorn Electron, when I was aged about 5, and used to type the games in from a magazine.  i would say things got less exciting than that -> 2nd line support, and then more exciting again,
@@ -37,8 +38,10 @@
 
 
 //  As a contractor under the flag of Dibigitsymicronanocyberweb since 2017 (Compuglobalhypermeganet was already taken), Christopher Josephs Esq, has been using a very big ferry called FerryMcFerryFace, plying ports on site from as North as Manchester and Liverpool, as West as Dublin, and as South as Brighton and Bournemouth,
-//  and even at Cambridge but that was wierd and full of Harry Potter colleges people in pointy hats,
-//  and once I accidently ran over a tramp in a graveryard at midnight on my bike.
+//  and even at Cambridge but that was wierd and full of Harry Potter colleges people in pointy hats, and once I accidently ran over a tramp in a graveryard at midnight on my bike.
+
+// The technical details of this tour is explained in detail on my C.V
+
 //  Typically arriving at incredibly short notice and running Ubuntu on deck, which he prefers to Macs generally on which he is happy nonetheless to work if is in the spirt of the crew,
 //  even if he is rescuing your project locked into one working mac during an office move with a striking deadline, and only mandated to use that one painfully creaking machine with the inodes bug!), nobody has yet lost an eye or got a pointy thing in their foot.
 //  Though a lot of my experience is in Drupal, I am not a one trick Pony,  <a href="https://www.darleyeurope.com/"> I’ve had a whole field of p̶o̶n̶i̶e̶s̶ stallions</a>, waiting to literally run towards this: more recently
@@ -50,7 +53,9 @@
 // Once in Liverpool whilst doing a live job that could only be done at the weekend, some racist thugs did a march because they wanted Britain to be back British, which I think was meant to be against people with funny hats, or beards, but all they did was stop
 // Christopher Josephs from collecting his Chinese takeaway by getting it cordoned off.  This is the most dangerous this job has ever been, apart from lots of people, possibly agents of Ashgarhd, or Metal Beak, trying to constantly DDOS the BBC but I was too little to know owt about that.
 // I did some stuff that got bought up by Acquia!  I think my main point was "your not using long poll"
-// Once in Manchester I worked in a place which I think had bats in the roof, also nobody could see, and ministers used to come round, from the actual government, which is how I know that ministers are able to see in the dark now.
+
+// Once in Manchester I worked in a place which I think had bats in the roof, also nobody could see, and ministers used to come round, from the actual government, which is how I know that ministers are able to see in the dark now, and why there are no lights in offices in the X-Files and the Westwing.
+
 // Christopher Josephs is still not sure of the rules of what stuff you are meant to talk about and what stuff you ain't according to which bits you worked on for whom'st, whilst working under whom'st've'deth but this is spelled out in more detail on my cv.
 // who knows, maybe it is Impossible (upside down question mark)¿.  But then it was not impossible, and there are people that can confirm that it was not impossible.
 // prior to this CJ was gunning for Immediate Media, holding down back end for some legacy code, and asl
