@@ -24,9 +24,7 @@ class Transition extends React.PureComponent {
         const { children, location } = this.props
         return (
             <>
-
             <TransitionGroup>
-
                 <ReactTransition
                     key={location.pathname}
                     timeout={{
@@ -47,6 +45,6 @@ class Transition extends React.PureComponent {
             </TransitionGroup>
                 </>
         )
-    }
+        }
 }
 export default Transition

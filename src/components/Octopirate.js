@@ -13,7 +13,7 @@ const CameraController = () => {
     const { camera, gl } = useThree();
     useEffect(
         () => {
-            camera.position.z =  3;
+            camera.position.z =  3.6;
             const controls = new OrbitControls(camera, gl.domElement);
             controls.enableZoom = false;
             return () => {
@@ -56,7 +56,6 @@ class Octopirate extends Component {
 
 
     render() {
-        console.log(this.props.mouse);
         return this.OctoPirateCanvas(this.props.mouse);
     }
     componentDidMount(){
@@ -66,10 +65,10 @@ class Octopirate extends Component {
     OctoPirateCanvas(mouse, ...props){
         return (
             <>
-                <LoadingScreen >
+                <Wrapper style={this.props.style}>
                     <Loader className={ this.state.loaded ? 'fade-out' : '' }></Loader>
-                    <Planet></Planet>
-                    <Canvas height={"600px"}
+                    <Canvas className={"canvas"}
+                        height={"600px"}
                             pixelRatio={window.devicePixelRatio}>
 
                         <directionalLight
@@ -89,10 +88,10 @@ class Octopirate extends Component {
                         */}
                         <Suspense fallback={null}>
                             <CameraController />
-                            <Model mouse={mouse} setLoaded={loaded=>this.setLoaded(loaded)} position={[-0.2, 0, 0]}/>
+                            <Model mouse={mouse} setLoaded={loaded=>this.setLoaded(loaded)} position={[-0.1, 0, 0]}/>
                         </Suspense>
                     </Canvas>
-                </LoadingScreen>
+                </Wrapper>
             </>
         )
     }
@@ -193,14 +192,28 @@ position: absolute;
   display: inline-block;
 `
 
-const LoadingScreen = styled.div`
+const Wrapper = styled.div`
 z-index: 2;
-opacity: 1;
+opacity: 0;
 width: 100%;
 height: 100%;
-transition: 3s opacity;
+transition: 0.3s opacity;
+margin-top: -90px;
 && .fade-out{
   opacity: 0;
+  transition: 0.3s opacity;
+}
+-webikit-animation: moon-move-in 2.4s 1s forwards;
+animation: moon-move-in 2.4s 1s forwards;
+@keyframes moon-move-in {
+0% {
+        opacity: 0;
+}
+99% {
+    opacity: 0;
+}   
+100% {
+    opacity: 1;
 }
 `
 const spin = keyframes`
@@ -223,13 +236,14 @@ left: 50%;
 top: 50%;
 width: 150px;
 height: 150px;
-margin: -75px 0 0 -75px;
+margin: -35px 0 0 -75px;
 border-radius: 50%;
 border: 3px solid transparent;
 border-top-color: #9370DB;
 -webkit-animation: ${spin} 2s linear infinite;
 animation: ${spin} 2s linear infinite;
 z-index:3;
+
 &&:before {
 content: "";
 position: absolute;

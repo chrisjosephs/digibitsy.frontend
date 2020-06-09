@@ -48,7 +48,6 @@ const Layout = ({children, location}) => {
                             backgroundSize: 'cover'
                         }}
                     />
-                    <MatrixLetters trigger={location.pathname === "/page-2/" ? 1 : 0}/>
                     <div className={"container mx-auto min-h-screen"}>
                         <div className={"container-head"}>
                             <Header siteTitle={data.site.siteMetadata.title}/>
@@ -77,13 +76,13 @@ const Layout = ({children, location}) => {
 
                                             <polygon points="400,400 200,0 0,400" stroke="#151C60" strokeWidth="3"/>
                                         </NavTriangle>
-                                        <div className={'Navtext relative z-20'} style={{top: "6em"}}>
+                                        <div className={'Navtext relative z-20'} style={{top: "2em"}}>
                                             <br/>
                                             <br/>
                                             <br/>
-                                            <Link to="/" className={"z-20 relative"}>> Me <br/></Link>
-                                            <Link to="/page-2/" className={"z-20 relative"}>>>> HOW <br/></Link>
-                                            <Link to="/career/" className={"z-20 relative"}>> Career <br/></Link>
+                                            <Link to="/me" className={"z-20 relative"}>> Me <br/></Link>
+                                            <Link to="/page-2" className={"z-20 relative"}>>>> HOW <br/></Link>
+                                            <Link to="/career" className={"z-20 relative"}>> Career <br/></Link>
                                             > Artwork <br/>
                                             > github / bitbucket <br/>
                                             > contact <br/>
@@ -96,18 +95,18 @@ const Layout = ({children, location}) => {
                         <div className={"container top-0 min-h-screen absolute"}>
                             <div className="flex " style={{marginTop: "100px"}}>
                                 <div className={"md:w-2/3"}></div>
-                                <div className={"md:w-1/3 z-10 h-screen"} style={{marginTop: "100px"}}>
+                                <div className={"md:w-1/3 z-10 h-screen"} style={{marginTop: "70px"}}>
+                                    <OctoPirate style={{position: "absolute", width: "30%", height: "30%", right: 0}} mouse={mouse}></OctoPirate>
                                     <Moon></Moon>
-                                    <div className={"absolute "} style={{height: "100%"}}>
-                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div className={"main"}>
                             {/* <Invaders/>*/}
                             {/*  <Rocket/> */}
+                            { location.pathname !== "/me" &&
                             <Transition location={location}>
-
+                                <MatrixLetters trigger={location.pathname === "/page-2" ? 1 : 0}/>
                                 <div className="flex text-white p-10 bg-gray-700 opacity-75 z-0"
                                      style={{}}>
                                     <main className="my-8 mb-20 w-full" style={{position: "relative", zIndex: "10"}}>
@@ -122,7 +121,7 @@ const Layout = ({children, location}) => {
                                         }}></div>
                                         {children}</main>
                                 </div>
-                            </Transition>
+                            </Transition> }
                         </div>
                     </div>
                     <footer className={"relative bottom-0 content-center w-full text-center"}
@@ -135,7 +134,7 @@ const Layout = ({children, location}) => {
                             © {new Date().getFullYear()}, Built with
                             {` `}
                             React / <a href="https://www.gatsbyjs.org">Gatsby</a>, Threejs (where opengl supported),
-                            Drupal 8,
+                            Drupal 9,
                             graphQL, Tailwind css
                         </div>
                     </footer>
@@ -147,7 +146,6 @@ const Layout = ({children, location}) => {
                                     <div className={"md:w-2/4 text-gray-300 z-20 text-center"}
                                          style={{fontFamily: "Orbitron", fontWeight: "400"}}>
                                         <NavTriangle height="0" width="0">
-
                                             <defs>
                                                 <linearGradient id="grad1" x1="0%" y1="100%" x2="100%" y2="0%">
                                                     <stop offset="0%"
