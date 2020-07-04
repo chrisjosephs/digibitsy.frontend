@@ -16,11 +16,12 @@ import {StaticQuery} from "../../.cache/gatsby-browser-entry";
 import Transition from '../components/transition'
 import MatrixLetters from "../components/matrix";
 import {getMousePos} from "../components/utils";
-import background from '../images/piqsels.com-id-fvkta.jpg'
+import background from '../images/piqsels.com-id-fvkta2.jpg'
 import OctoPirate from "../components/Octopirate";
 import planetImg from "../images/planet3.gif"
 import {TransitionGroup} from "react-transition-group";
 import styled from "@emotion/styled";
+import Geoscape from "../components/Geoscape";
 
 const Layout = ({children, location}) => {
     const mouse = useRef({x: 0, y: 0});
@@ -38,20 +39,21 @@ const Layout = ({children, location}) => {
                 <div onMouseMove={e => (mouse.current = getMousePos(e))}>
                     <BigBangStarField
                         className="Big-Bang-Star-Field"
-
+                        starColor={"227, 170, 244"}
+                        scale={4}
                         style={{
                             position: 'fixed',
                             width: '100%',
                             height: '100%',
                             zIndex: '-10',
                             background: `url(${background})`,
-                            backgroundSize: 'cover'
+                            backgroundSize: 'cover',
                         }}
                     />
-                    <div className={"container mx-auto min-h-screen"}>
+                    <div className={"container mx-auto min-h-screen relative z-20"}>
                         <div className={"container-head"}>
                             <Header siteTitle={data.site.siteMetadata.title}/>
-                            <div className="flex " style={{marginTop: "100px"}}>
+                            <div className="flex" style={{marginTop: "100px"}}>
                                 <div className={"md:w-2/3"}>
                                     <div className={"md:w-2/4 text-gray-300 z-20 text-center"}
                                          style={{fontFamily: "Orbitron", fontWeight: "400"}}>
@@ -93,10 +95,10 @@ const Layout = ({children, location}) => {
                             </div>
                         </div>
                         <div className={"container top-0 min-h-screen absolute"}>
-                            <div className="flex " style={{marginTop: "100px"}}>
+                            <div className="flex h-screen" style={{paddingTop: "100px"}}>
                                 <div className={"md:w-2/3"}></div>
-                                <div className={"md:w-1/3 z-10 h-screen"} style={{marginTop: "70px"}}>
-                                    <OctoPirate style={{position: "absolute", width: "30%", height: "30%", right: 0}} mouse={mouse}></OctoPirate>
+                                <div className={"md:w-1/3 h-full"} style={{paddingTop: "70px", zIndex: 5}}>
+                                    <OctoPirate style={{position: "absolute", width: "30%", height:"450px", right: 0}} mouse={mouse}></OctoPirate>
                                     <Moon></Moon>
                                 </div>
                             </div>
@@ -124,13 +126,229 @@ const Layout = ({children, location}) => {
                             </Transition> }
                         </div>
                     </div>
-                    <footer className={"relative bottom-0 content-center w-full text-center"}
-                            style={{marginTop: "-15vh"}}>
+
+                    <footer className={"relative bottom-0 content-center w-full text-center z-10"}
+                            style={{marginTop: "-50vh"}}>
+                        <Geoscape className={"z-30"} style={{position: "absolute", height:"50vh"}}></Geoscape>
+                        { /*
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                         <div className={"container mx-auto"}>
-                            <img className={"object-contain w-full bg-transparent m-0"} style={{maxHeight: "15vh"}}
+
+                             <img className={"object-contain w-full bg-transparent m-0"} style={{maxHeight: "15vh"}}
                                  src={planetImg}/>
                         </div>
-                        <div className={"mx-auto bg-black text-gray-200"}>
+                        */ }
+                        <div className={"mx-auto bg-black text-gray-200 z-50" +
+                        "" +
+                        " relative"}   style={{height: "2rem", marginTop:"-2rem"}}>
                             © {new Date().getFullYear()}, Built with
                             {` `}
                             React / <a href="https://www.gatsbyjs.org">Gatsby</a>, Threejs (where opengl supported),
@@ -138,6 +356,7 @@ const Layout = ({children, location}) => {
                             graphQL, Tailwind css
                         </div>
                     </footer>
+                    { /*
                     <div className={"TopPage h-screen bg-black"}>
                         <div className={"container mx-auto h-screen"}>
                             <Header siteTitle={data.site.siteMetadata.title}/>
@@ -170,6 +389,8 @@ const Layout = ({children, location}) => {
                             </div>
                         </div>
                     </div>
+                    */
+                    }
                 </div>
             )}
         />
@@ -195,7 +416,6 @@ const Moon = styled.div`
     }
 
 `;
-
 
 const NavTriangle = styled.svg`
   animation: dash 6s linear infinite forwards;  

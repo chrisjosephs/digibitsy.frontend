@@ -9,21 +9,6 @@ import {jsx, css, keyframes} from '@emotion/core'
 import PropTypes from "prop-types";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
-const CameraController = () => {
-    const { camera, gl } = useThree();
-    useEffect(
-        () => {
-            camera.position.z =  3.6;
-            const controls = new OrbitControls(camera, gl.domElement);
-            controls.enableZoom = false;
-            return () => {
-                controls.dispose();
-            };
-        },
-        [camera, gl]
-    );
-    return null;
-};
 class Octopirate extends Component {
 
     constructor(props) {
@@ -67,9 +52,8 @@ class Octopirate extends Component {
             <>
                 <Wrapper style={this.props.style}>
                     <Loader className={ this.state.loaded ? 'fade-out' : '' }></Loader>
-                    <Canvas className={"canvas"}
-                        height={"600px"}
-                            pixelRatio={window.devicePixelRatio}>
+                    <Canvas className={"octoPirate"}
+                            pixelRatio={window.devicePixelRatio} >
 
                         <directionalLight
                             position={[2.2, 3.4, 1]}
@@ -96,6 +80,22 @@ class Octopirate extends Component {
         )
     }
 }
+const CameraController = () => {
+    const { camera, gl } = useThree();
+    useEffect(
+        () => {
+            camera.position.z =  3.6;
+            const controls = new OrbitControls(camera, gl.domElement);
+            controls.enableZoom = false;
+            return () => {
+                controls.dispose();
+            };
+        },
+        [camera, gl]
+    );
+    return null;
+};
+
 function moveJoint(mouse, joint, degreeLimit = 45) {
 
     let degrees = getMouseDegrees(mouse.current.x, mouse.current.y, degreeLimit)
