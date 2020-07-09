@@ -8,7 +8,7 @@
 import React, {Suspense, useRef, useState} from "react"
 import BigBangStarField from 'react-big-bang-star-field'
 import PropTypes from "prop-types"
-import {StaticQuery, graphql, Link} from "gatsby"
+import {useStaticQuery, StaticQuery, graphql, Link} from "gatsby"
 import Header from "../components/header"
 import "./layout.css"
 import '../css/global.css'
