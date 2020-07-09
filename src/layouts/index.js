@@ -8,11 +8,10 @@
 import React, {Suspense, useRef, useState} from "react"
 import BigBangStarField from 'react-big-bang-star-field'
 import PropTypes from "prop-types"
-import {useStaticQuery, graphql, Link} from "gatsby"
+import {StaticQuery, graphql, Link} from "gatsby"
 import Header from "../components/header"
 import "./layout.css"
 import '../css/global.css'
-import {StaticQuery} from "../../.cache/gatsby-browser-entry";
 import Transition from '../components/transition'
 import MatrixLetters from "../components/matrix";
 import {getMousePos} from "../components/utils";
