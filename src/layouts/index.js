@@ -28,13 +28,15 @@ const Layout = ({children, location}) => {
 
     return (
         <StaticQuery
-            query={graphql`query SiteTitleQuery {
-        site {
-          siteMetadata {
-            title
+            query={graphql`
+        query HeadingQuery {
+          site {
+            siteMetadata {
+              title
+            }
           }
         }
-      }`}
+      `}
             render={data => (
                 <div onMouseMove={e => (mouse.current = getMousePos(e))}>
                     <BigBangStarField
