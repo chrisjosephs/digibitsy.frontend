@@ -52,7 +52,9 @@ class Octopirate extends Component {
             <>
                 <Wrapper style={this.props.style}>
                     <Loader className={ this.state.loaded ? 'fade-out' : '' }></Loader>
-                    <Canvas className={"octoPirate"}
+                    <Canvas
+                        resize={{ scroll: false }}
+                            className={"octoPirate"}
                             pixelRatio={window.devicePixelRatio} >
 
                         <directionalLight
