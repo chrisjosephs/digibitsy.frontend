@@ -8,6 +8,7 @@ import styled from '@emotion/styled'
 import {jsx, css, keyframes} from '@emotion/core'
 import PropTypes from "prop-types";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import ResizeObserver from "resize-observer-polyfill";
 
 class Octopirate extends Component {
 
@@ -53,7 +54,7 @@ class Octopirate extends Component {
                 <Wrapper style={this.props.style}>
                     <Loader className={ this.state.loaded ? 'fade-out' : '' }></Loader>
                     <Canvas
-                        resize={{ scroll: false }}
+                        resize={{ scroll: false,  polyfill: ResizeObserver }}
                             className={"octoPirate"}
                             pixelRatio={window.devicePixelRatio} >
 

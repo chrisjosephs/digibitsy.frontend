@@ -10,6 +10,7 @@ import PropTypes from "prop-types";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { SceneUtils } from 'three/examples/jsm/utils/SceneUtils.js';
 import { noise } from "./perlin.js";
+import ResizeObserver from "resize-observer-polyfill";
 
 class Geoscape extends Component {
     heightmap;
@@ -66,7 +67,7 @@ class Geoscape extends Component {
     scene(){
         return (
             <>
-                <Canvas resize={{ scroll: false }} className={"canvas"} style={{ height: "50vh"}} pixelRatio={window.devicePixelRatio} camera={this.camera}>
+                <Canvas resize={{ scroll: false, polyfill: ResizeObserver }} className={"canvas"} style={{ height: "50vh"}} pixelRatio={window.devicePixelRatio} camera={this.camera}>
                 <ambientLight color={"0xFFFFFF"} intensity={0.3} />
                 <directionalLight color={"0xFFFFFF"} intensity={1} position={[0,2000,-2800]} />
                 <spotLight color={"0xd30491"} intensity={20} distance={3000} angle={Math.PI} position={[0, 1500, -1300]} />
