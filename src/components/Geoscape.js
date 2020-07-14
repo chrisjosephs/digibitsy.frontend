@@ -98,7 +98,7 @@ function Terrain(){
     }
     terrain.children[0].geometry.computeFlatVertexNormals();
     terrain.rotateX(-Math.PI / 2);
-
+    const meshRef = useRef();
     // Raf loop
     useFrame(() => {
         terrain.position.z += 4;
@@ -118,7 +118,7 @@ function Terrain(){
 
     return (
         <>
-            <mesh ref={terrain.children[0]}>
+            <mesh ref={meshRef}>
                 <primitive object={terrain}/>
                 <planeBufferGeometry attach={terrain.children[0].geometry} args={[25, 25, 75, 75]} />
                 <planeBufferGeometry attach={terrain.children[1].geometry} args={[25, 25, 75, 75]} />
