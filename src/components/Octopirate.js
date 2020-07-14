@@ -130,8 +130,8 @@ function Model ({mouse, ...props}) {
                 // loadingScreen.addEventListener( 'transitionend', onTransitionEnd );
         });
 
-        const {nodes, scene, scenes, animations} = useLoader(GLTFLoader, "/octoanka4lowqt2draco.glb", loader => {
-            const dracoLoader = new DRACOLoader();
+            const {nodes, scene, scenes, animations} = useLoader(GLTFLoader, "/octoankaarmdecimatedraco2.glb", loader => {
+            let dracoLoader = new DRACOLoader();
             dracoLoader.setDecoderConfig({ type: 'js' });
             dracoLoader.setDecoderPath('https://www.gstatic.com/draco/v1/decoders/');
             loader.setDRACOLoader(dracoLoader)
@@ -168,13 +168,14 @@ function Model ({mouse, ...props}) {
             map: MetalRusted,
 
         });
-        nodes['anchor'].material = material;
+         nodes['anchorobjcb9289e8-f66e-417d-9586-27500257b6e7_(1)001'].material = material;
+        //  nodes['anchor'].material = material;
         nodes['octopus_hat_high_octopus_hat_tex_0'].visible = true;
 
         nodes['octopus_body_high_Octopus_body_tex_0'].material.metalness = 0.1;
 
         useFrame(({clock}) => (
-            nodes["Armature_0"].rotation.x = nodes["Armature_0"].rotation.y = nodes["Armature_0"].rotation.z = Math.sin(clock.getElapsedTime()) * -0.3))
+            nodes["Armature_0"].rotation.x = nodes["Armature_0"].rotation.y = nodes["Armature_0"].rotation.z = Math.sin(clock.getElapsedTime()) * -0.3));
 
         const ref = useRef()
         return (
