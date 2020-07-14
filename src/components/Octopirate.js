@@ -134,7 +134,7 @@ function Model ({mouse, ...props}) {
             let dracoLoader = new DRACOLoader();
             dracoLoader.setDecoderConfig({ type: 'js' });
             dracoLoader.setDecoderPath('https://www.gstatic.com/draco/v1/decoders/');
-            loader.setDRACOLoader(dracoLoader)
+            loader.setDRACOLoader(dracoLoader);
             loader.manager = loadingManager;
         })
         console.log(nodes);
@@ -145,7 +145,7 @@ function Model ({mouse, ...props}) {
             mixer.update(delta)
         })
         useFrame((state, delta) => {
-            mixer.update(delta)
+            mixer.update(delta);
             moveJoint(mouse, nodes.Neck_M_0297);
         })
 
