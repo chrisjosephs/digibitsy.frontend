@@ -9,6 +9,8 @@ import {jsx, css, keyframes} from '@emotion/core'
 import PropTypes from "prop-types";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import ResizeObserver from "resize-observer-polyfill";
+import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader'
+DRACOLoader.setDecoderPath("/DRACOLoader.js");
 
 class Octopirate extends Component {
 
@@ -128,14 +130,15 @@ function Model ({mouse, ...props}) {
                 // loadingScreen.addEventListener( 'transitionend', onTransitionEnd );
         });
 
-        const {nodes, scene, scenes, animations} = useLoader(GLTFLoader, "/octoanka6.glb", loader => {
-            // const dracoLoader = new DRACOLoader()
-            // dracoLoader.setDecoderPath('/draco-gltf/')
-            // loader.setDRACOLoader(dracoLoader)
+        const {nodes, scene, scenes, animations} = useLoader(GLTFLoader, "/octoanka4lowqt2draco.glb", loader => {
+            const dracoLoader = new DRACOLoader();
+            dracoLoader.setDecoderConfig({ type: 'js' });
+            dracoLoader.setDecoderPath('https://www.gstatic.com/draco/v1/decoders/');
+            loader.setDRACOLoader(dracoLoader)
             loader.manager = loadingManager;
         })
-
-        let [mixer] = useState(() => new THREE.AnimationMixer())
+        console.log(nodes);
+        let [mixer] = useState(() => new THREE.AnimationMixer());
 
 
         useFrame((state, delta) => {
