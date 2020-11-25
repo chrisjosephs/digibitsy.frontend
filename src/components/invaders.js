@@ -1,4 +1,4 @@
-import styled, {keyframes, css} from 'styled-components';
+import { css, keyframes, styled } from '@emotion/react';
 import React, {Component} from "react";
 import tw from 'tailwind.macro'
 

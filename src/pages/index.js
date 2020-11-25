@@ -1,12 +1,6 @@
-import React, {Suspense, useEffect, useMemo, useRef, useState} from 'react'
+import React from 'react'
 import {Link} from "gatsby"
 import SEO from "../components/seo"
-import {Canvas, useLoader, useFrame, useThree} from "react-three-fiber"
-import {GLTFLoader} from "three/examples/jsm/loaders/GLTFLoader"
-import * as THREE from "three";
-import { getMouseDegrees } from "../components/utils.js"
-import { getMousePos } from "../components/utils.js"
-import lerp from "lerp"
 
 
 const IndexPage = () => (

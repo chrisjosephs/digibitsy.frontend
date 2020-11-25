@@ -1,9 +1,9 @@
-import styled, {keyframes, css} from 'styled-components';
+import { css, keyframes, styled } from '@emotion/react';
 import React, {Component} from "react";
 import tw from 'tailwind.macro'
-
 import rocketSVG from "../images/rocket.svg"
 import exhaustFumes from "../images/smoke-with-transparency-rs.gif"
+
 
 class Rocket extends Component {
     constructor(props) {
@@ -47,12 +47,12 @@ const noblastOff = keyframes`
   100% { margin-top: 0;}
 `;
 const RocketContainer = styled.div`
-${tw`block absolute`}
+${tw`block absolute`};
 bottom: 0;
 `
 
 const RocketImg = styled.div`
-${tw`block relative`}
+${tw`block relative`};
 animation: "${props => props.blastOff ? css`${blastOff}` : css`${noblastOff}`}  8s linear infinite";
 background-image: url(${rocketSVG});
 background-size: cover;
@@ -62,7 +62,7 @@ transform: rotate(-45deg);
 width: 160px;
 `
 const RocketExhaustFumesImg = styled.div`
-${tw`block relative`}
+${tw`block relative`};
 animation: "${props => props.blastOff ? css`${blastOff}` : css`${noblastOff}`}  8s linear infinite";
 background-image: url(${exhaustFumes});
 background-size: cover;
