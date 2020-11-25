@@ -1,8 +1,3 @@
-<p align="center">
-  <a href="https://www.gatsbyjs.org">
-    <img alt="Gatsby" src="https://www.gatsbyjs.org/monogram.svg" width="60" />
-  </a>
-</p>
 <h1 align="center">
   Digibitsy Portfolio and Technical Demonstration
 </h1>
@@ -34,7 +29,7 @@ Check out a [demo](https://alpha.digibitsymicronanocyberweb.com).
 - [x] Heading logo 2D anim - Christopher Josephs esq / Digibitsy 2D and animation
 - [ ]  Divvy placeholder text - what am I on about?
     - [ ] Full placeholder text
-- [ ] Content
+- [ ] CONTENT!!
 - [x] Layout 
   - [x] react-big-bang-starfield canvas background from component
   - [x] rising moon
@@ -49,9 +44,10 @@ Check out a [demo](https://alpha.digibitsymicronanocyberweb.com).
 
 # Roadmap
 
-- [ ] Content
+- [ ] The actual ruddy CONTENT!
     - [ ] Career timeline
     - [ ] Site screenshots & highlights
+    - [ ] Art links
 - [ ] Heading logo 3D anim - Christopher Josephs esq / Digibitsy
 - [x] Facebuilder MyHead in blender
 - [ ] Blog & blog graphQL views connect
@@ -60,5 +56,7 @@ Check out a [demo](https://alpha.digibitsymicronanocyberweb.com).
 - [ ] react-big-bang-starfield module to be threejs rather than canvas anim
 - [ ] Career timeline
     - change/don't use plugin
+- [ ] Space invader transition animation
+- [ ] Rocket transition animation
 
 https://alpha.digibitsymicronanocyberweb.com
