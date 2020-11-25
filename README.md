@@ -1,99 +1,64 @@
-<!-- AUTO-GENERATED-CONTENT:START (STARTER) -->
 <p align="center">
   <a href="https://www.gatsbyjs.org">
     <img alt="Gatsby" src="https://www.gatsbyjs.org/monogram.svg" width="60" />
   </a>
 </p>
 <h1 align="center">
-  Gatsby's default starter
+  Digibitsy Portfolio and Technical Demonstration
 </h1>
 
-Kick off your project with this default boilerplate. This starter ships with the main Gatsby configuration files you might need to get up and running blazing fast with the blazing fast app generator for React.
+This site is a demonstration of the work of Christopher Josephs / Digibitsymicronanocyberweb Limited intended to visually showcase frontend, single-page application and fullstack work done for clients such as Bidx1.com and concentric.cx as well as provide insights into the nature of backend work done for OnBuy.com, Immediate Media and many others.
 
-_Have another more specific idea? You may want to check out our vibrant collection of [official and community-created starters](https://www.gatsbyjs.org/docs/gatsby-starters/)._
+This is also a technical demonstration of Chris' interest in React, Gatsby and React-Three three.js, which is indeed the dream, as well as forays into Blender modelling and animation.
 
-## 🚀 Quick start
 
-1.  **Create a Gatsby site.**
+# Usage
 
-    Use the Gatsby CLI to create a new site, specifying the default starter.
+Check out a [demo](https://alpha.digibitsymicronanocyberweb.com).
 
-    ```shell
-    # create a new Gatsby site using the default starter
-    gatsby new my-default-starter https://github.com/gatsbyjs/gatsby-starter-default
-    ```
+# Development Roadmap
 
-1.  **Start developing.**
 
-    Navigate into your new site’s directory and start it up.
+- [x] Suspense - loading animation for octopus
+- [x] Draco compression and loader to compress octopus and anchor
+    - 2.1Mb down from 23Mb 
+    - decimate in Blender to make Lowpoly
+- [x] 3 dimensional planet surface footer
+- [x] Octopus bones look around and follow cursor
+- [x] Material map and Metallic/Roughness for anchor mesh metallic texture
+- [x] Matrix fall lettering - currently fullscreen
+    - [ ] in content div 
+    - [ ] spin off into standalone component public npm package
+- [ ] Page transition anims
+- [x] Octopus swing animations and Orbital controls to spin with mouse
+- [x] Heading logo 2D anim - Christopher Josephs esq / Digibitsy 2D and animation
+- [ ]  Divvy placeholder text - what am I on about?
+    - [ ] Full placeholder text
+- [ ] Content
+- [x] Layout 
+  - [x] react-big-bang-starfield canvas background from component
+  - [x] rising moon
+  - [x] 2d planet surface background
+  - [ ] 3D floating MyHead under About me
+- [x] Persist navigation and layout and only refresh central div not whole page (as was the norm in Gatsby 1.0)
+    - gatsby-plugin-layout
+- [x] Setup gatsby: tailwind-css,  styled div, react-three-fiber, own react-big-bang-starfield component
+- [x] Blender composition of Octopus and anchor gltf
+  - [ ] Blender animations for octopus and anchor hover over and page transitions
 
-    ```shell
-    cd my-default-starter/
-    gatsby develop
-    ```
 
-1.  **Open the source code and start editing!**
+# Roadmap
 
-    Your site is now running at `http://localhost:8000`!
+- [ ] Content
+    - [ ] Career timeline
+    - [ ] Site screenshots & highlights
+- [ ] Heading logo 3D anim - Christopher Josephs esq / Digibitsy
+- [x] Facebuilder MyHead in blender
+- [ ] Blog & blog graphQL views connect
+- [ ] Suspense - loading animation and overlay for whole of main page loading
+    - [ ] delay moonrise until after suspense
+- [ ] react-big-bang-starfield module to be threejs rather than canvas anim
+- [ ] Career timeline
+    - change/don't use plugin
 
-    _Note: You'll also see a second link: _`http://localhost:8000/___graphql`_. This is a tool you can use to experiment with querying your data. Learn more about using this tool in the [Gatsby tutorial](https://www.gatsbyjs.org/tutorial/part-five/#introducing-graphiql)._
-
-    Open the `my-default-starter` directory in your code editor of choice and edit `src/pages/index.js`. Save your changes and the browser will update in real time!
-
-## 🧐 What's inside?
-
-A quick look at the top-level files and directories you'll see in a Gatsby project.
-
-    .
-    ├── node_modules
-    ├── src
-    ├── .gitignore
-    ├── .prettierrc
-    ├── gatsby-browser.js
-    ├── gatsby-config.js
-    ├── gatsby-node.js
-    ├── gatsby-ssr.js
-    ├── LICENSE
-    ├── package-lock.json
-    ├── package.json
-    └── README.md
-
-1.  **`/node_modules`**: This directory contains all of the modules of code that your project depends on (npm packages) are automatically installed.
-
-2.  **`/src`**: This directory will contain all of the code related to what you will see on the front-end of your site (what you see in the browser) such as your site header or a page template. `src` is a convention for “source code”.
-
-3.  **`.gitignore`**: This file tells git which files it should not track / not maintain a version history for.
-
-4.  **`.prettierrc`**: This is a configuration file for [Prettier](https://prettier.io/). Prettier is a tool to help keep the formatting of your code consistent.
-
-5.  **`gatsby-browser.js`**: This file is where Gatsby expects to find any usage of the [Gatsby browser APIs](https://www.gatsbyjs.org/docs/browser-apis/) (if any). These allow customization/extension of default Gatsby settings affecting the browser.
-
-6.  **`gatsby-config.js`**: This is the main configuration file for a Gatsby site. This is where you can specify information about your site (metadata) like the site title and description, which Gatsby plugins you’d like to include, etc. (Check out the [config docs](https://www.gatsbyjs.org/docs/gatsby-config/) for more detail).
-
-7.  **`gatsby-node.js`**: This file is where Gatsby expects to find any usage of the [Gatsby Node APIs](https://www.gatsbyjs.org/docs/node-apis/) (if any). These allow customization/extension of default Gatsby settings affecting pieces of the site build process.
-
-8.  **`gatsby-ssr.js`**: This file is where Gatsby expects to find any usage of the [Gatsby server-side rendering APIs](https://www.gatsbyjs.org/docs/ssr-apis/) (if any). These allow customization of default Gatsby settings affecting server-side rendering.
-
-9.  **`LICENSE`**: Gatsby is licensed under the MIT license.
-
-10. **`package-lock.json`** (See `package.json` below, first). This is an automatically generated file based on the exact versions of your npm dependencies that were installed for your project. **(You won’t change this file directly).**
-
-11. **`package.json`**: A manifest file for Node.js projects, which includes things like metadata (the project’s name, author, etc). This manifest is how npm knows which packages to install for your project.
-
-12. **`README.md`**: A text file containing useful reference information about your project.
-
-## 🎓 Learning Gatsby
-
-Looking for more guidance? Full documentation for Gatsby lives [on the website](https://www.gatsbyjs.org/). Here are some places to start:
-
-- **For most developers, we recommend starting with our [in-depth tutorial for creating a site with Gatsby](https://www.gatsbyjs.org/tutorial/).** It starts with zero assumptions about your level of ability and walks through every step of the process.
-
-- **To dive straight into code samples, head [to our documentation](https://www.gatsbyjs.org/docs/).** In particular, check out the _Guides_, _API Reference_, and _Advanced Tutorials_ sections in the sidebar.
-
-## 💫 Deploy
-
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/gatsbyjs/gatsby-starter-default)
-
-[![Deploy with ZEIT Now](https://zeit.co/button)](https://zeit.co/import/project?template=https://github.com/gatsbyjs/gatsby-starter-default)
-
-<!-- AUTO-GENERATED-CONTENT:END -->
+https://alpha.digibitsymicronanocyberweb.com
