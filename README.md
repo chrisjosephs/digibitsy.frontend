@@ -13,18 +13,19 @@ Check out a [demo](https://alpha.digibitsymicronanocyberweb.com).
 
 # Development Roadmap
 
-
 - [x] Suspense - loading animation for octopus
 - [x] Draco compression and loader to compress octopus and anchor
     - 2.1Mb down from 23Mb 
     - decimate in Blender to make Lowpoly
-- [x] 3 dimensional planet surface footer
+- [x] 3 dimensional scrolling planet surface geoscape footer
 - [x] Octopus bones look around and follow cursor
 - [x] Material map and Metallic/Roughness for anchor mesh metallic texture
 - [x] Matrix fall lettering - currently fullscreen
-    - [ ] in content div 
+    - [x] in content div 
     - [ ] spin off into standalone component public npm package
 - [ ] Page transition anims
+    - [x] matrix fall lettering
+    - [ ] space invaders / rocket
 - [x] Octopus swing animations and Orbital controls to spin with mouse
 - [x] Heading logo 2D anim - Christopher Josephs esq / Digibitsy 2D and animation
 - [ ]  Divvy placeholder text - what am I on about?
@@ -35,9 +36,11 @@ Check out a [demo](https://alpha.digibitsymicronanocyberweb.com).
   - [x] rising moon
   - [x] 2d planet surface background
   - [ ] 3D floating MyHead under About me
+  - [ ] Fully Responsive
+  - [ ] Mobile
 - [x] Persist navigation and layout and only refresh central div not whole page (as was the norm in Gatsby 1.0)
     - gatsby-plugin-layout
-- [x] Setup gatsby: tailwind-css,  styled div, react-three-fiber, own react-big-bang-starfield component
+- [x] Setup gatsby: tailwind-css, styled div, react-three-fiber, own react-big-bang-starfield component
 - [x] Blender composition of Octopus and anchor gltf
   - [ ] Blender animations for octopus and anchor hover over and page transitions
 

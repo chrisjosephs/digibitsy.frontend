@@ -59,7 +59,6 @@ const Layout = ({children, location}) => {
                                     <div className={"md:w-2/4 text-gray-300 z-20 text-center"}
                                          style={{fontFamily: "Orbitron", fontWeight: "400"}}>
                                         <NavTriangle height="0" width="0">
-
                                             <defs>
                                                 <linearGradient id="grad1" x1="0%" y1="100%" x2="100%" y2="0%">
                                                     <stop offset="0%"
@@ -108,9 +107,8 @@ const Layout = ({children, location}) => {
                             {/* <Invaders/>*/}
                             {/*  <Rocket/> */}
                             { location.pathname !== "/me" &&
-
                                 <div className="flex text-white p-10 bg-gray-700 opacity-75 z-0 relative">
-                                    <Transition location={location}>
+                                    <Transition location={location} className="overflow-hidden">
                                         <MatrixLetters className="MatrixLetters w-full relative z-10" trigger={location.pathname === "/page-2" ? 1 : 0}/>
                                         <div className="my-8 mb-20 w-full relative z-10">
                                         <div className="cutout" style={{
@@ -122,7 +120,6 @@ const Layout = ({children, location}) => {
                                             height: "160px",
                                             marginBottom: "1.45rem"
                                         }}></div>
-
                                         {children}</div>
                                         </Transition>
                                 </div>
@@ -140,7 +137,7 @@ const Layout = ({children, location}) => {
                                  src={planetImg}/>
                         </div>
                         */ }
-                        <div className={"mx-auto bg-black text-gray-200 z-50" +
+                        <div className={"BuiltWith mx-auto bg-black text-gray-200 z-50" +
                         "" +
                         " relative"}   style={{height: "2rem", marginTop:"-2rem"}}>
                             © {new Date().getFullYear()}, Built with
