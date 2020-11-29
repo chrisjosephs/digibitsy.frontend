@@ -104,15 +104,15 @@ const Layout = ({children, location}) => {
                                 </div>
                             </div>
                         </div>
-                        <div className={"main"}>
+                        <main className={"main"}>
                             {/* <Invaders/>*/}
                             {/*  <Rocket/> */}
                             { location.pathname !== "/me" &&
-                            <Transition location={location}>
-                                <MatrixLetters trigger={location.pathname === "/page-2" ? 1 : 0}/>
-                                <div className="flex text-white p-10 bg-gray-700 opacity-75 z-0"
-                                     style={{}}>
-                                    <main className="my-8 mb-20 w-full" style={{position: "relative", zIndex: "10"}}>
+
+                                <div className="flex text-white p-10 bg-gray-700 opacity-75 z-0 relative">
+                                    <Transition location={location}>
+                                        <MatrixLetters className="MatrixLetters w-full relative z-10" trigger={location.pathname === "/page-2" ? 1 : 0}/>
+                                        <div className="my-8 mb-20 w-full relative z-10">
                                         <div className="cutout" style={{
                                             position: "relative",
                                             float: "right",
@@ -122,10 +122,12 @@ const Layout = ({children, location}) => {
                                             height: "160px",
                                             marginBottom: "1.45rem"
                                         }}></div>
-                                        {children}</main>
+
+                                        {children}</div>
+                                        </Transition>
                                 </div>
-                            </Transition> }
-                        </div>
+                            }
+                        </main>
                     </div>
 
                     <footer className={"relative bottom-0 content-center w-full text-center z-10"}

@@ -36,7 +36,7 @@ class MatrixLetters extends Component {
                  ref={this.containerRef}
                  style={{
                      overflow: 'hidden',
-                     position: 'fixed',
+                     position: 'absolute',
                      zIndex: 50,
                      top: 0,
                      left: 0,
