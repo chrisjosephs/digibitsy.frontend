@@ -21,6 +21,7 @@ import planetImg from "../images/planet3.gif"
 import {TransitionGroup} from "react-transition-group";
 import styled from "@emotion/styled";
 import Geoscape from "../components/Geoscape";
+import ThreeDText from "../components/3dtext";
 
 const Layout = ({children, location}) => {
     const mouse = useRef({x: 0, y: 0});
@@ -53,45 +54,15 @@ const Layout = ({children, location}) => {
                     />
                     <div className={"container mx-auto min-h-screen relative z-20"}>
                         <div className={"container-head"}>
-                            <Header siteTitle={data.site.siteMetadata.title}/>
+                            <div className="flex">
+                                <div className="outer" style={{position: "relative", width: "100%"}}>
                             <div className="flex" style={{marginTop: "100px"}}>
                                 <div className={"md:w-2/3"}>
-                                    <div className={"md:w-2/4 text-gray-300 z-20 text-center"}
-                                         style={{fontFamily: "Orbitron", fontWeight: "400"}}>
-                                        <NavTriangle height="0" width="0">
-                                            <defs>
-                                                <linearGradient id="grad1" x1="0%" y1="100%" x2="100%" y2="0%">
-                                                    <stop offset="0%"
-                                                          style={{stopColor: "rgb(50,50,50)", stopOpacity: "1"}}/>
-                                                    <stop offset="100%"
-                                                          style={{stopColor: "rgb(0,0,0)", stopOpacity: "1"}}/>
-                                                </linearGradient>
-                                            </defs>
-                                            <filter id="dropshadow" height="130%">
-                                                <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
-                                                <feOffset dx="2" dy="2" result="offsetblur"/>
-                                                <feMerge>
-                                                    <feMergeNode/>
-                                                    <feMergeNode in="SourceGraphic"/>
-                                                </feMerge>
-                                            </filter>
-
-                                            <polygon points="400,400 200,0 0,400" stroke="#151C60" strokeWidth="3"/>
-                                        </NavTriangle>
-                                        <div className={'Navtext relative z-20'} style={{top: "2em"}}>
-                                            <br/>
-                                            <br/>
-                                            <br/>
-                                            <Link to="/me" className={"z-20 relative"}>> Me <br/></Link>
-                                            <Link to="/page-2" className={"z-20 relative"}>>>> HOW <br/></Link>
-                                            <Link to="/career" className={"z-20 relative"}>> Career <br/></Link>
-                                            > Artwork <br/>
-                                            > github / bitbucket <br/>
-                                            > contact <br/>
-                                            > blog <br/>
-                                        </div>
-                                    </div>
+                                    <ThreeDText className="ThreeDText" style={{position: "absolute", width: "100%", height:"450px", right: 0}}></ThreeDText>
                                 </div>
+                            </div>
+                                </div>
+
                             </div>
                         </div>
                         <div className={"container top-0 min-h-screen absolute"}>

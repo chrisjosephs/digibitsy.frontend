@@ -37,7 +37,7 @@
     "react-icons": "^3.10.0",
     "react-perfect-scrollbar": "^1.5.8",
     "react-sizeme": "^2.6.12",
-    "react-three-fiber": "^4.2.14",
+    "react-three-fiber": "^5.3.18",
     "react-transition-group": "^4.3.0",
     "tailwind.macro": "^1.0.0-alpha.10",
     "three": "^0.118.3"

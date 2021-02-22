@@ -137,7 +137,7 @@ function Model ({mouse, ...props}) {
             loader.setDRACOLoader(dracoLoader);
             loader.manager = loadingManager;
         })
-        console.log(nodes);
+
         let [mixer] = useState(() => new THREE.AnimationMixer());
 
 
