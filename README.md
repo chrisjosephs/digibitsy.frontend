@@ -4,9 +4,7 @@ Check out a [demo](https://alpha.digibitsymicronanocyberweb.com).
   Digibitsy Portfolio and Technical Demonstration
 </h1>
 
-This site is a demonstration of the work of Christopher Josephs / Digibitsymicronanocyberweb Limited intended to visually showcase frontend, single-page application and fullstack work done for clients such as Bidx1.com and concentric.cx as well as provide insights into the nature of backend work done for OnBuy.com, Immediate Media and many others.
-
-This is also a technical demonstration of Chris' interest in React, Gatsby and React-Three three.js, which is indeed the dream, as well as forays into Blender modelling and animation.
+This is a technical demonstration of Chris' interest in React, Gatsby and React-Three three.js, which is indeed the dream, as well as forays into Blender modelling and animation.
 
 
 # Usage
