@@ -81,11 +81,11 @@ const Layout = ({children, location}) => {
 
                       <polygon points="400,400 200,0 0,400" stroke="#151C60" strokeWidth="3"/>
                     </NavTriangle>
-                    <div className={'Navtext relative z-20 pr-8'} style={{top: "2.2rem"}}>
+                    <NavLinks className={'nav-links relative z-20 pr-8'} style={{top: "2.2rem"}}>
                       <br/>
                       <br/>
                       <br/>
-                      <Link to="/me"> Me <br/></Link>
+                      <Link to="/">> Me <br/></Link>
                       <Link to="/page-2">>>> HOW <br/></Link>
                       <Link to="/career">> Career <br/></Link>
                       > Artwork <br/>
@@ -94,7 +94,7 @@ const Layout = ({children, location}) => {
                       <br/>
                       <a href={'mailto:digibitsy@gmail.com'}>> contact <br/> </a>
                       > blog <br/>
-                    </div>
+                    </NavLinks>
                   </div>
                 </div>
               </div>
@@ -193,6 +193,17 @@ const Layout = ({children, location}) => {
     />
   )
 }
+const NavLinks = styled.div`
+  text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+  a:hover {
+    color: #fff;
+    text-shadow:2px 2px 30px #fff;;
+    -moz-transition: all 0.2s ease-in;
+    -o-transition: all 0.2s ease-in;
+    -webkit-transition: all 0.2s ease-in;
+    transition: all 0.2s ease-in;
+  }
+`
 const Moon = styled.div`
   position: relative;
   background: url(https://raw.githubusercontent.com/yagoestevez/fcc-portfolio/master/src/Images/Moon.svg?sanitize=true) right 150% no-repeat;
