@@ -24,7 +24,6 @@ import Geoscape from "../components/Geoscape";
 
 const Layout = ({children, location}) => {
     const mouse = useRef({x: 0, y: 0});
-
     return (
         <StaticQuery
             query={graphql`
@@ -53,6 +52,9 @@ const Layout = ({children, location}) => {
                     />
                     <div className={"container mx-auto min-h-screen relative z-20"}>
                         <div className={"container-head"}>
+                          <head>
+                            <title>{data.site.siteMetadata.title}</title>
+                          </head>
                             <Header siteTitle={data.site.siteMetadata.title}/>
                             <div className="flex" style={{marginTop: "100px"}}>
                                 <div className={"md:w-2/3"}>
@@ -87,7 +89,8 @@ const Layout = ({children, location}) => {
                                             <Link to="/page-2" className={"z-20 relative"}>>>> HOW <br/></Link>
                                             <Link to="/career" className={"z-20 relative"}>> Career <br/></Link>
                                             > Artwork <br/>
-                                            > github / bitbucket <br/>
+                                          <Link to="https://github.com/chrisjosephs" className={"z-20 relative"} target={'_blank'}>> github / bitbucket <br/></Link>
+                                            <br/>
                                             > contact <br/>
                                             > blog <br/>
                                         </div>
@@ -112,7 +115,7 @@ const Layout = ({children, location}) => {
                                 <MatrixLetters trigger={location.pathname === "/page-2" ? 1 : 0}/>
                                 <div className="flex text-white p-10 bg-gray-700 opacity-75 z-0"
                                      style={{}}>
-                                    <main className="my-8 mb-20 w-full" style={{position: "relative", zIndex: "10"}}>
+                                    <main className="my-8 mb-20 w-full" style={{position: "relative", zIndex: "5"}}>
                                         <div className="cutout" style={{
                                             position: "relative",
                                             float: "right",
@@ -129,7 +132,7 @@ const Layout = ({children, location}) => {
                     </div>
 
                     <footer className={"relative bottom-0 content-center w-full text-center z-10"}
-                            style={{marginTop: "-50vh"}}>
+                            style={{marginTop: "-30vh"}}>
                         <Geoscape className={"z-30"} style={{position: "absolute", height:"50vh"}}></Geoscape>
                         { /*
                         <div className={"container mx-auto"}>
