@@ -15,6 +15,7 @@ class MatrixLetters extends Component {
         this.letters = 'ABCDEFABCDEF0123456789ƐㄥϛㄣƐ∀ƆƎℲ';
         this.letters = this.letters.split('');
         this.reruns = 0;
+        this.lastRenderTime = 0; // timestamp of the last render() call
     }
     static propTypes = {
         trigger: PropTypes.number,
@@ -81,8 +82,12 @@ class MatrixLetters extends Component {
         window.removeEventListener('resize', this.updateWindowDimensions);
     }
 
-    _tick = () => {
-        this._draw()
+    _tick = (now) => {
+        // frame rate limiter each 0.08 seconds call the createNewObject() function
+        if(!this.lastRenderTime || now - this.lastRenderTime  >= 12) {
+            this.lastRenderTime  = now;
+            this._draw()
+        }
         this._tickRaf = raf(this._tick)
     }
     // Setting up the draw function
