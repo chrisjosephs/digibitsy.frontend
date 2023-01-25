@@ -81,19 +81,18 @@ const Layout = ({children, location}) => {
 
                       <polygon points="400,400 200,0 0,400" stroke="#151C60" strokeWidth="3"/>
                     </NavTriangle>
-                    <div className={'Navtext relative z-20'} style={{top: "2em"}}>
+                    <div className={'Navtext relative z-20 pr-8'} style={{top: "2.2rem"}}>
                       <br/>
                       <br/>
                       <br/>
-                      <Link to="/me" className={"z-20 relative"}>> Me <br/></Link>
-                      <Link to="/page-2" className={"z-20 relative"}>>>> HOW <br/></Link>
-                      <Link to="/career" className={"z-20 relative"}>> Career <br/></Link>
+                      <Link to="/me"> Me <br/></Link>
+                      <Link to="/page-2">>>> HOW <br/></Link>
+                      <Link to="/career">> Career <br/></Link>
                       > Artwork <br/>
                       <Link to="https://github.com/chrisjosephs" className={"z-20 relative"} target={'_blank'}>> github
                         / bitbucket <br/></Link>
                       <br/>
-                      <Link to='javascript:void(0)'
-                            onClick={() => window.location = 'mailto:digibitsy@gmail.com'}>> contact <br/> </Link>
+                      <a href={'mailto:digibitsy@gmail.com'}>> contact <br/> </a>
                       > blog <br/>
                     </div>
                   </div>
@@ -135,7 +134,7 @@ const Layout = ({children, location}) => {
           </div>
 
           <footer className={"relative bottom-0 content-center w-full text-center z-10"}
-                  style={{marginTop: "-30vh"}}>
+                  style={{marginTop: "-42vh"}}>
             <Geoscape className={"z-30"} style={{position: "absolute", height: "50vh"}}></Geoscape>
             { /*
                         <div className={"container mx-auto"}>
