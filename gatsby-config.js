@@ -4,9 +4,22 @@ module.exports = {
     description: `Digibitsy Portfolio`,
     author: `@gatsbyjs`,
   },
+  siteMetadata: {
+    // add general title and description
+    title: `Digibitsy | Digibitsymicronanocyberweb LTD`,
+    description: `Digibitsy Portfolio`,
+    author: `@christopherjosephs`,
+    // site URL, no trailing slash
+    siteUrl: 'https://alpha.digibitsymicronanocyberweb.com',
+    // other default open graph data
+    og: {
+      siteName: `Digibitsy | Digibitsymicronanocyberweb LTD`,
+    },
+  },
   plugins: [
     `gatsby-plugin-react-helmet`,
     'gatsby-plugin-postcss',
+    'gatsby-remark-images',
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -45,6 +58,22 @@ module.exports = {
     },
     {
       resolve: `gatsby-plugin-layout`
+    },
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        name: 'images',
+        path: './src/images/',
+      },
+      __key: 'images',
+    },
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        name: 'pages',
+        path: './src/pages/',
+      },
+      __key: 'pages',
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
