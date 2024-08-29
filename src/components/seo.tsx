@@ -44,7 +44,6 @@ export default function Seo(props: SeoProps) {
             siteUrl
             og {
               siteName
-              twitterCreator
             }
           }
         }
@@ -125,11 +124,7 @@ export default function Seo(props: SeoProps) {
     {
       name: 'twitter:image',
       content: ogImage.images.fallback.src,
-    },
-    {
-      name: 'twitter:creator',
-      content: site!.siteMetadata!.og!.twitterCreator,
-    },
+    }
   ];
 
   // If we have keywords, then add it
