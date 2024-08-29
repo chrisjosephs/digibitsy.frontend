@@ -5,7 +5,7 @@ import {GLTFLoader} from "three/examples/jsm/loaders/GLTFLoader"
 import lerp from "lerp"
 import {getMouseDegrees} from "./utils"
 import styled from '@emotion/styled'
-import {jsx, css, keyframes} from '@emotion/core'
+import { css, keyframes } from '@emotion/react';
 import PropTypes from "prop-types";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { SceneUtils } from 'three/examples/jsm/utils/SceneUtils.js';

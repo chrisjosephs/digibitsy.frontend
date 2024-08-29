@@ -2,7 +2,7 @@ import { Link } from "gatsby"
 import PropTypes from "prop-types"
 import React, {Component} from "react"
 import styled from "@emotion/styled"
-import {css, keyframes} from "@emotion/core"
+import {css, keyframes} from "@emotion/react"
 
 class Header extends Component {
     constructor(props) {

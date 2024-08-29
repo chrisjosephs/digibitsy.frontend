@@ -1,16 +1,15 @@
 import * as THREE from "three"
 import React, {Component, Suspense, useEffect, useRef, useState} from "react"
 import {useLoader, useFrame, Canvas, useThree} from "react-three-fiber"
-import {GLTFLoader} from "three/examples/jsm/loaders/GLTFLoader"
+import {GLTFLoader} from "three/examples/jsm/loaders/GLTFLoader";
 import lerp from "lerp"
 import {getMouseDegrees} from "./utils"
 import styled from '@emotion/styled'
-import {jsx, css, keyframes} from '@emotion/core'
+import {jsx, css, keyframes} from '@emotion/react'
 import PropTypes from "prop-types";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import ResizeObserver from "resize-observer-polyfill";
-import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader'
-DRACOLoader.setDecoderPath("/DRACOLoader.js");
+import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader";
 
 class Octopirate extends Component {
 
@@ -106,8 +105,8 @@ function moveJoint(mouse, joint, degreeLimit = 45) {
     let degrees = getMouseDegrees(mouse.current.x, mouse.current.y, degreeLimit)
     joint.rotation.xD = lerp(joint.rotation.xD || 0, degrees.x, 0.1)
     joint.rotation.yD = lerp(joint.rotation.yD || 0, degrees.y, 0.1)
-    joint.rotation.x = -0.1 + THREE.Math.degToRad(joint.rotation.xD)
-    joint.rotation.z = -0.5 + THREE.Math.degToRad(joint.rotation.yD)
+    joint.rotation.x = -0.1 + THREE.MathUtils.degToRad(joint.rotation.xD)
+    joint.rotation.z = -0.5 + THREE.MathUtils.degToRad(joint.rotation.yD)
 }
 function Model ({mouse, ...props}) {
         const group = useRef()
@@ -129,13 +128,12 @@ function Model ({mouse, ...props}) {
                 // optional: remove loader from DOM via event listener
                 // loadingScreen.addEventListener( 'transitionend', onTransitionEnd );
         });
-
             const {nodes, scene, scenes, animations} = useLoader(GLTFLoader, "/octoankaarmdecimatedraco2.glb", loader => {
-            let dracoLoader = new DRACOLoader();
-            dracoLoader.setDecoderConfig({ type: 'js' });
-            dracoLoader.setDecoderPath('https://www.gstatic.com/draco/v1/decoders/');
-            loader.setDRACOLoader(dracoLoader);
-            loader.manager = loadingManager;
+              var dracoLoader = new DRACOLoader();
+              dracoLoader.setDecoderPath("/DRACOLoader.js")
+              dracoLoader.setDecoderPath('https://www.gstatic.com/draco/v1/decoders/');
+              loader.setDRACOLoader(dracoLoader);
+              loader.manager = loadingManager;
         })
         console.log(nodes);
         let [mixer] = useState(() => new THREE.AnimationMixer());
