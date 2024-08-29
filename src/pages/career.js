@@ -1,5 +1,5 @@
 import React, {Suspense, useEffect, useMemo, useRef, useState} from 'react'
-    import {Timeline, TimelineEvent} from '@mailtop/horizontal-timeline'
+// import {Timeline, TimelineEvent} from '@mailtop/horizontal-timeline'
 import {FaBug, FaRegCalendarCheck, FaRegFileAlt} from 'react-icons/fa'
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import 'react-perfect-scrollbar/dist/css/styles.css';
@@ -16,7 +16,7 @@ console.log("fabug");
 console.log(FaBug);
 const CareerPage = () => (
 // I HAVE NEVAR: on mysql typed UPDATE `articles` SET `content` = REPLACE('content', '---', '<hr>'; - see Tom Scott
-
+// tom-scott-thumbs-up-jpg
 
       <div className={"CareerPage"}>
         <p>//  As a contractor under the flag of Dibigitsymicronanocyberweb since 2017 (Compuglobalhypermeganet was already taken), Christopher Josephs Esq, has been using a very big ferry called FerryMcFerryFace, plying ports on site from as North as Manchester and Liverpool, as West as Dublin, and as South as Brighton and Bournemouth,
@@ -25,7 +25,7 @@ const CareerPage = () => (
         // The technical details of this tour is explained in detail on my CV.</p><br/>
 
         Highlights:<br/>
-
+        { /*
     <Timeline minEvents={3} placeholder >
         <span className={"bidx1-icon"}>
         <TimelineEvent
@@ -92,6 +92,7 @@ const CareerPage = () => (
             }}
         />
     </Timeline>
+ **/ }
     </div>
 
 )
