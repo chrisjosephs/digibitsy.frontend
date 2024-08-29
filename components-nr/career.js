@@ -1,6 +1,8 @@
 import React, {Suspense, useEffect, useMemo, useRef, useState} from 'react'
 // import {Timeline, TimelineEvent} from '@mailtop/horizontal-timeline'
 import {FaBug, FaRegCalendarCheck, FaRegFileAlt} from 'react-icons/fa'
+import PerfectScrollbar from 'react-perfect-scrollbar';
+import 'react-perfect-scrollbar/dist/css/styles.css';
 import {GenIcon} from "react-icons";
 import BidX1Icon from "../images/bidx1Icon.js";
 import Icon from 'react-icon-base';
