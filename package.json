@@ -66,6 +66,11 @@
     "gatsby"
   ],
   "license": "0BSD",
+  "overrides": {
+    "react-server-dom-webpack@0.0.0-experimental-c8b778b7f-20220825": {
+      "react": "^18.3.1"
+    }
+  },
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop",
