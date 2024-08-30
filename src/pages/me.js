@@ -1,6 +1,6 @@
 import React, {Suspense, useEffect, useMemo, useRef, useState} from 'react'
 import {Link} from "gatsby"
-import SEO from "../components/seo"
+import Seo from "../components/Seo"
 import {Canvas, useLoader, useFrame, useThree} from "react-three-fiber"
 import {GLTFLoader} from "three/examples/jsm/loaders/GLTFLoader"
 import * as THREE from "three";
@@ -11,7 +11,7 @@ import lerp from "lerp"
 
 const MePage = () => (
     <div className={"MePage"}>
-        <SEO title="Home"/>
+        <Seo title="Home"/>
         // About me:<br/>
         -  rotating head you zoom in and it does some stuff -
         // my favourite lethal weapon film is lethal weapon 3, and I am pretty good at making paper planes.  As for actors, I like Bill Paxton because he is the only person to have been killed by a Predator, an Alien, and a Terminator.<br/>

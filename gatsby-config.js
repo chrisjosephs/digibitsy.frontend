@@ -15,9 +15,16 @@ module.exports = {
     og: {
       siteName: `Digibitsy | Digibitsymicronanocyberweb LTD`,
     },
+    social: {
+      linkedin: "https://www.linkedin.com/in/christopher-josephs",
+      github: "xiss23@gmail.com",
+      email: "digbitsy@gmail.com",
+    },
   },
   plugins: [
-    `gatsby-plugin-react-helmet`,
+    'gatsby-plugin-typegen',
+    'gatsby-plugin-image',
+    'gatsby-plugin-react-helmet',
     'gatsby-plugin-postcss',
     'gatsby-remark-images',
     {
@@ -31,8 +38,8 @@ module.exports = {
       resolve: `gatsby-plugin-google-fonts`,
       options: {
         fonts: [
-           `Orbitron\:900, 400`,
-            `Yellowtail\:400`
+          `Orbitron\:900, 400`,
+          `Yellowtail\:400`,
         ],
       },
     },
@@ -47,7 +54,8 @@ module.exports = {
         background_color: `#663399`,
         theme_color: `#663399`,
         display: `minimal-ui`,
-        icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+        icon: `src/images/gatsby-icon.png`, // This path is relative to the
+                                            // root of the site.
       },
     },
     {
@@ -57,7 +65,7 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-plugin-layout`
+      resolve: `gatsby-plugin-layout`,
     },
     {
       resolve: 'gatsby-source-filesystem',
@@ -75,8 +83,8 @@ module.exports = {
       },
       __key: 'pages',
     },
-    // this (optional) plugin enables Progressive Web App + Offline functionality
-    // To learn more, visit: https://gatsby.dev/offline
+    // this (optional) plugin enables Progressive Web App + Offline
+    // functionality To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
   ],
-}
+};

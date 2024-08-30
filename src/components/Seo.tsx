@@ -48,7 +48,7 @@ export default function Seo(props: SeoProps) {
           }
         }
         featuredImage: file(
-          absolutePath: { glob: "**/src/images/digibitsybannerOG.jpg" }
+          relativePath: { glob: "**/src/images/digibitsybannerOG.jpg" }
         ) {
           childImageSharp {
             gatsbyImageData(layout: FIXED, width: 1200)
