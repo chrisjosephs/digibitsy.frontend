@@ -51,7 +51,7 @@ export default function Seo(props: SeoProps) {
           absolutePath: { glob: "**/src/images/digibitsybannerOG.jpg" }
         ) {
           childImageSharp {
-            gatsbyImageData(layout: FIXED, width: 1200)
+            gatsbyImageData(layout: FIXED, width: 1200, quality: 85)
           }
         }
       }
