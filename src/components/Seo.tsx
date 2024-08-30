@@ -141,7 +141,7 @@ export default function Seo(props: SeoProps) {
       <meta charSet="utf-8" />
       <title>{title}</title>
       {metas.map(meta => (
-        <meta key={meta.name} name={meta.name} content={meta.content} />
+        <meta key={meta.name} name={meta.name} content={meta.content ?? ''} />
       ))}
     </Helmet>
   );
