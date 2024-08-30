@@ -2368,6 +2368,11 @@ type WebPOptions = {
   readonly quality: InputMaybe<Scalars['Int']>;
 };
 
+type HeadingQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type HeadingQueryQuery = { readonly site: { readonly siteMetadata: { readonly title: string | null } | null } | null };
+
 type IndexPagesDataQueryVariables = Exact<{ [key: string]: never; }>;
 
 
