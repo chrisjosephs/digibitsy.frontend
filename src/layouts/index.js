@@ -140,8 +140,7 @@ const Layout = ({children, location}) => {
                       {location.pathname !== "/me" &&
                           <Transition location={location}>
                             <MatrixLetters
-                                style = {{zIndex: 9999}}
-                                trigger={location.pathname === "/page-2/"
+                                trigger={RegExp('\/page-2(.*)').test(location.pathname)
                                     ? 1
                                     : 0}/>
                             <div
