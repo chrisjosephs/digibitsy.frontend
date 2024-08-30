@@ -19,6 +19,7 @@ import background from '../images/piqsels.com-id-fvkta2.jpg';
 import OctoPirate from "../components/Octopirate";
 import styled from "@emotion/styled";
 import Geoscape from "../components/Geoscape";
+import zIndex from '@mui/material/styles/zIndex';
 
 const Layout = ({children, location}) => {
   const mouse = useRef({x: 0, y: 0});
@@ -139,12 +140,18 @@ const Layout = ({children, location}) => {
                       {location.pathname !== "/me" &&
                           <Transition location={location}>
                             <MatrixLetters
-                                trigger={location.pathname === "/page-2"
+                                style = {{zIndex: 9999}}
+                                trigger={location.pathname === "/page-2/"
                                     ? 1
                                     : 0}/>
                             <div
                                 className="flex text-white p-10 bg-gray-700 opacity-75 z-0"
-                                style={{}}>
+                                style={{
+                                  display: location.pathname === "/page-2"
+                                      ? 'none'
+                                      : 'block'
+
+                                }}>
                               <main className="my-8 mb-20 w-full"
                                     style={{position: "relative", zIndex: "5"}}>
                                 <div className="cutout" style={{
