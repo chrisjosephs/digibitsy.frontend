@@ -9,7 +9,9 @@ class MatrixLetters extends Component {
         super(props);
         this.containerRef = createRef();
         this.canvasRef = createRef();
-        this.state = {containerWidth: window.innerWidth, containerHeight: window.innerHeight};
+        if (typeof window !== "undefined") {
+            this.state = {containerWidth: window.innerWidth, containerHeight: window.innerHeight};
+        }
         this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
         // Setting up the letters
         this.letters = 'ABCDEFABCDEF0123456789ƐㄥϛㄣƐ∀ƆƎℲ';
@@ -60,7 +62,9 @@ class MatrixLetters extends Component {
     componentDidMount() {
         this.ctx = this.canvasRef.current.getContext('2d');
         this.updateWindowDimensions();
-        window.addEventListener('resize', this.updateWindowDimensions);
+        if (typeof window !== "undefined") {
+            window.addEventListener('resize', this.updateWindowDimensions);
+        }
         // Setting up the columns
         this.fontSize = 16;
         this.columns = this.state.containerWidth / this.fontSize;
@@ -79,7 +83,9 @@ class MatrixLetters extends Component {
 
     componentWillUnmount() {
         raf.cancel(this._tickRaf)
-        window.removeEventListener('resize', this.updateWindowDimensions);
+        if (typeof window !== "undefined") {
+            window.removeEventListener('resize', this.updateWindowDimensions);
+        }
     }
 
     _tick = (now) => {
@@ -130,7 +136,9 @@ class MatrixLetters extends Component {
         }
     }
     updateWindowDimensions() {
-        this.setState({containerWidth: window.innerWidth, containerHeight: window.innerHeight})
+        if (typeof window !== "undefined") {
+            this.setState({containerWidth: window.innerWidth, containerHeight: window.innerHeight})
+        }
     }
 
 }
