@@ -1,7 +1,7 @@
 .octo-pirate {
     position: absolute;
     top: 20px;
-    right: 20%;
+    /* right: 20%; */
     width: 50%;
     z-index: 500;
     @media screen(sm) {
@@ -51,6 +51,12 @@
     @media screen(sm) {
         top: 2.2rem;
     }
-
-
+}
+#___gatsby{
+    max-width: 100%;
+    overflow-x: hidden;
+    @media screen(sm) {
+        max-width: unset;
+        overflow-x: auto;
+    }
 }

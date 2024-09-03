@@ -243,10 +243,10 @@ const Loader = styled.div`
     -webkit-animation: ${spin} 2s linear infinite;
     animation: ${spin} 2s linear infinite;
     z-index: 3;
-    top: 100px;
-    height: 100px;
-    width: 100px;
-    left: 70%;
+    top: 150px;
+    height: 140px;
+    width: 140px;
+    left: 30%;
     ${media.sm`
         left: 50%;
         top: 50%;
