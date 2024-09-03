@@ -9,6 +9,7 @@ import {keyframes} from '@emotion/react'
 import PropTypes from "prop-types";
 import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
 import {DRACOLoader} from "three/examples/jsm/loaders/DRACOLoader";
+import media from '../util/breakpoints';
 
 class Octopirate extends Component {
 
@@ -30,7 +31,7 @@ class Octopirate extends Component {
     static defaultProps = {
         mouse: {
             current:
-                {x: 50, y: 50}
+                { x: 360, y: 150}
         }
     };
 
@@ -123,13 +124,14 @@ function Model({mouse, ...props}) {
         loader.setDRACOLoader(dracoLoader);
         loader.manager = loadingManager;
     })
-    // stare at camera when first loaded
+    // stare forward when first loaded
     moveJoint({
         current: {
             x: 360,
             y: 150
         }
     }, nodes.Neck_M_0297);
+
     let [mixer] = useState(() => new THREE.AnimationMixer());
 
     useFrame((state, delta) => {
@@ -234,10 +236,6 @@ const spin = keyframes`
 const Loader = styled.div`
     display: block;
     position: relative;
-    left: 50%;
-    top: 50%;
-    width: 150px;
-    height: 150px;
     margin: -35px 0 0 -75px;
     border-radius: 50%;
     border: 3px solid transparent;
@@ -245,7 +243,17 @@ const Loader = styled.div`
     -webkit-animation: ${spin} 2s linear infinite;
     animation: ${spin} 2s linear infinite;
     z-index: 3;
-
+    top: 100px;
+    height: 100px;
+    width: 100px;
+    left: 70%;
+    ${media.sm`
+        left: 50%;
+        top: 50%;
+        width: 150px;
+        height: 150px;
+       `
+    }
     &&:before {
         content: "";
         position: absolute;

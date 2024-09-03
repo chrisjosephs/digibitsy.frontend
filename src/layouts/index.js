@@ -123,7 +123,7 @@ const Layout = ({children, location}) => {
                         <div className={"w-1/2 md:w-1/3 h-full octo-pirate-outer"}>
                           <div className={"octo-pirate"}>
                             <OctoPirate
-                                      mouse={mouse}></OctoPirate>
+                                      mouse={mouse} style={{width:'300px', height:'400px'}}></OctoPirate>
                           </div>
                           <Moon></Moon>
                         </div>
