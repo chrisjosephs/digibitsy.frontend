@@ -184,10 +184,10 @@ const Layout = ({children, location}) => {
                          style={{height: "2rem", marginTop: "-2rem"}}>
                       © {new Date().getFullYear()}, Built with
                       {` `}
-                      React / <a href="https://www.gatsbyjs.org">Gatsby</a>,
-                      Threejs (where opengl supported),
-                      Drupal 9,
-                      graphQL, Tailwind css
+                      React | <a href="https://www.gatsbyjs.org">Gatsby</a>,
+                      Threejs,
+                      Drupal,
+                      graphQL, Tailwind
                     </div>
                   </footer>
                   { /*

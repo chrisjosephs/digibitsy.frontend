@@ -159,9 +159,9 @@ const H1 = styled.h1`
     -webkit-text-fill-color: transparent;
     -webkit-text-stroke-width: 2px;
     -webkit-text-stroke-color: white;
-    ${media.sm`
+    ${media.sm` 
         font-size: 180px;
-        margin-top: 0;
+        margin: 0;
     `}
    
 `
@@ -188,6 +188,11 @@ const H2 = styled.h2`
     z-index: 11;
     ${media.sm`
         font-size: 110px;
+        margin-top: 140px; // same as one above
+    `}
+    ${media.lg`
+        font-size: 110px;
+        left: -50px;
         margin-top: 140px; // same as one above
     `}
 `
