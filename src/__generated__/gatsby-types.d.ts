@@ -2368,6 +2368,11 @@ type WebPOptions = {
   readonly quality: InputMaybe<Scalars['Int']>;
 };
 
+type CareerPagesDataQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type CareerPagesDataQuery = { readonly careerPageFeatured: { readonly childImageSharp: { readonly gatsbyImageData: import('gatsby-plugin-image').IGatsbyImageData } | null } | null };
+
 type HeadingQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -2377,6 +2382,21 @@ type IndexPagesDataQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 type IndexPagesDataQuery = { readonly indexPageFeatured: { readonly childImageSharp: { readonly gatsbyImageData: import('gatsby-plugin-image').IGatsbyImageData } | null } | null };
+
+type MePagesDataQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type MePagesDataQuery = { readonly mePageFeatured: { readonly childImageSharp: { readonly gatsbyImageData: import('gatsby-plugin-image').IGatsbyImageData } | null } | null };
+
+type NotFoundPagesDataQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type NotFoundPagesDataQuery = { readonly notFoundPageFeatured: { readonly childImageSharp: { readonly gatsbyImageData: import('gatsby-plugin-image').IGatsbyImageData } | null } | null };
+
+type Page2PagesDataQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type Page2PagesDataQuery = { readonly page2PageFeatured: { readonly childImageSharp: { readonly gatsbyImageData: import('gatsby-plugin-image').IGatsbyImageData } | null } | null };
 
 type SeoMetaDataQueryVariables = Exact<{ [key: string]: never; }>;
 

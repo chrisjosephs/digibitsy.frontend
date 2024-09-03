@@ -26,7 +26,7 @@ class TalkingHead extends Component {
     }
     static defaultProps = {
         mouse: { current:
-                { x: 0, y: 0 }}
+                { x: 50, y: 50 }}
     };
     cameraDefault() {
         const fov = 45;

@@ -1,15 +1,14 @@
 import * as THREE from "three"
 import React, {Component, Suspense, useEffect, useRef, useState} from "react"
-import {useLoader, useFrame, Canvas, useThree} from "react-three-fiber"
+import {Canvas, useFrame, useLoader, useThree} from "react-three-fiber"
 import {GLTFLoader} from "three/examples/jsm/loaders/GLTFLoader";
 import lerp from "lerp"
 import {getMouseDegrees} from "../util/utils"
 import styled from '@emotion/styled'
-import {jsx, css, keyframes} from '@emotion/react'
+import {keyframes} from '@emotion/react'
 import PropTypes from "prop-types";
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
-import ResizeObserver from "resize-observer-polyfill";
-import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader";
+import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
+import {DRACOLoader} from "three/examples/jsm/loaders/DRACOLoader";
 
 class Octopirate extends Component {
 
@@ -20,6 +19,7 @@ class Octopirate extends Component {
         }
         this.camera = this.cameraDefault();
     }
+
     setLoaded = (loadedValue) => {
         this.setState({loaded: loadedValue});
     }
@@ -28,16 +28,19 @@ class Octopirate extends Component {
         mouse: PropTypes.object
     }
     static defaultProps = {
-        mouse: { current:
-                { x: 0, y: 0 }}
+        mouse: {
+            current:
+                {x: 50, y: 50}
+        }
     };
+
     cameraDefault() {
         const fov = 45;
         const aspect = 1;  // the canvas default
         const near = 0.1;
         const far = 2000;
         const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
-        camera.position.set(30,0,30);
+        camera.position.set(30, 0, 30);
         return camera;
     }
 
@@ -45,15 +48,17 @@ class Octopirate extends Component {
     render() {
         return this.OctoPirateCanvas(this.props.mouse);
     }
-    componentDidMount(){
+
+    componentDidMount() {
         // move load model to componentdidmount
 
     }
-    OctoPirateCanvas(mouse, ...props){
+
+    OctoPirateCanvas(mouse, ...props) {
         return (
             <>
                 <Wrapper style={this.props.style}>
-                    <Loader className={ this.state.loaded ? 'fade-out' : '' }></Loader>
+                    <Loader className={this.state.loaded ? 'fade-out' : ''}></Loader>
                     <Canvas className={"octoPirate"}>
 
                         <directionalLight
@@ -72,8 +77,8 @@ class Octopirate extends Component {
                         </mesh>
                         */}
                         <Suspense fallback={null}>
-                            <CameraController />
-                            <Model mouse={mouse} setLoaded={loaded=>this.setLoaded(loaded)} position={[-0.1, 0, 0]}/>
+                            <CameraController/>
+                            <Model mouse={mouse} setLoaded={loaded => this.setLoaded(loaded)} position={[-0.1, 0, 0]}/>
                         </Suspense>
                     </Canvas>
                 </Wrapper>
@@ -81,11 +86,12 @@ class Octopirate extends Component {
         )
     }
 }
+
 const CameraController = () => {
-    const { camera, gl } = useThree();
+    const {camera, gl} = useThree();
     useEffect(
         () => {
-            camera.position.z =  3.6;
+            camera.position.z = 3.6;
             const controls = new OrbitControls(camera, gl.domElement);
             controls.enableZoom = false;
             return () => {
@@ -98,128 +104,122 @@ const CameraController = () => {
 };
 
 function moveJoint(mouse, joint, degreeLimit = 45) {
-
     let degrees = getMouseDegrees(mouse.current.x, mouse.current.y, degreeLimit)
     joint.rotation.xD = lerp(joint.rotation.xD || 0, degrees.x, 0.1)
     joint.rotation.yD = lerp(joint.rotation.yD || 0, degrees.y, 0.1)
     joint.rotation.x = -0.1 + THREE.MathUtils.degToRad(joint.rotation.xD)
     joint.rotation.z = -0.5 + THREE.MathUtils.degToRad(joint.rotation.yD)
 }
-function Model ({mouse, ...props}) {
-        const group = useRef()
 
-        function onTransitionEnd() {
-
+function Model({mouse, ...props}) {
+    const group = useRef()
+    const loadingManager = new THREE.LoadingManager(() => {
+        props.setLoaded(true);
+    });
+    const {nodes, scene, scenes, animations} = useLoader(GLTFLoader, "/octoankaarmdecimatedraco2.glb", loader => {
+        var dracoLoader = new DRACOLoader();
+        dracoLoader.setDecoderPath("/DRACOLoader.js")
+        dracoLoader.setDecoderPath('https://www.gstatic.com/draco/v1/decoders/');
+        loader.setDRACOLoader(dracoLoader);
+        loader.manager = loadingManager;
+    })
+    // stare at camera when first loaded
+    moveJoint({
+        current: {
+            x: 360,
+            y: 150
         }
+    }, nodes.Neck_M_0297);
+    let [mixer] = useState(() => new THREE.AnimationMixer());
 
-        const loadingManager = new THREE.LoadingManager(() => {
-            props.setLoaded(true);
-            /*
-            const loadingScreen = document.getElementsByClassName( 'LoadingScreen' );
-            console.log(loadingScreen);
-
-            if(!undefined===loadingScreen){
-                loadingScreen.classList.add( 'fade-out' );
-            }
-            */
-                // optional: remove loader from DOM via event listener
-                // loadingScreen.addEventListener( 'transitionend', onTransitionEnd );
-        });
-            const {nodes, scene, scenes, animations} = useLoader(GLTFLoader, "/octoankaarmdecimatedraco2.glb", loader => {
-              var dracoLoader = new DRACOLoader();
-              dracoLoader.setDecoderPath("/DRACOLoader.js")
-              dracoLoader.setDecoderPath('https://www.gstatic.com/draco/v1/decoders/');
-              loader.setDRACOLoader(dracoLoader);
-              loader.manager = loadingManager;
-        })
-        console.log(nodes);
-        let [mixer] = useState(() => new THREE.AnimationMixer());
-
-
-        useFrame((state, delta) => {
-            mixer.update(delta)
-        })
-        useFrame((state, delta) => {
-            mixer.update(delta);
+    useFrame((state, delta) => {
+        mixer.update(delta)
+    })
+    useFrame((state, delta) => {
+        mixer.update(delta);
+        if (mouse.current.x !== 0 && mouse.current.y !== 0) {
             moveJoint(mouse, nodes.Neck_M_0297);
-        })
+        }
+    })
 
-        useFrame((state, delta) => mixer.update(delta))
-        /* No Animations yet
-        useEffect(() => {
-            actions.current = { idle: mixer.clipAction(animations[8], group.current) }
-            actions.current.idle.play()
-            return () => animations.forEach(clip => mixer.uncacheClip(clip))
-        }, [])
-    */
-        var textureLoader = new THREE.TextureLoader();
-        var MetalRusted = textureLoader.load('/rm.jpg');
+    useFrame((state, delta) => mixer.update(delta))
+    /* No Animations yet
+    useEffect(() => {
+        actions.current = { idle: mixer.clipAction(animations[8], group.current) }
+        actions.current.idle.play()
+        return () => animations.forEach(clip => mixer.uncacheClip(clip))
+    }, [])
+*/
+    var textureLoader = new THREE.TextureLoader();
+    var MetalRusted = textureLoader.load('/rm.jpg');
 
-        var material = new THREE.MeshStandardMaterial({
-            color: 0xffffff,
-            metalness: 0.95,   // between 0 and 1
-            roughness: 0.65, // between 0 and 1
-            envMapIntensity: 1,
-            map: MetalRusted,
+    var material = new THREE.MeshStandardMaterial({
+        color: 0xffffff,
+        metalness: 0.95,   // between 0 and 1
+        roughness: 0.65, // between 0 and 1
+        envMapIntensity: 1,
+        map: MetalRusted,
 
-        });
-         nodes['anchorobjcb9289e8-f66e-417d-9586-27500257b6e7_(1)001'].material = material;
-        //  nodes['anchor'].material = material;
-        nodes['octopus_hat_high_octopus_hat_tex_0'].visible = true;
+    });
+    nodes['anchorobjcb9289e8-f66e-417d-9586-27500257b6e7_(1)001'].material = material;
+    //  nodes['anchor'].material = material;
+    nodes['octopus_hat_high_octopus_hat_tex_0'].visible = true;
 
-        nodes['octopus_body_high_Octopus_body_tex_0'].material.metalness = 0.1;
+    nodes['octopus_body_high_Octopus_body_tex_0'].material.metalness = 0.1;
 
-        useFrame(({clock}) => (
-            nodes["Armature_0"].rotation.x = nodes["Armature_0"].rotation.y = nodes["Armature_0"].rotation.z = Math.sin(clock.getElapsedTime()) * -0.3));
+    useFrame(({clock}) => (
+        nodes["Armature_0"].rotation.x = nodes["Armature_0"].rotation.y = nodes["Armature_0"].rotation.z = Math.sin(clock.getElapsedTime()) * -0.3));
 
-        const ref = useRef()
-        return (
-            <>
+    const ref = useRef()
+    return (
+        <>
 
-                <group ref={ref} rotation={[2, 0, 0]} ref={group} {...props} dispose={null}>
-                    <primitive object={nodes["Armature_0"]}/>
-                </group>
-            </>
-        )
-    }
+            <group ref={ref} rotation={[2, 0, 0]} ref={group} {...props} dispose={null}>
+                <primitive object={nodes["Armature_0"]}/>
+            </group>
+        </>
+    )
+}
 
 export default Octopirate;
 const Planet = styled.div`
-position: absolute;
-  height: 400px;
-  opacity: 0.7;
-  width: 400px;
-  background-color: lightpink;
-  border-radius: 50%;
-  display: inline-block;
+    position: absolute;
+    height: 400px;
+    opacity: 0.7;
+    width: 400px;
+    background-color: lightpink;
+    border-radius: 50%;
+    display: inline-block;
 `
 
 const Wrapper = styled.div`
-z-index: 2;
-opacity: 0;
-width: 100%;
-height: 100%;
-transition: 0.3s opacity;
-margin-top: -90px;
-&& .fade-out{
-  opacity: 0;
-  transition: 0.3s opacity;
-}
--webikit-animation: moon-move-in 2.4s 1s forwards;
-animation: moon-move-in 2.4s 1s forwards;
-@keyframes moon-move-in {
-0% {
-        opacity: 0;
-}
-99% {
+    z-index: 2;
     opacity: 0;
-}   
-100% {
-    opacity: 1;
-}
+    width: 100%;
+    height: 100%;
+    transition: 0.3s opacity;
+    margin-top: -90px;
+
+    && .fade-out {
+        opacity: 0;
+        transition: 0.3s opacity;
+    }
+
+    -webikit-animation: moon-move-in 2.4s 1s forwards;
+    animation: moon-move-in 2.4s 1s forwards;
+    @keyframes moon-move-in {
+        0% {
+            opacity: 0;
+        }
+        99% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
 `
 const spin = keyframes`
-0%   {
+    0% {
         -webkit-transform: rotate(0deg);
         -ms-transform: rotate(0deg);
         transform: rotate(0deg);
