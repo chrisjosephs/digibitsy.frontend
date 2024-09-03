@@ -52,8 +52,8 @@ class MatrixLetters extends Component {
             >
                 <canvas
                     ref={this.canvasRef}
-                    width={this.state.containerWidth}
-                    height={this.state.containerHeight}
+                    width={this.state?.containerWidth ?? 0}
+                    height={this.state?.containerHeight ?? 0}
                 />
             </div>
         </>;
@@ -67,7 +67,9 @@ class MatrixLetters extends Component {
         }
         // Setting up the columns
         this.fontSize = 16;
+        if(this.state.containerWidth){
         this.columns = this.state.containerWidth / this.fontSize;
+        }
         // Setting up the drops
         this.drops = [];
         for (let i = 0; i < this.columns; i++) {
