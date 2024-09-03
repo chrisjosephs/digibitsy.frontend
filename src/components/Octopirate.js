@@ -54,10 +54,7 @@ class Octopirate extends Component {
             <>
                 <Wrapper style={this.props.style}>
                     <Loader className={ this.state.loaded ? 'fade-out' : '' }></Loader>
-                    <Canvas
-                        resize={{ scroll: false,  polyfill: ResizeObserver }}
-                            className={"octoPirate"}
-                            pixelRatio={window.devicePixelRatio} >
+                    <Canvas className={"octoPirate"}>
 
                         <directionalLight
                             position={[2.2, 3.4, 1]}
