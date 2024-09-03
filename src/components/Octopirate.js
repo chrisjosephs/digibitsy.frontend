@@ -172,8 +172,8 @@ function Model({mouse, ...props}) {
 
     nodes['octopus_body_high_Octopus_body_tex_0'].material.metalness = 0.1;
 
-    useFrame(({clock}) => (
-        nodes["Armature_0"].rotation.x = nodes["Armature_0"].rotation.y = nodes["Armature_0"].rotation.z = Math.sin(clock.getElapsedTime()) * -0.3));
+    // useFrame(({clock}) => (
+       // nodes["Armature_0"].rotation.x = nodes["Armature_0"].rotation.y = nodes["Armature_0"].rotation.z = Math.sin(clock.getElapsedTime()) * -0.3));
 
     const ref = useRef()
     return (
