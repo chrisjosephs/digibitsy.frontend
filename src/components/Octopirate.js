@@ -249,7 +249,7 @@ const Loader = styled.div`
     left: 30%;
     ${media.sm`
         left: 50%;
-        top: 50%;
+        top: 65%;
         width: 150px;
         height: 150px;
        `
