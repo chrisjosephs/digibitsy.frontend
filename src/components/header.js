@@ -79,10 +79,16 @@ const LogoTriangleDesktop = styled.svg`
     display: none;
     ${media.sm`
         display: block;
+        margin-left: 200px;
+    `}
+    ${media.lg`
+        margin-left: 275px;
+    `}
+    ${media.xl`
+        margin-left: 400px;
     `}
     height: 320px;
     width: 600px;
-    margin-left: 400px;
     top: 6em;
     animation: dash 6s linear infinite forwards;
     fill: url(#grad1);

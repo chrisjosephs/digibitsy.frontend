@@ -58,8 +58,8 @@ const Layout = ({children, location}) => {
                       className={"container mx-auto min-h-screen relative z-20"}>
                     <div className={"container-head"}>
                       <Header siteTitle={data.site.siteMetadata.title}/>
-                      <div className="flex" style={{marginTop: "100px"}}>
-                        <div className={"md:w-2/3"}>
+                      <div className="flex layout-content">
+                        <div className={"w-1/2 md:w-2/3"}>
                           <div
                               className={"md:w-2/4 text-gray-300 z-20 text-center"}
                               style={{
@@ -95,8 +95,7 @@ const Layout = ({children, location}) => {
                               <polygon points="400,400 200,0 0,400"
                                        stroke="#151C60" strokeWidth="3"/>
                             </NavTriangle>
-                            <NavLinks className={'nav-links relative z-20 pr-8'}
-                                      style={{top: "2.2rem"}}>
+                            <NavLinks className={'nav-links relative z-20 pr-8'}>
                               <br/>
                               <br/>
                               <br/>
@@ -149,15 +148,7 @@ const Layout = ({children, location}) => {
                                 }}>
                               <main className="my-8 mb-20 w-full"
                                     style={{position: "relative", zIndex: "5"}}>
-                                <div className="cutout" style={{
-                                  position: "relative",
-                                  float: "right",
-                                  top: "0",
-                                  right: "0",
-                                  width: "33%",
-                                  height: "160px",
-                                  marginBottom: "1.45rem",
-                                }}></div>
+                                <div className="cutout"></div>
                                 {children}</main>
                             </div>
                           </Transition>}
@@ -247,7 +238,7 @@ const Moon = styled.div`
   background: url(https://raw.githubusercontent.com/yagoestevez/fcc-portfolio/master/src/Images/Moon.svg?sanitize=true) right 150% no-repeat;
   width: 100%;
   height: 100%;
-  z-index: -1;
+  z-index: -10;
   opacity: 0;
   animation: moon-move-in 1.2s 1s forwards;
 

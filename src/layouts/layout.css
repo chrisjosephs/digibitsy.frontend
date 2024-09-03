@@ -1,20 +1,55 @@
 .octo-pirate {
-  @media screen(sm) {
     position: absolute;
-    width: 30%;
-    height: 450px;
-    right: 0;
-  }
+    top: 20px;
+    right: 20%;
+    width: 50%;
+    @media screen(sm) {
+        position: absolute;
+        width: 30%;
+        height: 450px;
+        right: 0;
+        top: 100px;
+    }
 }
-.octo-pirate-outer{
-  z-index: 50;
-  position:relative;
-  padding-top: 10px;
-  top: -100px;
-  @media screen(sm) {
-    z-index: 5;
-    position: unset;
-    top: 0;
-    padding-top: 70px;
-  }
+
+.octo-pirate-outer {
+    z-index: 1;
+    position: absolute;
+    left: 50%;
+    padding-top: 0px;
+
+    @media screen(sm) {
+        z-index: 5;
+        position: unset;
+        top: 0;
+        padding-top: 70px;
+    }
+}
+
+.cutout {
+    position: relative;
+    float: right;
+    top: 0px;
+    right: 0px;
+    width: 40%;
+    height: 100px;
+    margin-bottom: 1.45rem;
+    @media screen(sm) {
+        height: 160px;
+        width: 33%;
+    }
+}
+.layout-content{
+    margin-top: 0;
+    @media screen(sm) {
+        margin-top: 100px;
+    }
+}
+.nav-links {
+    top: 3rem;
+    @media screen(sm) {
+        top: 2.2rem;
+    }
+
+
 }
