@@ -3,7 +3,7 @@ import React, {Component, Suspense, useEffect, useRef, useState} from "react"
 import {useLoader, useFrame, Canvas, useThree} from "react-three-fiber"
 import {GLTFLoader} from "three/examples/jsm/loaders/GLTFLoader";
 import lerp from "lerp"
-import {getMouseDegrees} from "./utils"
+import {getMouseDegrees} from "../util/utils"
 import styled from '@emotion/styled'
 import {jsx, css, keyframes} from '@emotion/react'
 import PropTypes from "prop-types";

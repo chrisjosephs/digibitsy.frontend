@@ -14,7 +14,7 @@ import "./layout.css";
 import '../css/global.css';
 import Transition from '../components/transition';
 import MatrixLetters from "../components/matrix";
-import {getMousePos} from "../components/utils";
+import {getMousePos} from "../util/utils";
 import background from '../images/piqsels.com-id-fvkta2.jpg';
 import OctoPirate from "../components/Octopirate";
 import styled from "@emotion/styled";

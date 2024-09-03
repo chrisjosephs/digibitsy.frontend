@@ -4,8 +4,8 @@ import Seo from "../components/Seo"
 import {Canvas, useLoader, useFrame, useThree} from "react-three-fiber"
 import {GLTFLoader} from "three/examples/jsm/loaders/GLTFLoader"
 import * as THREE from "three";
-import { getMouseDegrees } from "../components/utils.js"
-import { getMousePos } from "../components/utils.js"
+import { getMouseDegrees } from "../util/utils.js"
+import { getMousePos } from "../util/utils.js"
 import lerp from "lerp"
 
 

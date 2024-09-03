@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/digibitsy.iml" filepath="$PROJECT_DIR$/.idea/digibitsy.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../digibitsy.backend/.idea/digibitsy.backend.iml" filepath="$PROJECT_DIR$/../digibitsy.backend/.idea/digibitsy.backend.iml" />
     </modules>
   </component>
 </project>
