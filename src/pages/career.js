@@ -4,6 +4,7 @@ import {FaBug, FaRegCalendarCheck, FaRegFileAlt} from 'react-icons/fa'
 import {GenIcon} from "react-icons";
 import BidX1Icon from "../images/bidx1Icon.js";
 import Icon from 'react-icon-base';
+import {graphql} from "gatsby";
 
 export var bidX1img = function (props) {
     return GenIcon({"tag":"svg","attr":{"viewBox":"0 0 512 512"},"child":[{"tag":"path","attr":{"d":"M464 0H144c-26.5 0-48 21.5-48 48v48H48c-26.5 0-48 21.5-48 48v320c0 26.5 21.5 48 48 48h320c26.5 0 48-21.5 48-48v-48h48c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48zm-96 464H48V256h320v208zm96-96h-48V144c0-26.5-21.5-48-48-48H144V48h320v320z"}}]})(props);
@@ -94,4 +95,15 @@ const CareerPage = () => (
     </div>
 
 )
+export const query = graphql`
+    query CareerPagesData {
+        careerPageFeatured: file(
+            absolutePath: { glob: "**/src/images/digibitsybannerOG.jpg" }
+        ) {
+            childImageSharp {
+                gatsbyImageData(layout: FIXED, width: 1200)
+            }
+        }
+    }
+`;
 export default CareerPage

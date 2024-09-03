@@ -1,5 +1,5 @@
 import React from "react"
-import { Link } from "gatsby"
+import {graphql, Link} from "gatsby"
 
 import Seo from "../components/Seo"
 
@@ -11,5 +11,16 @@ const SecondPage = () => (
     <Link to="/">Go back to the homepage</Link>
     </div>
 );
+export const query = graphql`
+    query Page2PagesData {
+        page2PageFeatured: file(
+            absolutePath: { glob: "**/src/images/digibitsybannerOG.jpg" }
+        ) {
+            childImageSharp {
+                gatsbyImageData(layout: FIXED, width: 1200)
+            }
+        }
+    }
+`;
 
 export default SecondPage

@@ -1,5 +1,5 @@
 import React, {Suspense, useEffect, useMemo, useRef, useState} from 'react'
-import {Link} from "gatsby"
+import {graphql, Link} from "gatsby"
 import Seo from "../components/Seo"
 import {Canvas, useLoader, useFrame, useThree} from "react-three-fiber"
 import {GLTFLoader} from "three/examples/jsm/loaders/GLTFLoader"
@@ -32,6 +32,17 @@ const MePage = () => (
 
     </div>
 )
+export const query = graphql`
+        query MePagesData {
+                mePageFeatured: file(
+                        absolutePath: { glob: "**/src/images/digibitsybannerOG.jpg" }
+                ) {
+                        childImageSharp {
+                                gatsbyImageData(layout: FIXED, width: 1200)
+                        }
+                }
+        }
+`;
 
 export default MePage
 
