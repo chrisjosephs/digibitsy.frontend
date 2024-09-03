@@ -47,7 +47,9 @@ class Octopirate extends Component {
 
 
     render() {
-        return this.OctoPirateCanvas(this.props.mouse);
+        if (typeof window !== "undefined") {
+            return this.OctoPirateCanvas(this.props.mouse);
+        }
     }
 
     componentDidMount() {
