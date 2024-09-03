@@ -33,12 +33,12 @@ class Header extends Component {
                     <TriangleContainerMobile>
                     <LogoTriangleMobile>
                         <defs>
-                            <linearGradient id="grad1" x1="0%" y1="100%" x2="100%" y2="0%">
-                                <stop offset="0%" style={{stopColor: "rgb(50,50,50)", stopOpacity: "1"}}/>
+                            <linearGradient id="gradM1" x1="0%" y1="100%" x2="100%" y2="0%">
+                                <stop offset="0%" style={{stopColor: "rgb(50,50,50)", stopOpacity: "0.8"}}/>
                                 <stop offset="100%" style={{stopColor: "rgb(0,0,0)", stopOpacity: "1"}}/>
                             </linearGradient>
                         </defs>
-                        <filter id="dropshadow" height="130%">
+                        <filter id="dropshadowM" height="130%">
                             <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
                             <feOffset dx="2" dy="2" result="offsetblur"/>
                             <feMerge>
@@ -109,8 +109,8 @@ const LogoTriangleMobile = styled.svg`
        display: none;
     `}
     animation: dash 6s linear infinite forwards;
-    fill: url(#grad1);
-    filter :url(#dropshadow);
+    fill: url(#gradM1);
+    filter :url(#dropshadowM);
     height: 300px;
     margin-left: auto;
     margin-right: auto;

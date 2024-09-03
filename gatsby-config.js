@@ -25,7 +25,18 @@ module.exports = {
     'gatsby-plugin-typegen',
     'gatsby-plugin-image',
     'gatsby-plugin-react-helmet',
-    'gatsby-plugin-postcss',
+    {
+      resolve: 'gatsby-plugin-postcss',
+      options: {
+        postCssPlugins: [
+          require('postcss-import'),
+          require('postcss-mixins'),
+          require('postcss-nested'),
+          require('postcss-simple-vars'),
+          require('autoprefixer'),
+        ],
+      }
+    },
     'gatsby-remark-images',
     {
       resolve: `gatsby-source-filesystem`,

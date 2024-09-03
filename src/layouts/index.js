@@ -19,6 +19,7 @@ import background from '../images/piqsels.com-id-fvkta2.jpg';
 import OctoPirate from "../components/Octopirate";
 import styled from "@emotion/styled";
 import Geoscape from "../components/Geoscape";
+import "./layout.css";
 import zIndex from '@mui/material/styles/zIndex';
 
 const Layout = ({children, location}) => {
@@ -66,7 +67,6 @@ const Layout = ({children, location}) => {
                                 fontWeight: "400",
                               }}>
                             <NavTriangle height="0" width="0">
-
                               <defs>
                                 <linearGradient id="grad1" x1="0%" y1="100%"
                                                 x2="100%" y2="0%">
@@ -120,16 +120,13 @@ const Layout = ({children, location}) => {
                     <div className={"container top-0 min-h-screen absolute"}>
                       <div className="flex h-screen"
                            style={{paddingTop: "100px"}}>
-                        <div className={"md:w-2/3"}></div>
-                        <div className={"md:w-1/3 h-full"}
+                        <div className={"w-2/3 md:w-2/3  h-full"}></div>
+                        <div className={"w-1/3 md:w-1/3 h-full"}
                              style={{paddingTop: "70px", zIndex: 5}}>
-                          <OctoPirate style={{
-                            position: "absolute",
-                            width: "30%",
-                            height: "450px",
-                            right: 0,
-                          }}
+                          <div className={"octo-pirate"}>
+                            <OctoPirate
                                       mouse={mouse}></OctoPirate>
+                          </div>
                           <Moon></Moon>
                         </div>
                       </div>
