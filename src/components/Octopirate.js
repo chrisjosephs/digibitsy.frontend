@@ -62,7 +62,8 @@ class Octopirate extends Component {
             <>
                 <Wrapper style={this.props.style}>
                     <Loader className={this.state.loaded ? 'fade-out' : ''}></Loader>
-                    <Canvas className={"octoPirate"}>
+                    <Canvas className={"octoPirate"}
+                        pixelRatio={1}>
 
                         <directionalLight
                             position={[2.2, 3.4, 1]}
