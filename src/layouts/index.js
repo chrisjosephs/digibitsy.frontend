@@ -120,9 +120,8 @@ const Layout = ({children, location}) => {
                     <div className={"container top-0 min-h-screen absolute"}>
                       <div className="flex h-screen"
                            style={{paddingTop: "100px"}}>
-                        <div className={"w-2/3 md:w-2/3  h-full"}></div>
-                        <div className={"w-1/3 md:w-1/3 h-full"}
-                             style={{paddingTop: "70px", zIndex: 5}}>
+                        <div className={"w-1/2 md:w-2/3  h-full"}></div>
+                        <div className={"w-1/2 md:w-1/3 h-full octo-pirate-outer"}>
                           <div className={"octo-pirate"}>
                             <OctoPirate
                                       mouse={mouse}></OctoPirate>

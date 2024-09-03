@@ -1,6 +1,20 @@
 .octo-pirate {
-  position: absolute;
-  width: 30%;
-  height: 450px;
-  right: 0;
+  @media screen(sm) {
+    position: absolute;
+    width: 30%;
+    height: 450px;
+    right: 0;
+  }
+}
+.octo-pirate-outer{
+  z-index: 50;
+  position:relative;
+  padding-top: 10px;
+  top: -100px;
+  @media screen(sm) {
+    z-index: 5;
+    position: unset;
+    top: 0;
+    padding-top: 70px;
+  }
 }
