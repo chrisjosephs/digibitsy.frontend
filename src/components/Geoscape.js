@@ -34,7 +34,9 @@ class Geoscape extends Component {
         return camera;
     }
     render() {
-        return this.scene();
+        if (typeof window !== "undefined") {
+            return this.scene();
+        }
     }
     draw(){
         // requestAnimationFrame(render);
