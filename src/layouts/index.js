@@ -238,7 +238,7 @@ const Moon = styled.div`
   background: url(https://raw.githubusercontent.com/yagoestevez/fcc-portfolio/master/src/Images/Moon.svg?sanitize=true) right 150% no-repeat;
   width: 100%;
   height: 100%;
-  z-index: -10;
+  z-index: -10 !important;
   opacity: 0;
   animation: moon-move-in 1.2s 1s forwards;
 

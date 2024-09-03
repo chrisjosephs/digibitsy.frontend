@@ -14,13 +14,10 @@
 }
 
 .octo-pirate-outer {
-    z-index: 1;
     position: absolute;
     left: 50%;
     padding-top: 0px;
-
     @media screen(sm) {
-        z-index: 5;
         position: unset;
         top: 0;
         padding-top: 70px;
