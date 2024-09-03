@@ -1,16 +1,17 @@
-import React, {Suspense, useEffect, useMemo, useRef, useState} from 'react'
+import React from 'react'
 import Seo from '../components/Seo';
 import { graphql, PageProps, Link  } from 'gatsby'
-import { GatsbyImage, getImage } from "gatsby-plugin-image"
 
 export default function IndexPage (
     props: PageProps<GatsbyTypes.IndexPagesDataQuery>
 ) {
     const { data } = props;
+
     return <div className={"IndexPage"}>
         <Seo
             title="Home Page"
             description="Homepage of Digibitsymicronanocyberweb Limited and Christopher Josephs"
+            // @ts-ignore
             featuredImage={data.indexPageFeatured.childImageSharp.gatsbyImageData}
         />
         // About me:<br/>
