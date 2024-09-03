@@ -13,7 +13,7 @@ class Header extends Component {
                 <div className="outer" style={{position: "relative", width: "100%"}}>
                     <H1>Digibitsy</H1>
                     <H2>Christopher <br/> Josephs esq.</H2>
-                    <LogoTriangle>
+                    <LogoTriangleDesktop>
                         <defs>
                             <linearGradient id="grad1" x1="0%" y1="100%" x2="100%" y2="0%">
                                 <stop offset="0%" style={{stopColor: "rgb(50,50,50)", stopOpacity: "1"}}/>
@@ -29,7 +29,26 @@ class Header extends Component {
                             </feMerge>
                         </filter>
                         <polygon points="0,0 400,0 200,300" stroke="#36e292" strokeWidth="3"/>
-                    </LogoTriangle>
+                    </LogoTriangleDesktop>
+                    <TriangleContainerMobile>
+                    <LogoTriangleMobile>
+                        <defs>
+                            <linearGradient id="grad1" x1="0%" y1="100%" x2="100%" y2="0%">
+                                <stop offset="0%" style={{stopColor: "rgb(50,50,50)", stopOpacity: "1"}}/>
+                                <stop offset="100%" style={{stopColor: "rgb(0,0,0)", stopOpacity: "1"}}/>
+                            </linearGradient>
+                        </defs>
+                        <filter id="dropshadow" height="130%">
+                            <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+                            <feOffset dx="2" dy="2" result="offsetblur"/>
+                            <feMerge>
+                                <feMergeNode/>
+                                <feMergeNode in="SourceGraphic"/>
+                            </feMerge>
+                        </filter>
+                        <polygon points="0,0 300,0 150,200" stroke="#36e292" strokeWidth="3"/>
+                    </LogoTriangleMobile>
+                    </TriangleContainerMobile>
                 </div>
                 {/*
                     <div className={"md:w-1/3"}>
@@ -56,21 +75,22 @@ class Header extends Component {
 }
 
 export default Header
-const LogoTriangle = styled.svg`
+const LogoTriangleDesktop = styled.svg`
+    display: none;
     ${media.sm`
-        top: 6em;
+        display: block;
     `}
+    height: 320px;
+    width: 600px;
+    margin-left: 400px;
+    top: 6em;
     animation: dash 6s linear infinite forwards;
     fill: url(#grad1);
     filter: url(#dropshadow);
     height: 320px;
-    width: 600px;
-    left: 50%;
-    margin-left: -200px;
     position: absolute;
     stroke-dasharray: 1200;
     stroke-dashoffset: 1200;
-    top: 2em;
     z-index: 8;
     @keyframes dash {
         0% {
@@ -84,11 +104,47 @@ const LogoTriangle = styled.svg`
         }
     }
 `
+const LogoTriangleMobile = styled.svg`
+    ${media.sm`
+       display: none;
+    `}
+    animation: dash 6s linear infinite forwards;
+    fill: url(#grad1);
+    filter :url(#dropshadow);
+    height: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    stroke-dasharray: 1200;
+    stroke-dashoffset: 1200;
+    top: 2em;
+    z-index: 8;
+    @keyframes dash {
+        0%{
+            stroke-dashoffset: 1200;
+        }
+        70%{
+            stroke-dashoffset: 0;
+        }
+        100%{
+            stroke-dashoffset: 0;
+        }
+    }
+`
 const CloudBase = styled.div`
+`
+const TriangleContainerMobile = styled.div`
+    ${media.sm`
+        display: none;
+    `}
+    width: 100%;
+    position: absolute;
+    height: 100%;
+    display: block;
 `
 const H1 = styled.h1`
     font-size: 60px;
-    margin-top: 0px;
+    margin-top: 0;
     color: #C6CBF5;
     font-family: 'Orbitron', sans-serif;
     font-weight: 900;
