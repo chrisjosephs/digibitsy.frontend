@@ -41,19 +41,7 @@ const Layout = ({children, location}) => {
                   <title>{data.site.siteMetadata.title}</title>
                 </head>
                 <div onMouseMove={e => (mouse.current = getMousePos(e))}>
-                  <BigBangStarField
-                      className="Big-Bang-Star-Field"
-                      starColor={"227, 170, 244"}
-                      scale={4}
-                      style={{
-                        position: 'fixed',
-                        width: '100%',
-                        height: '100%',
-                        zIndex: '-10',
-                        background: `url(${background})`,
-                        backgroundSize: 'cover',
-                      }}
-                  />
+
                   <div
                       className={"container mx-auto min-h-screen relative z-20"}>
                     <div className={"container-head"}>
