@@ -6,6 +6,7 @@
  */
 
 import React, {useRef} from "react";
+import BigBangStarField from 'react-big-bang-star-field';
 import PropTypes from "prop-types";
 import {graphql, Link, StaticQuery} from "gatsby";
 import Header from "../components/header";
@@ -40,6 +41,19 @@ const Layout = ({children, location}) => {
                   <title>{data.site.siteMetadata.title}</title>
                 </head>
                 <div onMouseMove={e => (mouse.current = getMousePos(e))}>
+                  <BigBangStarField
+                      className="Big-Bang-Star-Field"
+                      starColor={"227, 170, 244"}
+                      scale={4}
+                      style={{
+                        position: 'fixed',
+                        width: '100%',
+                        height: '100%',
+                        zIndex: '-10',
+                        background: `url(${background})`,
+                        backgroundSize: 'cover',
+                      }}
+                  />
                   <div
                       className={"container mx-auto min-h-screen relative z-20"}>
                     <div className={"container-head"}>
@@ -125,9 +139,10 @@ const Layout = ({children, location}) => {
                                     ? 1
                                     : 0}/>
                             <div
-                                className="flex text-white p-10 bg-gray-700 opacity-75 z-0"
+                                className="flex z-10 text-white p-10 bg-gray-700 opacity-75 z-0"
                                 style={{
-                                  display: location.pathname === "/page-2"
+                                    position: "relative",
+                                 display: location.pathname === "/page-2"
                                       ? 'none'
                                       : 'block'
 
@@ -224,7 +239,7 @@ const Moon = styled.div`
   background: url(https://raw.githubusercontent.com/yagoestevez/fcc-portfolio/master/src/Images/Moon.svg?sanitize=true) right 150% no-repeat;
   width: 100%;
   height: 100%;
-  z-index: -10 !important;
+  z-index: 1 !important;
   opacity: 0;
   animation: moon-move-in 1.2s 1s forwards;
 
