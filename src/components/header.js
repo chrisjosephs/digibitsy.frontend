@@ -8,6 +8,29 @@ class Header extends Component {
     }
 
     render() {
+        const svg_elem = document.getElementById('LogoTriangleMobile')
+
+        const animateDashTime = 200 // milliseconds
+        let anim_dash_offset = 0
+        let animateDashTimer = null
+
+        function animateDashStep() {
+
+            anim_dash_offset += 1
+            if (svg_elem) {
+                svg_elem.setAttribute('style',
+                    '--stroke-dashoffset: ' + anim_dash_offset);
+
+                // repeat
+                animateDashTimer = setTimeout(
+                    animateDashStep,
+                    animateDashTime
+                )
+            }
+        }
+
+// start
+        animateDashStep()
         return (
             <div className="flex">
                 <div className="outer" style={{position: "relative", width: "100%"}}>
@@ -30,7 +53,7 @@ class Header extends Component {
                         </filter>
                         <polygon points="0,0 400,0 200,300" stroke="#36e292" strokeWidth="3"/>
                     </LogoTriangleDesktop>
-                    <TriangleContainerMobile>
+                    <TriangleContainerMobile id={"LogoTriangleMobile"}>
                     <LogoTriangleMobile>
                         <defs>
                             <linearGradient id="gradM1" x1="0%" y1="100%" x2="100%" y2="0%">
@@ -114,28 +137,17 @@ const LogoTriangleMobile = styled.svg`
     ${media.sm`
        display: none;
     `}
-    animation: dash 6s linear infinite forwards;
+   
     fill: url(#gradM1);
     filter :url(#dropshadowM);
     height: 300px;
     margin-left: auto;
     margin-right: auto;
     position: relative;
-    stroke-dasharray: 1200;
-    stroke-dashoffset: 1200;
+   
     top: 2em;
     z-index: 8;
-    @keyframes dash {
-        0%{
-            stroke-dashoffset: 1200;
-        }
-        70%{
-            stroke-dashoffset: 0;
-        }
-        100%{
-            stroke-dashoffset: 0;
-        }
-    }
+   
 `
 const CloudBase = styled.div`
 `

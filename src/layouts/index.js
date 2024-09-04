@@ -24,6 +24,31 @@ import zIndex from '@mui/material/styles/zIndex';
 
 const Layout = ({children, location}) => {
   const mouse = useRef({x: 0, y: 0});
+  const svg_elem = document.getElementById('NavTriangleWrapper')
+
+  const animateDashTime = 200 // milliseconds
+  let anim_dash_offset = 0
+  let animateDashTimer = null
+
+  function animateDashStep() {
+
+    anim_dash_offset += 1
+    if (svg_elem) {
+      svg_elem.setAttribute('style',
+          '--stroke-dashoffset: ' + anim_dash_offset);
+
+      // repeat
+      animateDashTimer = setTimeout(
+          animateDashStep,
+          animateDashTime
+      )
+    }
+  }
+
+// start
+  animateDashStep()
+
+// stopx`
   return (
       <StaticQuery
           query={graphql`
@@ -63,35 +88,25 @@ const Layout = ({children, location}) => {
                                 fontFamily: "Orbitron",
                                 fontWeight: "400",
                               }}>
-                            <NavTriangle height="0" width="0">
-                              <defs>
-                                <linearGradient id="grad1" x1="0%" y1="100%"
-                                                x2="100%" y2="0%">
-                                  <stop offset="0%"
-                                        style={{
-                                          stopColor: "rgb(50,50,50)",
-                                          stopOpacity: "1",
-                                        }}/>
-                                  <stop offset="100%"
-                                        style={{
-                                          stopColor: "rgb(0,0,0)",
-                                          stopOpacity: "1",
-                                        }}/>
-                                </linearGradient>
-                              </defs>
-                              <filter id="dropshadow" height="130%">
-                                <feGaussianBlur in="SourceAlpha"
-                                                stdDeviation="3"/>
-                                <feOffset dx="2" dy="2" result="offsetblur"/>
-                                <feMerge>
-                                  <feMergeNode/>
-                                  <feMergeNode in="SourceGraphic"/>
-                                </feMerge>
-                              </filter>
-
-                              <polygon points="400,400 200,0 0,400"
-                                       stroke="#151C60" strokeWidth="3"/>
-                            </NavTriangle>
+                            <div id={"NavTriangleWrapper"}>
+                              <svg height="100%" width="100%" viewBox="0 0 400 400">
+                                <defs>
+                                  <linearGradient id="grad1" x1="0%" y1="100%" x2="100%" y2="0%">
+                                    <stop offset="0%" stopColor="rgb(50,50,50)" stopOpacity="1"/>
+                                    <stop offset="100%" stopColor="rgb(0,0,0)" stopOpacity="1"/>
+                                  </linearGradient>
+                                  <filter id="dropshadow" height="130%">
+                                    <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+                                    <feOffset dx="2" dy="2" result="offsetblur"/>
+                                    <feMerge>
+                                      <feMergeNode/>
+                                      <feMergeNode in="SourceGraphic"/>
+                                    </feMerge>
+                                  </filter>
+                                </defs>
+                                <polygon points="400,400 200,0 0,400" stroke="#151C60" strokeWidth="3"/>
+                              </svg>
+                            </div>
                             <NavLinks className={'nav-links relative z-20 pr-8'}>
                               <br/>
                               <br/>
@@ -136,9 +151,10 @@ const Layout = ({children, location}) => {
                                     ? 1
                                     : 0}/>
                             <div
-                                className="flex z-10 text-white p-10 bg-gray-700 opacity-75 z-0"
+                                className="flex z-9 text-white p-10 bg-gray-700 opacity-75 z-0"
                                 style={{
                                     position: "relative",
+                                    zIndex: 9,
                                  display: location.pathname === "/page-2"
                                       ? 'none'
                                       : 'block'
