@@ -155,11 +155,12 @@ const Model = ({mouse, ...props}) => {
         roughness: 0.65, // between 0 and 1
         envMapIntensity: 1,
         map: MetalRusted,
+        side: THREE.FrontSide, // Optimize by rendering only the front side
       }), [MetalRusted]);
   nodes['octopus_hat_high_octopus_hat_tex_0'].visible = true;
 
   nodes['octopus_body_high_Octopus_body_tex_0'].material.metalness = 0;
-
+  nodes['octopus_body_high_Octopus_body_tex_0'].material.side = THREE.FrontSide; // Optimize by rendering only the front side
   const ref = useRef();
   return (
       <>
