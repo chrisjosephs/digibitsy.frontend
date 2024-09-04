@@ -10,6 +10,7 @@ import PropTypes from "prop-types";
 import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
 import {DRACOLoader} from "three/examples/jsm/loaders/DRACOLoader";
 import media from '../util/breakpoints';
+import {sRGBEncoding} from 'three';
 
 class Octopirate extends Component {
 
@@ -63,14 +64,18 @@ class Octopirate extends Component {
                 <Wrapper style={this.props.style}>
                     <Loader className={this.state.loaded ? 'fade-out' : ''}></Loader>
                     <Canvas className={"octoPirate"}
-                        pixelRatio={1}>
+                            pixelRatio={window.devicePixelRatio > 1 ? 1.5 : 1}
+                            onCreated={({ gl }) => {
+                                gl.toneMapping = THREE.ACESFilmicToneMapping; // Tone mapping can help improve visual quality at lower resolution
+                                gl.outputEncoding =  sRGBEncoding; }}
+                    >
 
                         <directionalLight
                             position={[2.2, 3.4, 1]}
                             rotation={[2.3, 0.8, -2.14]}
                             color={0xffffff}
                             castShadow={false}
-                            scale={[1, 1, 1]}
+                            intensity={0.5}
                         />
                         <hemisphereLight skyColor={"black"} groundColor={0xffffff} intensity={0.68}
                                          position={[0, 2, 0]}/>
@@ -147,7 +152,7 @@ function Model({mouse, ...props}) {
         }
     })
 
-    useFrame((state, delta) => mixer.update(delta))
+    // useFrame((state, delta) => mixer.update(delta))
     /* No Animations yet
     useEffect(() => {
         actions.current = { idle: mixer.clipAction(animations[8], group.current) }
