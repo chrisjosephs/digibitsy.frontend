@@ -37,7 +37,7 @@ const Layout = ({children, location}) => {
       `}
           render={data => (
               <>
-                <div onMouseMove={e => (mouse.current = getMousePos(e))}>
+
                   <BigBangStarField
                       className="Big-Bang-Star-Field"
                       starColor={"227, 170, 244"}
@@ -214,7 +214,6 @@ const Layout = ({children, location}) => {
                     </div>
                     */
                   }
-                </div>
               </>
           )}
       />
