@@ -20,7 +20,7 @@ const Octopirate = ({mouse = {current: {x: 360, y: 150}}, style}) => {
         <Loader className={loaded ? 'fade-out' : ''}></Loader>
         <Canvas
             width = {300}
-            height = {300}
+            height ={300}
             className={'octoPirate'}
             position={[0, -0.3, 0]}
             pixelRatio={window.devicePixelRatio /2 }
@@ -88,24 +88,6 @@ function moveJoint(mouse, joint, degreeLimit = 45) {
 }
 
 const Model = ({mouse, ...props}) => {
-  const { gl, scene } = useThree();
-  useEffect(() => {
-    const contextAttribs = {
-      alpha: false,
-      depth: true,
-      stencil: false,
-      antialias: false,
-      powerPreference: 'high-performance',
-      premultipliedAlpha: false,
-      preserveDrawingBuffer: false,
-    };
-
-    const renderer = new THREE.WebGLRenderer(contextAttribs);
-    gl.domElement.replaceWith(renderer.domElement);
-    gl.setPixelRatio(window.devicePixelRatio * 0.5);
-    gl.domElement.width = window.innerWidth / 2;
-    gl.domElement.height = window.innerHeight / 2;
-  }, [gl]);
   // Throttle function
   const useThrottle = (callback, fps) => {
     const lastCallRef = useRef(0);
@@ -122,7 +104,7 @@ const Model = ({mouse, ...props}) => {
   const loadingManager = new THREE.LoadingManager(() => {
     props.setLoaded(true);
   });
-  const { nodes } = useLoader(GLTFLoader,
+  const {nodes, scene, scenes, animations} = useLoader(GLTFLoader,
       '/octoankaarmdecimatedraco2.glb', loader => {
         var dracoLoader = new DRACOLoader();
         dracoLoader.setDecoderPath('/DRACOLoader.js');
