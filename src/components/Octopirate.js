@@ -139,22 +139,7 @@ const Model = ({ mouse, ...props }) => {
         return () => animations.forEach(clip => mixer.uncacheClip(clip))
     }, [])
 */
-    var textureLoader = new THREE.TextureLoader();
-    var MetalRusted = textureLoader.load('/rm.jpg');
 
-    var material = new THREE.MeshStandardMaterial({
-        color: 0xffffff,
-        metalness: 0.95,   // between 0 and 1
-        roughness: 0.65, // between 0 and 1
-        envMapIntensity: 1,
-        map: MetalRusted,
-
-    });
-    nodes['anchorobjcb9289e8-f66e-417d-9586-27500257b6e7_(1)001'].material = material;
-    //  nodes['anchor'].material = material;
-    nodes['octopus_hat_high_octopus_hat_tex_0'].visible = true;
-
-    nodes['octopus_body_high_Octopus_body_tex_0'].material.metalness = 0.1;
 
 
     const ref = useRef()
