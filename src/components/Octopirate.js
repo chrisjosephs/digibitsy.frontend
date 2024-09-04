@@ -233,8 +233,7 @@ const Loader = styled.div`
     border-radius: 50%;
     border: 3px solid transparent;
     border-top-color: #9370DB;
-    -webkit-animation: ${spin} 2s linear infinite;
-    animation: ${spin} 2s linear infinite;
+  
     z-index: 3;
     top: 150px;
     height: 140px;
@@ -258,8 +257,7 @@ const Loader = styled.div`
         border-radius: 50%;
         border: 3px solid transparent;
         border-top-color: #BA55D3;
-        -webkit-animation: ${spin} 3s linear infinite;
-        animation: ${spin} 3s linear infinite;
+
     }
 
     &&:after {
@@ -272,8 +270,7 @@ const Loader = styled.div`
         border-radius: 50%;
         border: 3px solid transparent;
         border-top-color: #FF00FF;
-        -webkit-animation: ${spin} 1.5s linear infinite;
-        animation: ${spin} 1.5s linear infinite;
+
     }
 `;
 
