@@ -37,9 +37,6 @@ const Layout = ({children, location}) => {
       `}
           render={data => (
               <>
-                <head>
-                  <title>{data.site.siteMetadata.title}</title>
-                </head>
                 <div onMouseMove={e => (mouse.current = getMousePos(e))}>
                   <BigBangStarField
                       className="Big-Bang-Star-Field"
@@ -256,25 +253,25 @@ const Moon = styled.div`
 `;
 
 const NavTriangle = styled.svg`
-  animation: dash 6s linear infinite forwards;
-  fill: url(#grad1);
-  filter: url(#dropshadow);
-  position: absolute;
-  stroke-dasharray: 1200;
-  stroke-dashoffset: 1200;
-  top: 14em;
-  z-index: 8;
-  @keyframes dash {
-    0% {
-      stroke-dashoffset: 1200;
+    animation: dash 6s linear infinite forwards;
+    fill: url(#grad1);
+    filter: url(#dropshadow);
+    position: absolute;
+    stroke-dasharray: 1200;
+    stroke-dashoffset: 1200;
+    top: 14em;
+    z-index: 8;
+    @keyframes dash {
+        0% {
+            stroke-dashoffset: 1200;
+        }
+        70% {
+            stroke-dashoffset: 0;
+        }
+        100% {
+            stroke-dashoffset: 0;
+        }
     }
-    70% {
-      stroke-dashoffset: 0;
-    }
-    100% {
-      stroke-dashoffset: 0;
-    }
-  }
 `;
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
