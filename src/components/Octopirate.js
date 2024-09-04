@@ -1,5 +1,6 @@
 import * as THREE from "three"
-import React, {Component, Suspense, useEffect, useRef, useState} from "react"
+import {sRGBEncoding} from "three"
+import React, {Suspense, useEffect, useRef, useState} from "react"
 import {Canvas, useFrame, useLoader, useThree} from "react-three-fiber"
 import {GLTFLoader} from "three/examples/jsm/loaders/GLTFLoader";
 import lerp from "lerp"
@@ -10,117 +11,93 @@ import PropTypes from "prop-types";
 import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
 import {DRACOLoader} from "three/examples/jsm/loaders/DRACOLoader";
 import media from '../util/breakpoints';
-import {sRGBEncoding} from 'three';
-
-class Octopirate extends Component {
-
-    constructor(props) {
-        super(props)
-        this.state = {
-            loaded: false
-        }
-        this.camera = this.cameraDefault();
-    }
-
-    setLoaded = (loadedValue) => {
-        this.setState({loaded: loadedValue});
-    }
-
-    static propTypes = {
-        mouse: PropTypes.object
-    }
-    static defaultProps = {
-        mouse: {
-            current:
-                { x: 360, y: 150}
-        }
-    };
-
-    cameraDefault() {
-        const fov = 45;
-        const aspect = 1;  // the canvas default
-        const near = 0.1;
-        const far = 2000;
-        const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
-        camera.position.set(30, 0, 30);
-        return camera;
-    }
 
 
-    render() {
-        if (typeof window !== "undefined") {
-            return this.OctoPirateCanvas(this.props.mouse);
-        }
-    }
+const Octopirate = ({mouse = {current: {x: 360, y: 150}}, style}) => {
+    const [loaded, setLoaded] = useState(false);
 
-    componentDidMount() {
-        // move load model to componentdidmount
+    const OctoPirateCanvas = () => (
+        <Wrapper style={style}>
+            <Loader className={loaded ? 'fade-out' : ''}></Loader>
+            <Canvas
+                className={"octoPirate"}
+                pixelRatio={window.devicePixelRatio > 1 ? 1.5 : 1}
+                onCreated={({gl}) => {
+                    gl.toneMapping = THREE.ACESFilmicToneMapping;
+                    gl.outputEncoding = sRGBEncoding;
+                }}
+            >
+                <directionalLight
+                    position={[2.2, 3.4, 1]}
+                    rotation={[2.3, 0.8, -2.14]}
+                    color={0xffffff}
+                    castShadow={false}
+                    intensity={0.5}
+                />
+                <hemisphereLight
+                    skyColor={"black"}
+                    groundColor={0xffffff}
+                    intensity={0.68}
+                    position={[0, 2, 0]}
+                />
+                <Suspense fallback={null}>
+                    <CameraController/>
+                    <Model mouse={mouse} setLoaded={setLoaded} position={[-0.1, 0, 0]}/>
+                </Suspense>
+            </Canvas>
+        </Wrapper>
+    );
 
-    }
+    return <OctoPirateCanvas/>;
+};
 
-    OctoPirateCanvas(mouse, ...props) {
-        return (
-            <>
-                <Wrapper style={this.props.style}>
-                    <Loader className={this.state.loaded ? 'fade-out' : ''}></Loader>
-                    <Canvas className={"octoPirate"}
-                            pixelRatio={window.devicePixelRatio > 1 ? 1.5 : 1}
-                            onCreated={({ gl }) => {
-                                gl.toneMapping = THREE.ACESFilmicToneMapping; // Tone mapping can help improve visual quality at lower resolution
-                                gl.outputEncoding =  sRGBEncoding; }}
-                    >
-
-                        <directionalLight
-                            position={[2.2, 3.4, 1]}
-                            rotation={[2.3, 0.8, -2.14]}
-                            color={0xffffff}
-                            castShadow={false}
-                            intensity={0.5}
-                        />
-                        <hemisphereLight skyColor={"black"} groundColor={0xffffff} intensity={0.68}
-                                         position={[0, 2, 0]}/>
-                        {/*
-                                         <mesh position={[0, 0, -10]}>
-                            <circleBufferGeometry attach="geometry" args={[8, 64]}/>
-                            <meshLambertMaterial transparent={true} attach="material" color="lightpink" opacity={0.7}/>
-                        </mesh>
-                        */}
-                        <Suspense fallback={null}>
-                            <CameraController/>
-                            <Model mouse={mouse} setLoaded={loaded => this.setLoaded(loaded)} position={[-0.1, 0, 0]}/>
-                        </Suspense>
-                    </Canvas>
-                </Wrapper>
-            </>
-        )
-    }
-}
+Octopirate.propTypes = {
+    mouse: PropTypes.object,
+    style: PropTypes.object
+};
 
 const CameraController = () => {
     const {camera, gl} = useThree();
-    useEffect(
-        () => {
-            camera.position.z = 3.6;
-            const controls = new OrbitControls(camera, gl.domElement);
-            controls.enableZoom = false;
-            return () => {
-                controls.dispose();
-            };
-        },
-        [camera, gl]
-    );
+    useEffect(() => {
+        camera.position.z = 3.6;
+        const controls = new OrbitControls(camera, gl.domElement);
+        controls.enableZoom = false;
+        return () => {
+            controls.dispose();
+        };
+    }, [camera, gl]);
     return null;
 };
 
 function moveJoint(mouse, joint, degreeLimit = 45) {
-    let degrees = getMouseDegrees(mouse.current.x, mouse.current.y, degreeLimit)
-    joint.rotation.xD = lerp(joint.rotation.xD || 0, degrees.x, 0.1)
-    joint.rotation.yD = lerp(joint.rotation.yD || 0, degrees.y, 0.1)
-    joint.rotation.x = -0.1 + THREE.MathUtils.degToRad(joint.rotation.xD)
-    joint.rotation.z = -0.5 + THREE.MathUtils.degToRad(joint.rotation.yD)
+    let degrees = getMouseDegrees(mouse.current.x, mouse.current.y, degreeLimit);
+    joint.rotation.xD = lerp(
+        joint.rotation.xD || 0,
+        degrees.x,
+        0.1
+    );
+    joint.rotation.yD = lerp(
+        joint.rotation.yD || 0,
+        degrees.y,
+        0.1
+    );
+    joint.rotation.x = -0.1 + THREE.MathUtils.degToRad(joint.rotation.xD);
+    joint.rotation.z = -0.5 + THREE.MathUtils.degToRad(joint.rotation.yD);
 }
 
-function Model({mouse, ...props}) {
+const Model = ({ mouse, ...props }) => {
+    // Throttle function
+    const useThrottle = (callback, fps) => {
+        const lastCallRef = useRef(0);
+
+        return (state) => {
+            const now = state.clock.getElapsedTime();
+            if (now - lastCallRef.current > 1 / fps) {
+                callback(state);
+                lastCallRef.current = now;
+            }
+        };
+    };
     const group = useRef()
     const loadingManager = new THREE.LoadingManager(() => {
         props.setLoaded(true);
@@ -142,15 +119,17 @@ function Model({mouse, ...props}) {
 
     let [mixer] = useState(() => new THREE.AnimationMixer());
 
-    useFrame((state, delta) => {
-        mixer.update(delta)
-    })
-    useFrame((state, delta) => {
-        mixer.update(delta);
+    const throttle = useThrottle(({clock}) => {
+        const elapsedTime = clock.getElapsedTime();
+        const rotationValue = Math.sin(elapsedTime) * -0.3;
+        nodes["Armature_0"].rotation.x = rotationValue;
+        nodes["Armature_0"].rotation.y = rotationValue;
+        nodes["Armature_0"].rotation.z = rotationValue;
         if (mouse.current.x !== 0 && mouse.current.y !== 0) {
             moveJoint(mouse, nodes.Neck_M_0297);
         }
-    })
+    }, 30); // Targeting 30 FPS
+    useFrame(throttle);
 
     // useFrame((state, delta) => mixer.update(delta))
     /* No Animations yet
@@ -177,8 +156,6 @@ function Model({mouse, ...props}) {
 
     nodes['octopus_body_high_Octopus_body_tex_0'].material.metalness = 0.1;
 
-    useFrame(({clock}) => (
-        nodes["Armature_0"].rotation.x = nodes["Armature_0"].rotation.y = nodes["Armature_0"].rotation.z = Math.sin(clock.getElapsedTime()) * -0.3));
 
     const ref = useRef()
     return (
@@ -255,6 +232,7 @@ const Loader = styled.div`
     height: 140px;
     width: 140px;
     left: 30%;
+
     ${media.sm`
         left: 50%;
         top: 65%;
