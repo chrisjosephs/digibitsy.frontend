@@ -19,8 +19,11 @@ const Octopirate = ({mouse = {current: {x: 360, y: 150}}, style}) => {
       <Wrapper style={style}>
         <Loader className={loaded ? 'fade-out' : ''}></Loader>
         <Canvas
+            width = {300}
+            height = {300}
             className={'octoPirate'}
-            pixelRatio={window.devicePixelRatio > 1 ? 1.5 : 1}
+            position={[0, -0.3, 0]}
+            pixelRatio={window.devicePixelRatio /2 }
             onCreated={({gl}) => {
               gl.toneMapping = THREE.ACESFilmicToneMapping;
               gl.outputEncoding = sRGBEncoding;
