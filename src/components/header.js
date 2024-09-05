@@ -12,12 +12,11 @@ const Header = () => {
    * It continuously increments the dash offset at a specified interval to create a
    * moving dash effect.
    *
-   * @param {Event} e - The event object, typically associated with an event listener.
    *                    The target property of this event object should be the SVG element
    *                    to be animated.
+   * @param svgElem
    */
   const animateTriangle = (svgElem) => {
-    console.log(svgElem);
     const animateDashTime = 10; // milliseconds
     let anim_dash_offset = 0;
     let animateDashTimer = null;
@@ -70,7 +69,7 @@ const Header = () => {
               <polygon points="0,0 400,0 200,300" stroke="#36e292"
                        strokeWidth="3"/>
             </LogoTriangleDesktop>
-              <LogoTriangleMobile className={'LogoTriangle'} ref={triangleMobileRef}>
+              <LogoTriangleMobile ref={triangleMobileRef}>
                 <defs>
                   <linearGradient id="gradM1" x1="0%" y1="100%" x2="100%"
                                   y2="0%">
@@ -133,52 +132,28 @@ const LogoTriangleDesktop = styled.svg`
     height: 320px;
     width: 600px;
     top: 6em;
-    animation: dash 6s linear infinite forwards;
     fill: url(#grad1);
     filter: url(#dropshadow);
     height: 320px;
     position: absolute;
     stroke-dasharray: 1200;
     z-index: 8;
-    @keyframes dash {
-        0% {
-            stroke-dashoffset: 1200;
-        }
-        70% {
-            stroke-dashoffset: 0;
-        }
-        100% {
-            stroke-dashoffset: 0;
-        }
-    }
 `;
 const LogoTriangleMobile = styled.svg`
     ${media.sm`
        display: none;
     `}
-
     fill: url(#gradM1);
     filter: url(#dropshadowM);
     height: 300px;
     margin-left: auto;
     margin-right: auto;
     position: relative;
+    stroke-dasharray: 1200;
     top: 2em;
     z-index: 8;
-
 `;
 const CloudBase = styled.div`
-`;
-const TriangleContainerMobile = styled.div`
-    ${media.sm`
-        display: none;
-    `}
-    fill: url(#gradM1);
-    filter: url(#dropshadowM);
-    width: 100%;
-    position: absolute;
-    height: 100%;
-    display: block;
 `;
 const H1 = styled.h1`
     font-size: 60px;
