@@ -47,7 +47,7 @@ const Header = () => {
 // start
     return (
         <div className="flex">
-          <div className="outer" style={{position: 'relative', width: '100%'}}>
+          <div className="outer" style={{position: 'absolute', width: '100%'}}>
             <H1>Digibitsy</H1>
             <H2>Christopher <br/> Josephs esq.</H2>
             <LogoTriangleDesktop ref={triangleDesktopRef}>
