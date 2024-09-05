@@ -69,7 +69,8 @@ const Header = () => {
               <polygon points="0,0 400,0 200,300" stroke="#36e292"
                        strokeWidth="3"/>
             </LogoTriangleDesktop>
-              <LogoTriangleMobile ref={triangleMobileRef}>
+            <div id={"LogoTriangleMobile"} ref={triangleMobileRef}>
+            <LogoTriangleMobile ref={triangleMobileRef}>
                 <defs>
                   <linearGradient id="gradM1" x1="0%" y1="100%" x2="100%"
                                   y2="0%">
@@ -92,6 +93,7 @@ const Header = () => {
                 <polygon className="LogoTriangle" points="0,0 300,0 150,200"
                          stroke="#36e292" strokeWidth="3"/>
               </LogoTriangleMobile>
+            </div>
           </div>
           {/*
                     <div className={"md:w-1/3"}>
