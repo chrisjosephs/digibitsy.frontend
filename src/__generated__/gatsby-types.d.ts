@@ -2373,6 +2373,11 @@ type CareerPagesDataQueryVariables = Exact<{ [key: string]: never; }>;
 
 type CareerPagesDataQuery = { readonly careerPageFeatured: { readonly childImageSharp: { readonly gatsbyImageData: import('gatsby-plugin-image').IGatsbyImageData } | null } | null };
 
+type HeadingQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type HeadingQueryQuery = { readonly site: { readonly siteMetadata: { readonly title: string | null } | null } | null };
+
 type IndexPagesDataQueryVariables = Exact<{ [key: string]: never; }>;
 
 

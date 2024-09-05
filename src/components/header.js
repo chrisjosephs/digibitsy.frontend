@@ -1,79 +1,99 @@
-import React, {Component} from "react"
-import styled from "@emotion/styled"
+import React, {Component, useEffect, useRef} from 'react';
+import styled from '@emotion/styled';
 import media from '../util/breakpoints';
 
-class Header extends Component {
-    constructor(props) {
-        super(props)
+const Header = () => {
+  const triangleMobileRef = useRef(null)
+  const triangleDesktopRef = useRef(null)
+  /**
+   * Fix for SVG animate poor performance bug on chrome,
+   * whereby css animation of svg incurs severe lag
+   * The `animateTriangle` function animates the dash offset of an SVG element's stroke.
+   * It continuously increments the dash offset at a specified interval to create a
+   * moving dash effect.
+   *
+   * @param {Event} e - The event object, typically associated with an event listener.
+   *                    The target property of this event object should be the SVG element
+   *                    to be animated.
+   */
+  const animateTriangle = (svgElem) => {
+    console.log(svgElem);
+    const animateDashTime = 10; // milliseconds
+    let anim_dash_offset = 0;
+    let animateDashTimer = null;
+
+    function animateDashStep() {
+      anim_dash_offset += 2;
+      if (svgElem) {
+        svgElem.setAttribute('style',
+            'stroke-dashoffset: ' + (1200 - (anim_dash_offset % 1200)) +  ';');
+        // repeat
+        animateDashTimer = setTimeout(
+            animateDashStep,
+            animateDashTime,
+        );
+      }
     }
-
-    render() {
-        const svg_elem = document.getElementById('LogoTriangleMobile')
-
-        const animateDashTime = 200 // milliseconds
-        let anim_dash_offset = 0
-        let animateDashTimer = null
-
-        function animateDashStep() {
-
-            anim_dash_offset += 1
-            if (svg_elem) {
-                svg_elem.setAttribute('style',
-                    '--stroke-dashoffset: ' + anim_dash_offset);
-
-                // repeat
-                animateDashTimer = setTimeout(
-                    animateDashStep,
-                    animateDashTime
-                )
-            }
-        }
-
+    animateDashStep()
+  }
+  useEffect(() =>{
+    if (triangleMobileRef.current) {
+      animateTriangle(triangleMobileRef.current);
+    }
+  });
 // start
-        animateDashStep()
-        return (
-            <div className="flex">
-                <div className="outer" style={{position: "relative", width: "100%"}}>
-                    <H1>Digibitsy</H1>
-                    <H2>Christopher <br/> Josephs esq.</H2>
-                    <LogoTriangleDesktop>
-                        <defs>
-                            <linearGradient id="grad1" x1="0%" y1="100%" x2="100%" y2="0%">
-                                <stop offset="0%" style={{stopColor: "rgb(50,50,50)", stopOpacity: "1"}}/>
-                                <stop offset="100%" style={{stopColor: "rgb(0,0,0)", stopOpacity: "1"}}/>
-                            </linearGradient>
-                        </defs>
-                        <filter id="dropshadow" height="130%">
-                            <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
-                            <feOffset dx="2" dy="2" result="offsetblur"/>
-                            <feMerge>
-                                <feMergeNode/>
-                                <feMergeNode in="SourceGraphic"/>
-                            </feMerge>
-                        </filter>
-                        <polygon points="0,0 400,0 200,300" stroke="#36e292" strokeWidth="3"/>
-                    </LogoTriangleDesktop>
-                    <TriangleContainerMobile id={"LogoTriangleMobile"}>
-                    <LogoTriangleMobile>
-                        <defs>
-                            <linearGradient id="gradM1" x1="0%" y1="100%" x2="100%" y2="0%">
-                                <stop offset="0%" style={{stopColor: "rgb(50,50,50)", stopOpacity: "0.8"}}/>
-                                <stop offset="100%" style={{stopColor: "rgb(0,0,0)", stopOpacity: "1"}}/>
-                            </linearGradient>
-                        </defs>
-                        <filter id="dropshadowM" height="130%">
-                            <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
-                            <feOffset dx="2" dy="2" result="offsetblur"/>
-                            <feMerge>
-                                <feMergeNode/>
-                                <feMergeNode in="SourceGraphic"/>
-                            </feMerge>
-                        </filter>
-                        <polygon points="0,0 300,0 150,200" stroke="#36e292" strokeWidth="3"/>
-                    </LogoTriangleMobile>
-                    </TriangleContainerMobile>
-                </div>
-                {/*
+    return (
+        <div className="flex">
+          <div className="outer" style={{position: 'relative', width: '100%'}}>
+            <H1>Digibitsy</H1>
+            <H2>Christopher <br/> Josephs esq.</H2>
+            <LogoTriangleDesktop>
+              <defs>
+                <linearGradient id="grad1" x1="0%" y1="100%" x2="100%" y2="0%">
+                  <stop offset="0%"
+                        style={{stopColor: 'rgb(50,50,50)', stopOpacity: '1'}}/>
+                  <stop offset="100%"
+                        style={{stopColor: 'rgb(0,0,0)', stopOpacity: '1'}}/>
+                </linearGradient>
+              </defs>
+              <filter id="dropshadow" height="130%">
+                <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+                <feOffset dx="2" dy="2" result="offsetblur"/>
+                <feMerge>
+                  <feMergeNode/>
+                  <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+              </filter>
+              <polygon points="0,0 400,0 200,300" stroke="#36e292"
+                       strokeWidth="3"/>
+            </LogoTriangleDesktop>
+            <TriangleContainerMobile id={'LogoTriangleMobileDiv'}>
+              <LogoTriangleMobile className={'LogoTriangle'} ref={triangleMobileRef}>
+                <defs>
+                  <linearGradient id="gradM1" x1="0%" y1="100%" x2="100%"
+                                  y2="0%">
+                    <stop offset="0%" style={{
+                      stopColor: 'rgb(50,50,50)',
+                      stopOpacity: '0.8',
+                    }}/>
+                    <stop offset="100%"
+                          style={{stopColor: 'rgb(0,0,0)', stopOpacity: '1'}}/>
+                  </linearGradient>
+                </defs>
+                <filter id="dropshadowM" height="130%">
+                  <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+                  <feOffset dx="2" dy="2" result="offsetblur"/>
+                  <feMerge>
+                    <feMergeNode/>
+                    <feMergeNode in="SourceGraphic"/>
+                  </feMerge>
+                </filter>
+                <polygon className="LogoTriangle" points="0,0 300,0 150,200"
+                         stroke="#36e292" strokeWidth="3"/>
+              </LogoTriangleMobile>
+            </TriangleContainerMobile>
+          </div>
+          {/*
                     <div className={"md:w-1/3"}>
                     <CloudBase className = "CloudBase">
                         <CloudTitle>
@@ -92,12 +112,11 @@ class Header extends Component {
                     </CloudBase2>
                     </div>
                     */}
-            </div>
-        )
-    }
+        </div>
+    );
 }
 
-export default Header
+export default Header;
 const LogoTriangleDesktop = styled.svg`
     display: none;
     ${media.sm`
@@ -119,7 +138,6 @@ const LogoTriangleDesktop = styled.svg`
     height: 320px;
     position: absolute;
     stroke-dasharray: 1200;
-    stroke-dashoffset: 1200;
     z-index: 8;
     @keyframes dash {
         0% {
@@ -132,25 +150,25 @@ const LogoTriangleDesktop = styled.svg`
             stroke-dashoffset: 0;
         }
     }
-`
+`;
 const LogoTriangleMobile = styled.svg`
     ${media.sm`
        display: none;
     `}
-   
+
     fill: url(#gradM1);
-    filter :url(#dropshadowM);
+    filter: url(#dropshadowM);
     height: 300px;
     margin-left: auto;
     margin-right: auto;
     position: relative;
-   
     top: 2em;
     z-index: 8;
-   
-`
+    stroke-dasharray: 1200;
+
+`;
 const CloudBase = styled.div`
-`
+`;
 const TriangleContainerMobile = styled.div`
     ${media.sm`
         display: none;
@@ -159,7 +177,7 @@ const TriangleContainerMobile = styled.div`
     position: absolute;
     height: 100%;
     display: block;
-`
+`;
 const H1 = styled.h1`
     font-size: 60px;
     margin-top: 0;
@@ -181,8 +199,8 @@ const H1 = styled.h1`
         font-size: 180px;
         margin: 0;
     `}
-   
-`
+
+`;
 
 const H2 = styled.h2`
     color: rgb(209, 0, 177);
@@ -213,4 +231,4 @@ const H2 = styled.h2`
         left: -50px;
         margin-top: 140px; // same as one above
     `}
-`
+`;
