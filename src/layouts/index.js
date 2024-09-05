@@ -24,31 +24,6 @@ import zIndex from '@mui/material/styles/zIndex';
 
 const Layout = ({children, location}) => {
   const mouse = useRef({x: 0, y: 0});
-  const svg_elem = document.getElementById('NavTriangleWrapper')
-
-  const animateDashTime = 200 // milliseconds
-  let anim_dash_offset = 0
-  let animateDashTimer = null
-
-  function animateDashStep() {
-
-    anim_dash_offset += 1
-    if (svg_elem) {
-      svg_elem.setAttribute('style',
-          '--stroke-dashoffset: ' + anim_dash_offset);
-
-      // repeat
-      animateDashTimer = setTimeout(
-          animateDashStep,
-          animateDashTime
-      )
-    }
-  }
-
-// start
-  animateDashStep()
-
-// stopx`
   return (
       <StaticQuery
           query={graphql`
