@@ -36,12 +36,14 @@ const Header = () => {
     animateDashStep()
   }
   useEffect(() =>{
+    /*
     if (triangleMobileRef.current) {
       animateTriangle(triangleMobileRef.current);
     }
     if (triangleDesktopRef.current) {
       animateTriangle(triangleDesktopRef.current);
     }
+     */
   });
 // start
     return (
@@ -139,6 +141,7 @@ const LogoTriangleDesktop = styled.svg`
     height: 320px;
     position: absolute;
     stroke-dasharray: 1200;
+    stroke-dashoffset: 1200;
     z-index: 8;
 `;
 const LogoTriangleMobile = styled.svg`
@@ -152,6 +155,7 @@ const LogoTriangleMobile = styled.svg`
     margin-right: auto;
     position: relative;
     stroke-dasharray: 1200;
+    stroke-dashoffset: 1200;
     top: 2em;
     z-index: 8;
 `;
