@@ -63,6 +63,7 @@ const Layout = ({children, location}) => {
                                 fontFamily: "Orbitron",
                                 fontWeight: "400",
                               }}>
+                            { /*
                             <div id={"NavTriangleWrapper"}>
                               <svg height="100%" width="100%" viewBox="0 0 400 400">
                                 <defs>
@@ -82,6 +83,7 @@ const Layout = ({children, location}) => {
                                 <polygon points="400,400 200,0 0,400" stroke="#151C60" strokeWidth="3"/>
                               </svg>
                             </div>
+                            */ }
                             <NavLinks className={'nav-links relative z-20 pr-8'}>
                               <br/>
                               <br/>

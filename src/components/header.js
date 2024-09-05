@@ -40,6 +40,9 @@ const Header = () => {
     if (triangleMobileRef.current) {
       animateTriangle(triangleMobileRef.current);
     }
+    if (triangleDesktopRef.current) {
+      animateTriangle(triangleDesktopRef.current);
+    }
   });
 // start
     return (
@@ -47,7 +50,7 @@ const Header = () => {
           <div className="outer" style={{position: 'relative', width: '100%'}}>
             <H1>Digibitsy</H1>
             <H2>Christopher <br/> Josephs esq.</H2>
-            <LogoTriangleDesktop>
+            <LogoTriangleDesktop ref={triangleDesktopRef}>
               <defs>
                 <linearGradient id="grad1" x1="0%" y1="100%" x2="100%" y2="0%">
                   <stop offset="0%"
@@ -67,7 +70,6 @@ const Header = () => {
               <polygon points="0,0 400,0 200,300" stroke="#36e292"
                        strokeWidth="3"/>
             </LogoTriangleDesktop>
-            <TriangleContainerMobile id={'LogoTriangleMobileDiv'}>
               <LogoTriangleMobile className={'LogoTriangle'} ref={triangleMobileRef}>
                 <defs>
                   <linearGradient id="gradM1" x1="0%" y1="100%" x2="100%"
@@ -91,7 +93,6 @@ const Header = () => {
                 <polygon className="LogoTriangle" points="0,0 300,0 150,200"
                          stroke="#36e292" strokeWidth="3"/>
               </LogoTriangleMobile>
-            </TriangleContainerMobile>
           </div>
           {/*
                     <div className={"md:w-1/3"}>
@@ -164,7 +165,6 @@ const LogoTriangleMobile = styled.svg`
     position: relative;
     top: 2em;
     z-index: 8;
-    stroke-dasharray: 1200;
 
 `;
 const CloudBase = styled.div`
@@ -173,6 +173,8 @@ const TriangleContainerMobile = styled.div`
     ${media.sm`
         display: none;
     `}
+    fill: url(#gradM1);
+    filter: url(#dropshadowM);
     width: 100%;
     position: absolute;
     height: 100%;
