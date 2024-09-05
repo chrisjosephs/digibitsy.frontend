@@ -140,8 +140,6 @@ const LogoTriangleDesktop = styled.svg`
     filter: url(#dropshadow);
     height: 320px;
     position: absolute;
-    stroke-dasharray: 1200;
-    stroke-dashoffset: 1200;
     z-index: 8;
 `;
 const LogoTriangleMobile = styled.svg`
@@ -154,8 +152,6 @@ const LogoTriangleMobile = styled.svg`
     margin-left: auto;
     margin-right: auto;
     position: relative;
-    stroke-dasharray: 1200;
-    stroke-dashoffset: 1200;
     top: 2em;
     z-index: 8;
 `;
