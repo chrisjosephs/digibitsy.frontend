@@ -128,10 +128,10 @@ const Layout = ({children, location}) => {
                                     ? 1
                                     : 0}/>
                             <div
-                                className="flex z-9 text-white p-10 bg-gray-700 opacity-75 z-0"
+                                className="flex text-white p-10 bg-gray-700 opacity-75 z-0"
                                 style={{
                                     position: "relative",
-                                    zIndex: 9,
+                                    zIndex: 7,
                                  display: location.pathname === "/page-2"
                                       ? 'none'
                                       : 'block'
