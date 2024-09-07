@@ -26,6 +26,7 @@
     "gatsby-plugin-typegen": "^3.1.0",
     "gatsby-plugin-typescript": "^5.13.1",
     "gatsby-remark-images": "^7.13.2",
+    "gatsby-source-drupal": "^6.13.1",
     "gatsby-source-filesystem": "^5.13.1",
     "gatsby-transformer-sharp": "^5.13.1",
     "google-fonts-plugin": "^5.0.2",

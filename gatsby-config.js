@@ -1,12 +1,12 @@
 module.exports = {
   siteMetadata: {
-    title: `Digibitsy | Digibitsymicronanocyberweb LTD`,
-    description: `Digibitsy Portfolio`,
+    title: `Digibitsy | Digibitsymicronanocyberweb LTD | Christopher Josephs`,
+    description: `Digibitsy Portfolio | Christopher Josephs`,
     author: `@gatsbyjs`,
   },
   siteMetadata: {
     // add general title and description
-    title: `Digibitsy | Digibitsymicronanocyberweb LTD`,
+    title: `Digibitsy | Digibitsymicronanocyberweb LTD | Josephs`,
     description: `Digibitsy Portfolio`,
     author: `@christopherjosephs`,
     // site URL, no trailing slash
@@ -104,6 +104,13 @@ module.exports = {
         path: './src/pages/',
       },
       __key: 'pages',
+    },
+    {
+      resolve: `gatsby-source-drupal`,
+      options: {
+        baseUrl: `https://betadigibitsy.netlify.app/`,
+        apiBase: `jsonapi`,
+      },
     },
     // this (optional) plugin enables Progressive Web App + Offline
     // functionality To learn more, visit: https://gatsby.dev/offline
