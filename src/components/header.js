@@ -3,6 +3,8 @@ import styled from '@emotion/styled';
 import media from '../util/breakpoints';
 
 const Header = () => {
+  const triangleMobileRef = useRef(null)
+  const triangleDesktopRef = useRef(null)
     return (
         <div className="flex">
           <div className="outer" style={{position: 'absolute', width: '100%'}}>
