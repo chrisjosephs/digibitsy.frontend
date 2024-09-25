@@ -105,13 +105,13 @@ module.exports = {
       },
       __key: 'pages',
     },
-    {
-      resolve: `gatsby-source-drupal`,
-      options: {
-        baseUrl: `https://betadigibitsy.netlify.app/`,
-        apiBase: `jsonapi`,
-      },
-    },
+    // {
+    //  resolve: `gatsby-source-drupal`,
+    //  options: {
+    //    baseUrl: `https://betadigibitsy.netlify.app/`,
+    //    apiBase: `jsonapi`,
+    //  },
+    // },
     // this (optional) plugin enables Progressive Web App + Offline
     // functionality To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
