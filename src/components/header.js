@@ -3,49 +3,6 @@ import styled from '@emotion/styled';
 import media from '../util/breakpoints';
 
 const Header = () => {
-  const triangleMobileRef = useRef(null)
-  const triangleDesktopRef = useRef(null)
-  /**
-   * Fix for SVG animate poor performance bug on chrome,
-   * whereby css animation of svg incurs severe lag
-   * The `animateTriangle` function animates the dash offset of an SVG element's stroke.
-   * It continuously increments the dash offset at a specified interval to create a
-   * moving dash effect.
-   *
-   *                    The target property of this event object should be the SVG element
-   *                    to be animated.
-   * @param svgElem
-   */
-  const animateTriangle = (svgElem) => {
-    const animateDashTime = 10; // milliseconds
-    let anim_dash_offset = 0;
-    let animateDashTimer = null;
-
-    function animateDashStep() {
-      anim_dash_offset += 2;
-      if (svgElem) {
-        svgElem.setAttribute('style',
-            'stroke-dashoffset: ' + (1200 - (anim_dash_offset % 1200)) +  ';');
-        // repeat
-        animateDashTimer = setTimeout(
-            animateDashStep,
-            animateDashTime,
-        );
-      }
-    }
-    animateDashStep()
-  }
-  useEffect(() =>{
-    /*
-    if (triangleMobileRef.current) {
-      animateTriangle(triangleMobileRef.current);
-    }
-    if (triangleDesktopRef.current) {
-      animateTriangle(triangleDesktopRef.current);
-    }
-     */
-  });
-// start
     return (
         <div className="flex">
           <div className="outer" style={{position: 'absolute', width: '100%'}}>
